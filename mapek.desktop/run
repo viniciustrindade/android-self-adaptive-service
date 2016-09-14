@@ -1,0 +1,3 @@
+ #!/bin/zsh
+mvn clean install
+java -jar bin/felix.jar felix-cache                                                                                                                                     ‹ruby-2.1.1›

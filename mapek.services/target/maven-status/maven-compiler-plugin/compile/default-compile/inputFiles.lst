@@ -1,0 +1,14 @@
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/context/IBatteryContextService.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/domain/ContextElement.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/domain/Property.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/IFileService.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/IObserver.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/domain/ISensor.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/common/Util.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/ISubject.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/domain/IBatterySensor.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/ILoggerService.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/domain/SystemProperty.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/domain/EnviromentProperty.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/IValidator.java
+/home/vinicius/00-Pessoal/04-Programacao/WORKSPACE/00-PROJETOS/ifba/entregastcc/02-MAPE-K/mapek/mapek.services/src/main/java/br/com/vt/mapek/services/domain/Threshold.java

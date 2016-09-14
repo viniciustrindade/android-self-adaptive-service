@@ -1,0 +1,9 @@
+#!/bin/zsh
+source ~/.zshrc
+
+echo Construindo o Projeto && \
+mvn clean install && \
+
+echo "Compilando mp* bundles para o dalvikVM" && \
+echo $(cd mapek.android/res/raw && rm -rf dx && mkdir dx && mv mb_* dx && cd dx && dxall && mv mb_* .. && cd .. && rm -rf dx) >/dev/null && \
+
