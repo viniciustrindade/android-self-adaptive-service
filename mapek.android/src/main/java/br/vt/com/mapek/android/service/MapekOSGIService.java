@@ -131,7 +131,7 @@ public class MapekOSGIService extends Service {
 
 			String stateStr = "";
 			StringBuffer servicesInUse = new StringBuffer();
-			servicesInUse.append("\n[USING] \n");
+			//servicesInUse.append("\n[USING] \n");
 			int state = b.getState();
 
 			switch (state) {
@@ -163,7 +163,7 @@ public class MapekOSGIService extends Service {
 
 			teststr = teststr + "\n[" + stateStr + "] " + b.getSymbolicName()
 					+ " (" + b.getVersion() + ")";
-
+/*
 			if (b.getServicesInUse() != null) {
 				for (ServiceReference ref : b.getServicesInUse()) {
 
@@ -183,12 +183,12 @@ public class MapekOSGIService extends Service {
 
 					}
 				}
-			}
+			}*/
 			teststr += servicesInUse;
 
 		}
 
-		if (felix.getRegisteredServices() != null) {
+/*		if (felix.getRegisteredServices() != null) {
 			for (ServiceReference ref : felix.getRegisteredServices()) {
 
 				for (String id : (String[]) ref.getProperty("objectClass")) {
@@ -202,7 +202,7 @@ public class MapekOSGIService extends Service {
 
 				}
 			}
-		}
+		}*/
 
 		TextView tv = new TextView(this);
 
