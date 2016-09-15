@@ -19,12 +19,16 @@ public interface ISensor extends ISubject {
 
 	public void notifyObservers(ContextElement contextElement);
 
-	public void readAndNotify();
-
 	public List<IObserver> getObservers();
 
 	public void setObservers(List<IObserver> observers);
 
+	public ContextElement getCurrentContext();
+
 	public String toString();
+
+	public void start();
+
+	public void stop();
 
 }

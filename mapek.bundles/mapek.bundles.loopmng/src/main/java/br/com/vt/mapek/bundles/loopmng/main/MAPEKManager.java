@@ -23,7 +23,7 @@ import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XPolicy;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XSensor;
 import br.com.vt.mapek.services.IFileService;
 import br.com.vt.mapek.services.ILoggerService;
-import br.com.vt.mapek.services.IValidator;
+import br.com.vt.mapek.services.ISerializerService;
 import br.com.vt.mapek.services.common.Util;
 import br.com.vt.mapek.services.domain.IBatterySensor;
 import br.com.vt.mapek.services.domain.ISensor;
@@ -39,7 +39,7 @@ public class MAPEKManager implements Runnable {
 	private BundleContext bundleContext;
 
 	@Requires
-	private ISerializerService serializer;
+	private ISerializerService<XMLLoops> serializer;
 
 	@Requires
 	private IFileService fileManager;
@@ -63,7 +63,6 @@ public class MAPEKManager implements Runnable {
 			e.printStackTrace();
 		}
 		while (!end) {
-
 			for (Loop looper : loopers) {
 				looper.run();
 				printBundles();
@@ -133,9 +132,6 @@ public class MAPEKManager implements Runnable {
 
 		}
 	}
-/*	@Requires(specification=org.apache.felix.ipojo.ComponentFactory.class)
-	ComponentFactory[] factories;*/
-	
 
 	public void printBundles(){
 		Bundle[] bundles = this.bundleContext.getBundles();
@@ -175,12 +171,6 @@ public class MAPEKManager implements Runnable {
 
 		}
 		log.D(teststr);
-		/*log.D("[FACTORIES]\n");
-	    for (Factory factory : factories) {
-	        String version = factory.getVersion() != null ? factory.getVersion() : "";
-	        String state = factory.getState() == Factory.VALID ? "valid" : "invalid";
-	        log.D("Factory " + factory.getName() + " " + version + " " + state + "\n");
-	    }*/
 		log.D("=======================================");
 	}
 

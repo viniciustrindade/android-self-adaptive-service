@@ -2,5 +2,7 @@ package br.com.vt.mapek.services.domain;
 
 public interface IBatterySensor extends ISensor {
 
-	public abstract void readAndNotify();
+	public final Property property = SystemProperty.BATERIA;
+
+	public float getBatteryLevel();
 }

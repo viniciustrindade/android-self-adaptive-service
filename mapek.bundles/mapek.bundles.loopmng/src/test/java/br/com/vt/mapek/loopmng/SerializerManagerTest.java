@@ -16,15 +16,15 @@ import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XAction;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XPolicy;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XSensor;
-import br.com.vt.mapek.bundles.loopmng.main.ISerializerService;
-import br.com.vt.mapek.bundles.loopmng.main.SerializerService;
 import br.com.vt.mapek.bundles.loopmng.monitor.sensors.BatterySensor;
+import br.com.vt.mapek.bundles.loopmng.services.FileService;
+import br.com.vt.mapek.bundles.loopmng.services.SerializerService;
 import br.com.vt.mapek.services.IFileService;
+import br.com.vt.mapek.services.ISerializerService;
 import br.com.vt.mapek.services.common.Util;
 
 public class SerializerManagerTest {
-	public static ISerializerService serializerManager = SerializerService
-			.newInstance();
+	public static ISerializerService<XMLLoops> serializerManager = new SerializerService();
 	XMLLoops loops;
 	private InputStream input;
 	private OutputStream output;
@@ -37,7 +37,7 @@ public class SerializerManagerTest {
 	public void init()throws  Exception,IOException {
 	
 		loops = new XMLLoops();
-		this.fileManager = FileServiceTest.newInstance();
+		this.fileManager = new FileService();
 		marshalLoop1();
 		marshalLoop2();
 		this.input = fileManager.getInputStream(Constants.filename);

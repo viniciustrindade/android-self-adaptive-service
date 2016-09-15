@@ -34,19 +34,20 @@ import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XAction;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XPolicy;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XSensor;
 import br.com.vt.mapek.bundles.loopmng.executor.Executor;
-import br.com.vt.mapek.bundles.loopmng.main.ISerializerService;
 import br.com.vt.mapek.bundles.loopmng.main.Loop;
-import br.com.vt.mapek.bundles.loopmng.main.SerializerService;
 import br.com.vt.mapek.bundles.loopmng.monitor.Monitor;
-import br.com.vt.mapek.bundles.loopmng.monitor.sensors.BatterySensor;
 import br.com.vt.mapek.bundles.loopmng.monitor.sensors.AbstractSensor;
+import br.com.vt.mapek.bundles.loopmng.monitor.sensors.BatterySensor;
 import br.com.vt.mapek.bundles.loopmng.plan.ChangePlan;
 import br.com.vt.mapek.bundles.loopmng.plan.Planner;
+import br.com.vt.mapek.bundles.loopmng.services.FileService;
+import br.com.vt.mapek.bundles.loopmng.services.SerializerService;
 import br.com.vt.mapek.services.IFileService;
+import br.com.vt.mapek.services.ISerializerService;
 import br.com.vt.mapek.services.domain.Threshold;
 
 class MapekManagerTest {
-	private ISerializerService serializer;
+	private ISerializerService<XMLLoops> serializer;
 	private InputStream input;
 	private XMLLoops loops;
 	private List<Loop> loopers;
@@ -54,8 +55,8 @@ class MapekManagerTest {
 
 	@Before
 	public void init() throws Exception {
-		this.serializer = SerializerService.newInstance();
-		this.fileManager = FileServiceTest.newInstance();
+		this.serializer = new SerializerService();
+		this.fileManager = new FileService();
 		this.input= fileManager.getInputStream(Constants.filename);
 		this.loopers = new LinkedList<Loop>();
 		loops = serializer.unmarshal(this.input, XMLLoops.class);
@@ -97,7 +98,7 @@ class MapekManagerTest {
 		for (XAction xaction : xmlloop.actions) {
 			ChangePlan changePlan = loop.getChangePlan();
 			Action action = new Action(Commands.valueOf(xaction.id), xaction.params);
-			action.setFileManager(FileServiceTest.newInstance());
+			action.setFileManager(new FileService());
 			action.setBundleContext(new BundleContext() {
 				
 				public boolean ungetService(ServiceReference<?> reference) {

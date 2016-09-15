@@ -1,4 +1,4 @@
-package br.com.vt.mapek.bundles.loopmng.services.context;
+/*package br.com.vt.mapek.bundles.loopmng.services.context;
 
 import java.util.Date;
 
@@ -12,12 +12,12 @@ import org.apache.felix.ipojo.annotations.Requires;
 import org.apache.felix.ipojo.annotations.Validate;
 import org.osgi.framework.ServiceReference;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import br.com.vt.mapek.services.ILoggerService;
-import br.com.vt.mapek.services.common.Util;
 import br.com.vt.mapek.services.context.IBatteryContextService;
 import br.com.vt.mapek.services.domain.ContextElement;
 
@@ -85,4 +85,7 @@ public class BatteryContextService implements IBatteryContextService {
 		log.D("Unregistered by " + ref.getBundle().getSymbolicName());
 	}
 
+	
+
 }
+*/

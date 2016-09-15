@@ -7,7 +7,6 @@ import br.com.vt.mapek.bundles.loopmng.analyze.Analyzer;
 import br.com.vt.mapek.bundles.loopmng.analyze.SymptomRepository;
 import br.com.vt.mapek.bundles.loopmng.executor.Executor;
 import br.com.vt.mapek.bundles.loopmng.monitor.Monitor;
-import br.com.vt.mapek.bundles.loopmng.monitor.sensors.AbstractSensor;
 import br.com.vt.mapek.bundles.loopmng.plan.ChangePlan;
 import br.com.vt.mapek.bundles.loopmng.plan.Planner;
 import br.com.vt.mapek.services.common.Util;
@@ -56,10 +55,7 @@ public class Loop {
 	
 	public synchronized void run() {
 		System.out.println("\n "+this.id+"_____________________________________________________________");
-		for (ISensor sensor : sensores) {
-			sensor.readAndNotify();
-		}
-
+		
 		try {
 			Thread.sleep(rate);
 		} catch (InterruptedException e) {
