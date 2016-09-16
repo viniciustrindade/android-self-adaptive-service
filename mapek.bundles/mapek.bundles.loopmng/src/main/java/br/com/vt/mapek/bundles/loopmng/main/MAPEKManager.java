@@ -1,5 +1,6 @@
 package br.com.vt.mapek.bundles.loopmng.main;
 
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,18 +15,14 @@ import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 
 import br.com.vt.mapek.bundles.loopmng.Constants;
-import br.com.vt.mapek.bundles.loopmng.domain.Commands;
-import br.com.vt.mapek.bundles.loopmng.domain.Condition;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XAction;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XPolicy;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XSensor;
+import br.com.vt.mapek.bundles.loopmng.services.ISerializerService;
 import br.com.vt.mapek.services.IFileService;
 import br.com.vt.mapek.services.ILoggerService;
-import br.com.vt.mapek.services.ISerializerService;
-import br.com.vt.mapek.services.common.Util;
-import br.com.vt.mapek.services.domain.IBatterySensor;
 import br.com.vt.mapek.services.domain.ISensor;
 import br.com.vt.mapek.services.domain.Threshold;
 
@@ -39,23 +36,24 @@ public class MAPEKManager implements Runnable {
 	private BundleContext bundleContext;
 
 	@Requires
-	private ISerializerService<XMLLoops> serializer;
+	private ILoggerService log;
 
 	@Requires
 	private IFileService fileManager;
-
+	
 	@Requires
-	private ILoggerService log;
+	private ISerializerService serializer;
 	
 	private List<Loop> loopers;
 
 	public MAPEKManager() {
 		this.loopers = new LinkedList<Loop>();
 		this.bundle = FrameworkUtil.getBundle(this.getClass());
-		this.bundleContext = bundle.getBundleContext();
+		this.bundleContext = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
+
 	}
 
-	public void run() {
+	public synchronized void run() {
 		log.I("Manager Iniciado!!");
 		try {
 			configureFromXML(Constants.filename);
@@ -71,10 +69,10 @@ public class MAPEKManager implements Runnable {
 	}
 
 
-	public void configureFromXML(String xmlFile) throws Exception {
-		// InputStream input = fileManager.getInputStream(Constants.filename);
-		// XMLLoops loops = serializer.unmarshal(input, XMLLoops.class);
-
+	public synchronized void configureFromXML(String xmlFile) throws Exception {
+		InputStream input = fileManager.getInputStream(Constants.filename);
+		XMLLoops loops = serializer.unmarshal(input, XMLLoops.class);
+/*
 		XMLLoops loops = new XMLLoops();
 		XLoop l1 = loops.instance();
 		l1.instanceSensor(Util.getNewID(), IBatterySensor.class.getName());
@@ -99,7 +97,7 @@ public class MAPEKManager implements Runnable {
 		for (String bundles : Constants.bundlesToStop) {
 			l2.instanceAction(Commands.STOP_COMPONENT.name(), bundles);
 		}
-
+*/
 		int count = 0;
 		for (XLoop xmlloop : loops.loops) {
 
@@ -133,7 +131,7 @@ public class MAPEKManager implements Runnable {
 		}
 	}
 
-	public void printBundles(){
+	public synchronized void printBundles(){
 		Bundle[] bundles = this.bundleContext.getBundles();
 		String teststr = "Bundles Status: \n";
 		log.D("=======================================");
@@ -175,7 +173,7 @@ public class MAPEKManager implements Runnable {
 	}
 
 	@Validate
-	public void starting() {
+	public synchronized void starting() {
 		log.I("Manager starting");
 		Thread thread = new Thread(this);
 		end = false;
@@ -183,7 +181,7 @@ public class MAPEKManager implements Runnable {
 	}
 
 	@Invalidate
-	public void stopping() {
+	public synchronized void stopping() {
 		log.I("Manager stopping");
 		end = true;
 	}

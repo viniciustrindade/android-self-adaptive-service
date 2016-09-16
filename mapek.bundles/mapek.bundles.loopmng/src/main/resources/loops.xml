@@ -2,7 +2,7 @@
    <loops class="java.util.LinkedList">
       <loop rate="1000">
          <sensors class="java.util.LinkedList">
-            <sensor id="BATERIA" property="BATERIA"/>
+            <sensor id="10001" property="br.com.vt.mapek.services.domain.IBatterySensor"/>
          </sensors>
          <policys class="java.util.LinkedList">
             <policy property="BATERIA" condition="MENOR_IGUAL_QUE" setpoint="10"/>
@@ -17,7 +17,7 @@
       </loop>
       <loop rate="1000">
          <sensors class="java.util.LinkedList">
-            <sensor id="BATERIA" property="BATERIA"/>
+            <sensor id="10002" property="br.com.vt.mapek.services.domain.IBatterySensor"/>
          </sensors>
          <policys class="java.util.LinkedList">
             <policy property="BATERIA" condition="MAIOR_IGUAL_QUE" setpoint="50"/>

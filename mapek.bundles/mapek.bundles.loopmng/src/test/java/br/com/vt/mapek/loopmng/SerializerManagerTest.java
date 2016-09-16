@@ -18,13 +18,13 @@ import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XPolicy;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XSensor;
 import br.com.vt.mapek.bundles.loopmng.monitor.sensors.BatterySensor;
 import br.com.vt.mapek.bundles.loopmng.services.FileService;
+import br.com.vt.mapek.bundles.loopmng.services.ISerializerService;
 import br.com.vt.mapek.bundles.loopmng.services.SerializerService;
 import br.com.vt.mapek.services.IFileService;
-import br.com.vt.mapek.services.ISerializerService;
 import br.com.vt.mapek.services.common.Util;
 
 public class SerializerManagerTest {
-	public static ISerializerService<XMLLoops> serializerManager = new SerializerService();
+	public static ISerializerService serializerManager = new SerializerService();
 	XMLLoops loops;
 	private InputStream input;
 	private OutputStream output;

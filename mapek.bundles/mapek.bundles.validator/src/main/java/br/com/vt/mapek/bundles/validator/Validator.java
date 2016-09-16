@@ -99,14 +99,17 @@ public class Validator extends Arch implements IValidator {
 		}
 
 		for (InstanceDeclaration instance : m_instances) {
-			// Only print unbound instances (others already printed above)
-			if (!instance.getStatus().isBound()) {
-				buffer.append(format("Instance %s of type %s is not bound.%n",
-						name(instance.getConfiguration()), instance
-								.getConfiguration().get("component")));
-				buffer.append(format("  Reason: %s", instance.getStatus()
-						.getMessage()));
-				buffer.append("\n");
+			if (!instance.getConfiguration().get("component").equals(this.getClass())){
+				// Only print unbound instances (others already printed above)
+				if (!instance.getStatus().isBound()) {
+					buffer.append(format(
+							"Instance %s of type %s is not bound.%n",
+							name(instance.getConfiguration()), instance
+									.getConfiguration().get("component")));
+					buffer.append(format("  Reason: %s", instance.getStatus()
+							.getMessage()));
+					buffer.append("\n");
+				}
 			}
 		}
 

@@ -5,12 +5,9 @@ import java.util.Date;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Invalidate;
-import org.apache.felix.ipojo.annotations.PostRegistration;
-import org.apache.felix.ipojo.annotations.PostUnregistration;
 import org.apache.felix.ipojo.annotations.Provides;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.apache.felix.ipojo.annotations.Validate;
-import org.osgi.framework.ServiceReference;
 
 import android.content.Context;
 import android.content.Intent;
@@ -94,15 +91,5 @@ public class BatterySensor extends AbstractSensor implements IBatterySensor {
 		unregister();
 	}
 
-	@PostRegistration
-	public void registered(ServiceReference ref) {
-		log.D("Registered id: " + ref.getProperty("service.id"));
-
-	}
-
-	@PostUnregistration
-	public void unregistered(ServiceReference ref) {
-		log.D("Unregistered by " + ref.getBundle().getSymbolicName());
-	}
 
 }

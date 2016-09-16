@@ -8,7 +8,7 @@ import org.osgi.service.log.LogService;
 
 import br.com.vt.mapek.services.ILoggerService;
 
-@Component
+@Component(immediate=true)
 @Instantiate
 @Provides
 public class LoggerService implements ILoggerService, LogService {

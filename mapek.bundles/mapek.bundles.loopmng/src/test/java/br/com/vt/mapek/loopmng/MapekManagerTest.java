@@ -41,13 +41,13 @@ import br.com.vt.mapek.bundles.loopmng.monitor.sensors.BatterySensor;
 import br.com.vt.mapek.bundles.loopmng.plan.ChangePlan;
 import br.com.vt.mapek.bundles.loopmng.plan.Planner;
 import br.com.vt.mapek.bundles.loopmng.services.FileService;
+import br.com.vt.mapek.bundles.loopmng.services.ISerializerService;
 import br.com.vt.mapek.bundles.loopmng.services.SerializerService;
 import br.com.vt.mapek.services.IFileService;
-import br.com.vt.mapek.services.ISerializerService;
 import br.com.vt.mapek.services.domain.Threshold;
 
 class MapekManagerTest {
-	private ISerializerService<XMLLoops> serializer;
+	private ISerializerService serializer;
 	private InputStream input;
 	private XMLLoops loops;
 	private List<Loop> loopers;
