@@ -224,7 +224,8 @@
 				<inherited>true</inherited>
 				<configuration>
 					<skip>${skip.maven.plugin}</skip>
-				</configuration>
+	                  <ignoreEmbeddedSchemas>true</ignoreEmbeddedSchemas>
+    			</configuration>
 				<executions>
 					<execution>
 						<goals>

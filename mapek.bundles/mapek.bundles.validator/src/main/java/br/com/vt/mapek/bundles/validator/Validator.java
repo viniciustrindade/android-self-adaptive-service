@@ -99,7 +99,8 @@ public class Validator extends Arch implements IValidator {
 		}
 
 		for (InstanceDeclaration instance : m_instances) {
-			if (!instance.getConfiguration().get("component").equals(this.getClass())){
+			if (!instance.getConfiguration().get("component")
+					.equals(this.getClass())) {
 				// Only print unbound instances (others already printed above)
 				if (!instance.getStatus().isBound()) {
 					buffer.append(format(
@@ -125,9 +126,11 @@ public class Validator extends Arch implements IValidator {
 
 		for (Architecture m_arch : m_archs) {
 			InstanceDescription id = m_arch.getInstanceDescription();
-			if (id.getName().equalsIgnoreCase(instance)) {
-				sb.append(id.getDescription());
-				sb.append('\n');
+			if (id.getState() != ComponentInstance.VALID) {
+				if (id.getName().equalsIgnoreCase(instance)) {
+					sb.append(id.getDescription());
+					sb.append('\n');
+				}
 			}
 		}
 
