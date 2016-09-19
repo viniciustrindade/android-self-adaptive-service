@@ -1,9 +1,12 @@
 package br.com.vt.mapek.bundles.loopmng.main;
 
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.felix.ipojo.annotations.Bind;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Invalidate;
@@ -23,12 +26,12 @@ import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XSensor;
 import br.com.vt.mapek.bundles.loopmng.services.ISerializerService;
 import br.com.vt.mapek.services.IFileService;
 import br.com.vt.mapek.services.ILoggerService;
-import br.com.vt.mapek.services.domain.ISensor;
+import br.com.vt.mapek.services.ISensor;
 import br.com.vt.mapek.services.domain.Threshold;
 
 @Component
 @Instantiate
-public class MAPEKManager implements Runnable {
+public class XmlLoopLoader implements Runnable {
 	private volatile boolean end = false;
 
 	private Bundle bundle;
@@ -43,69 +46,104 @@ public class MAPEKManager implements Runnable {
 
 	@Requires
 	private ILoggerService log;
-	
+
 	private List<Loop> loopers;
 
-	public MAPEKManager() {
+	private HashMap<String, ISensor> cache = new HashMap<String, ISensor>();
+
+	public XmlLoopLoader() {
 		this.loopers = new LinkedList<Loop>();
 		this.bundle = FrameworkUtil.getBundle(this.getClass());
 		this.bundleContext = bundle.getBundleContext();
 	}
 
-	public void run() {
-		log.I("Manager Iniciado!!");
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public ISensor getSensorByClassName(String className) {
+		ISensor isensor = null;
+
+		// IF EXISTS IN CACHE
+		if (cache.containsKey(className)) {
+			return cache.get(className);
+		}
+
 		try {
-			configureFromXML(Constants.filename);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		while (!end) {
-			for (Loop looper : loopers) {
-				looper.run();
-				printBundles();
+			ServiceReference ref = bundleContext.getServiceReference(className);
+			isensor = (ISensor) bundleContext.getService(ref);
+
+			// CACHE SENSOR
+			if (isensor != null) {
+				cache.put(className, isensor);
 			}
+
+			return isensor;
+
+		} catch (Exception e) {
+			log.E("Couldnt load sensor class " + className + ", "
+					+ e.getMessage());
 		}
+		return isensor;
+
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void registerLoopsFromLoopFile() throws RuntimeException {
 
+		InputStream input = fileManager.getInputStream(Constants.LOOP_XML_FILE);
+		XMLLoops xml;
+		try {
+			xml = serializer.unmarshal(input, XMLLoops.class);
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
 
-	public void configureFromXML(String xmlFile) throws Exception {
-		InputStream input = fileManager.getInputStream(Constants.filename);
-		XMLLoops loops = serializer.unmarshal(input, XMLLoops.class);
-
-		int count = 0;
-		for (XLoop xmlloop : loops.loops) {
-
-			log.I("loop " + count);
-
+		for (XLoop xmlloop : xml.loops) {
 			Loop loop = new Loop(xmlloop.rate);
-			loopers.add(loop);
 
 			for (XSensor sensor : xmlloop.sensors) {
-				try {
-					ServiceReference ref = bundleContext
-							.getServiceReference(sensor.className);
-					ISensor isensor = (ISensor) bundleContext.getService(ref);
-					isensor.setSensorID(sensor.id);
-					loop.build(isensor);
-				} catch (Exception e) {
-					log.E("Couldnt load sensor class " + sensor.className + ", " + 	e.getMessage());
-				
+				ISensor isensor = getSensorByClassName(sensor.className);
+				if (isensor == null) {
+					throw new RuntimeException("SENSOR NOT FOUND: "
+							+ sensor.className);
 				}
+				loop.build(isensor);
+
 			}
 
 			for (XPolicy policy : xmlloop.policys) {
 				loop.getSymptomRepository().addSymptom(policy.property,
 						policy.condition, new Threshold(policy.setpoint));
 			}
+
 			for (XAction action : xmlloop.actions) {
 				loop.getChangePlan().addAction(this.bundleContext,
 						this.fileManager, action.id, action.params);
 			}
+			
+			this.bundleContext.registerService(Loop.class, loop,
+					new Hashtable());
+		}
+		
+	
 
+	}
+
+	public void run() throws RuntimeException {
+		log.I("Manager Iniciado!!");
+		registerLoopsFromLoopFile();
+
+		//INITIALIZE SENSORS
+		for (String key:cache.keySet()){
+			cache.get(key).register();
+		}
+		
+		while (!end) {
+			printBundles();
+			for (Loop looper : loopers) {
+				looper.run();
+			}
 		}
 	}
 
-	public void printBundles(){
+	public void printBundles() {
 		Bundle[] bundles = this.bundleContext.getBundles();
 		String teststr = "Bundles Status: \n";
 		log.D("=======================================");
@@ -144,6 +182,12 @@ public class MAPEKManager implements Runnable {
 		}
 		log.D(teststr);
 		log.D("=======================================");
+	}
+
+	@Bind(aggregate = true, specification = Loop.class, optional = false)
+	public void bindLoops(Loop l) {
+		log.I("BIND LOOPS");
+		loopers.add(l);
 	}
 
 	@Validate

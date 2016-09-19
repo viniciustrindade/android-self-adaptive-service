@@ -33,13 +33,22 @@ public class Installer implements BundleActivator {
 		Dictionary<String, String> props;
 		m_context = context;
 
-			Bundle ipojo = this.installBundle(context, "ipojo");
-			Bundle mb_loopmng = this.installBundle(context, "mb_loopmng");
-			Bundle mb_validator = this.installBundle(context, "mb_validator");
+		Bundle org_osgi_compendium = this.installBundle(context,
+				"org_osgi_compendium");
+		Bundle ipojo = this.installBundle(context, "ipojo");
+		Bundle mb_sensorbattery = this.installBundle(context,
+				"mb_sensorbattery");
+		Bundle mb_loopmng = this.installBundle(context, "mb_loopmng");
+		Bundle mb_validator = this.installBundle(context, "mb_validator");
 
-			ipojo.start();
-			mb_loopmng.start();
-			mb_validator.start();
+		org_osgi_compendium.start();
+		ipojo.start();
+		
+		mb_sensorbattery.start();
+		
+		mb_loopmng.start();
+		mb_validator.start();
+
 	}
 
 	public void stop(BundleContext arg0) throws Exception {

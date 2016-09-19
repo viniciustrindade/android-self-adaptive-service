@@ -1,9 +1,8 @@
-package br.com.vt.mapek.services.domain;
+package br.com.vt.mapek.services;
 
 import java.util.List;
 
-import br.com.vt.mapek.services.IObserver;
-import br.com.vt.mapek.services.ISubject;
+import br.com.vt.mapek.services.domain.ContextElement;
 
 public interface ISensor extends ISubject {
 
@@ -20,7 +19,7 @@ public interface ISensor extends ISubject {
 	public void notifyObservers(ContextElement contextElement);
 
 	public List<IObserver> getObservers();
-
+	
 	public void setObservers(List<IObserver> observers);
 
 	public ContextElement getCurrentContext();
@@ -30,5 +29,8 @@ public interface ISensor extends ISubject {
 	public void start();
 
 	public void stop();
+	
+	public void register();
+	public void unregister();
 
 }

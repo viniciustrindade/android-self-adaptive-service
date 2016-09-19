@@ -1,4 +1,4 @@
-package br.com.vt.mapek.loopmng;
+/*package br.com.vt.mapek.loopmng;
 
 import java.io.File;
 import java.io.InputStream;
@@ -269,3 +269,4 @@ class MapekManagerTest {
 	}
 
 }
+*/

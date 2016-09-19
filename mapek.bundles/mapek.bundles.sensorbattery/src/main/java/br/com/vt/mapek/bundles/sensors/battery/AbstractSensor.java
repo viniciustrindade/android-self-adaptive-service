@@ -1,13 +1,13 @@
-package br.com.vt.mapek.bundles.loopmng.monitor.sensors;
+package br.com.vt.mapek.bundles.sensors.battery;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.BroadcastReceiver;
 import br.com.vt.mapek.services.IObserver;
+import br.com.vt.mapek.services.ISensor;
 import br.com.vt.mapek.services.common.Util;
 import br.com.vt.mapek.services.domain.ContextElement;
-import br.com.vt.mapek.services.domain.ISensor;
 
 public abstract class AbstractSensor extends BroadcastReceiver implements ISensor {
 	private int sensorID;
@@ -57,7 +57,7 @@ public abstract class AbstractSensor extends BroadcastReceiver implements ISenso
 	public List<IObserver> getObservers() {
 		return observers;
 	}
-
+	
 	public void setObservers(List<IObserver> observers) {
 		this.observers = observers;
 	}

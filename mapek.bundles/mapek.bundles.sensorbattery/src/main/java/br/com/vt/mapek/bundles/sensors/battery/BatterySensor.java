@@ -1,4 +1,4 @@
-package br.com.vt.mapek.bundles.loopmng.monitor.sensors;
+package br.com.vt.mapek.bundles.sensors.battery;
 
 import java.util.Date;
 
@@ -15,10 +15,9 @@ import android.content.IntentFilter;
 import android.os.BatteryManager;
 import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.domain.ContextElement;
-import br.com.vt.mapek.services.domain.IBatterySensor;
 
 @Component
-@Provides
+@Provides(specifications=IBatterySensor.class)
 @Instantiate
 public class BatterySensor extends AbstractSensor implements IBatterySensor {
 
@@ -82,13 +81,13 @@ public class BatterySensor extends AbstractSensor implements IBatterySensor {
 	@Validate
 	public void start() {
 		log.D("[START] Iniciado Battery Sensor");
-		register();
+
 	}
 
 	@Invalidate
 	public void stop() {
 		log.D("[STOP] Parado  Battery Sensor");
-		unregister();
+
 	}
 
 

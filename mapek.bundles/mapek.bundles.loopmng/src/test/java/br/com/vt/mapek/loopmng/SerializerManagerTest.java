@@ -1,4 +1,4 @@
-package br.com.vt.mapek.loopmng;
+/*package br.com.vt.mapek.loopmng;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -127,3 +127,4 @@ public class SerializerManagerTest {
 	}
 
 }
+*/

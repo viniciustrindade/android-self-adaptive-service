@@ -13,6 +13,7 @@
 	<modules>
 		<module>mapek.bundles.loopmng</module>
 		<module>mapek.bundles.validator</module>
+		<module>mapek.bundles.sensorbattery</module>
 	</modules>
 
 	<artifactId>mapek.bundles</artifactId>
@@ -23,7 +24,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<android.dex.coreLibrary>true</android.dex.coreLibrary>
 		<skip.maven.plugin>true</skip.maven.plugin>
-
 	</properties>
 	<!-- ============================================================================================== -->
 

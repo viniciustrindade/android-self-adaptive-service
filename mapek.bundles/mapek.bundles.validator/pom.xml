@@ -29,12 +29,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
-			<version>1.4.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.ipojo</artifactId>
 			<version>1.12.1</version>
 			<scope>compile</scope>
