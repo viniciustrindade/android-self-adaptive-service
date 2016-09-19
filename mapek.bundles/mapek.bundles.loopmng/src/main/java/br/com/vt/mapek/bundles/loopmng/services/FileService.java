@@ -26,7 +26,7 @@ public class FileService implements IFileService {
 
 	@Requires
 	Context context;
-	
+
 	@Requires
 	private ILoggerService log;
 	private Bundle bundle;
@@ -40,20 +40,25 @@ public class FileService implements IFileService {
 	public InputStream getInputStream(String filename) {
 		log.D("[INPUT] filename : " + filename);
 		InputStream input = null;
-		
-		ClassLoader classLoader = Persister.class.getClassLoader();
+		try {
 
-		log.D("filemanager classloader: " + this.getClass().getClassLoader().getClass().getName());
-		input = classLoader.getResourceAsStream(filename);
+			ClassLoader classLoader = Persister.class.getClassLoader();
 
-		if (input == null) {
-			try {
-				throw new FileNotFoundException("Recurso nao encontrado!!");
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+			log.D("filemanager classloader: "
+					+ this.getClass().getClassLoader().getClass().getName());
+			input = classLoader.getResourceAsStream(filename);
+
+			if (input == null) {
+				try {
+					throw new FileNotFoundException("Recurso nao encontrado!!");
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
 			}
-		}
 
+		} catch (Exception e) {
+			e.fillInStackTrace();
+		}
 		return input;
 
 	}
@@ -62,7 +67,7 @@ public class FileService implements IFileService {
 
 		FileOutputStream out = null;
 		ClassLoader classLoader = Persister.class.getClassLoader();
-		
+
 		String file = classLoader.getResource(filename).getFile();
 
 		log.D("[OUTPUT] filename : " + file);
