@@ -49,8 +49,6 @@
 			<version>4.1.1.4</version>
 			<scope>compile</scope>
 		</dependency>
-		<!-- <dependency> <groupId>org.apache.felix</groupId> <artifactId>org.apache.felix.configadmin</artifactId> 
-			<version>1.8.10</version> </dependency> -->
 		<!-- XML -->
 		<dependency>
 			<groupId>org.simpleframework</groupId>
@@ -58,21 +56,6 @@
 			<version>2.7.1</version>
 			<scope>provided</scope>
 			<optional>false</optional>
-			<exclusions>
-				<exclusion>
-					<artifactId>stax-api</artifactId>
-					<groupId>stax</groupId>
-				</exclusion>
-				<exclusion>
-					<!-- Provided by Android -->
-					<artifactId>xpp3</artifactId>
-					<groupId>xpp3</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>stax</artifactId>
-					<groupId>stax</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 </project>

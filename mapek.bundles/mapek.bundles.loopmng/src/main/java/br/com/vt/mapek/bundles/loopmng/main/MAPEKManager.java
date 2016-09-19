@@ -1,5 +1,6 @@
 package br.com.vt.mapek.bundles.loopmng.main;
 
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,8 +15,6 @@ import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 
 import br.com.vt.mapek.bundles.loopmng.Constants;
-import br.com.vt.mapek.bundles.loopmng.domain.Commands;
-import br.com.vt.mapek.bundles.loopmng.domain.Condition;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop;
 import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XAction;
@@ -24,8 +23,6 @@ import br.com.vt.mapek.bundles.loopmng.domain.XMLLoops.XLoop.XSensor;
 import br.com.vt.mapek.bundles.loopmng.services.ISerializerService;
 import br.com.vt.mapek.services.IFileService;
 import br.com.vt.mapek.services.ILoggerService;
-import br.com.vt.mapek.services.common.Util;
-import br.com.vt.mapek.services.domain.IBatterySensor;
 import br.com.vt.mapek.services.domain.ISensor;
 import br.com.vt.mapek.services.domain.Threshold;
 
@@ -72,33 +69,8 @@ public class MAPEKManager implements Runnable {
 
 
 	public void configureFromXML(String xmlFile) throws Exception {
-		// InputStream input = fileManager.getInputStream(Constants.filename);
-		// XMLLoops loops = serializer.unmarshal(input, XMLLoops.class);
-
-		XMLLoops loops = new XMLLoops();
-		XLoop l1 = loops.instance();
-		l1.instanceSensor(Util.getNewID(), IBatterySensor.class.getName());
-
-		XPolicy policy1 = l1.instancePolicy();
-		policy1.property = Constants.property;
-		policy1.condition = Condition.MENOR_IGUAL_QUE;
-		policy1.setpoint = 10;
-		;
-		for (String bundles : Constants.bundlesToStart) {
-			l1.instanceAction(Commands.START_COMPONENT.name(), bundles);
-		}
-
-		XLoop l2 = loops.instance();
-		l2.instanceSensor(Util.getNewID(), IBatterySensor.class.getName());
-
-		XPolicy p2 = l2.instancePolicy();
-		p2.property = Constants.property;
-		p2.condition = Condition.MAIOR_IGUAL_QUE;
-		p2.setpoint = 50;
-
-		for (String bundles : Constants.bundlesToStop) {
-			l2.instanceAction(Commands.STOP_COMPONENT.name(), bundles);
-		}
+		InputStream input = fileManager.getInputStream(Constants.filename);
+		XMLLoops loops = serializer.unmarshal(input, XMLLoops.class);
 
 		int count = 0;
 		for (XLoop xmlloop : loops.loops) {
