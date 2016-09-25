@@ -64,9 +64,9 @@
 						<fileset>
 							<directory>mapek.desktop/bundle</directory>
 						</fileset>
-						<fileset>
+				<!-- 		<fileset>
 							<directory>mapek.desktop/felix-cache</directory>
-						</fileset>
+						</fileset> -->
 					</filesets>
 				</configuration>
 			</plugin>

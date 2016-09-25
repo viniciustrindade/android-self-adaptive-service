@@ -14,6 +14,24 @@ public class Installer implements BundleActivator {
 	private Context androidContext;
 	private Resources res;
 	private BundleContext m_context = null;
+	private final String[] files = {
+			
+			"ipojo",
+			"ipojoapi",
+			"ipojocomposite",
+			"mb_symptomrepository",
+			"mb_logger",
+			"mb_resources",
+			"mb_contextlog",
+			"mb_sensorbattery",
+			"mb_monitor",
+			"mb_analyzer",
+			"mb_planner",
+			"mb_execute",
+			"mb_loop",
+			"mb_validator"
+			};
+
 
 	public Installer(Context androidContext) {
 		this.androidContext = androidContext;
@@ -30,24 +48,11 @@ public class Installer implements BundleActivator {
 
 	@SuppressWarnings("rawtypes")
 	public void start(BundleContext context) throws Exception {
-		Dictionary<String, String> props;
 		m_context = context;
-
-		Bundle org_osgi_compendium = this.installBundle(context,
-				"org_osgi_compendium");
-		Bundle ipojo = this.installBundle(context, "ipojo");
-		Bundle mb_sensorbattery = this.installBundle(context,
-				"mb_sensorbattery");
-		Bundle mb_loopmng = this.installBundle(context, "mb_loopmng");
-		Bundle mb_validator = this.installBundle(context, "mb_validator");
-
-		org_osgi_compendium.start();
-		ipojo.start();
-		
-		mb_sensorbattery.start();
-		
-		mb_loopmng.start();
-		mb_validator.start();
+		for (String file : files) {
+			Bundle bundle = this.installBundle(context, file);
+			bundle.start();
+		}
 
 	}
 

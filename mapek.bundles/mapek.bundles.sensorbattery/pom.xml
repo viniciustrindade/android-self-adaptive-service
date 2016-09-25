@@ -11,11 +11,6 @@
 	<properties>
 		<bundle.name>mb_sensorbattery.jar</bundle.name>
 		<bundle.import.packages>
-			!javax.*,
-			!java.*,
-			!org.apache.avalon.*,
-			!org.apache.log4j.*,
-			!org.apache.log.*,
 			*
 		</bundle.import.packages>
 		<bundle.export.packages>br.com.vt.mapek.bundles.sensors.battery.*;version="${project.version}"</bundle.export.packages>

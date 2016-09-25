@@ -1,4 +1,4 @@
-package br.com.vt.mapek.desktop.main;
+/*package br.com.vt.mapek.desktop.main;
 
 import org.junit.Test;
 
@@ -48,3 +48,4 @@ public class ApacheFelix extends ServiceTestCase<MapekOSGIService> {
 		}
 	}
 }
+*/

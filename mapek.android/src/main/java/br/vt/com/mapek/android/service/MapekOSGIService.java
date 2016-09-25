@@ -62,6 +62,7 @@ public class MapekOSGIService extends Service {
 
 	@Override
 	public void onCreate() {
+		
 		felixConfig = new FelixConfig();
 		felixConfig.configureBundlesDir();
 		felixConfig.configureCache();

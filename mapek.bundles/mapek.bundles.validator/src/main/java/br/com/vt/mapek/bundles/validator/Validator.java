@@ -99,8 +99,9 @@ public class Validator extends Arch implements IValidator {
 		}
 
 		for (InstanceDeclaration instance : m_instances) {
-			if (!instance.getConfiguration().get("component")
-					.equals(this.getClass())) {
+			if (instance.getConfiguration().get("component") != null
+					&& !instance.getConfiguration().get("component")
+							.equals(this.getClass())) {
 				// Only print unbound instances (others already printed above)
 				if (!instance.getStatus().isBound()) {
 					buffer.append(format(
@@ -136,8 +137,9 @@ public class Validator extends Arch implements IValidator {
 
 		for (InstanceDeclaration instanceDeclaration : m_instances) {
 			if (!instanceDeclaration.getStatus().isBound()) {
-				if (instance
-						.equals(name(instanceDeclaration.getConfiguration()))) {
+				if (instance != null
+						&& instance.equals(name(instanceDeclaration
+								.getConfiguration()))) {
 					sb.append(format(
 							"InstanceDeclaration %s not bound to its factory%n",
 							instance));

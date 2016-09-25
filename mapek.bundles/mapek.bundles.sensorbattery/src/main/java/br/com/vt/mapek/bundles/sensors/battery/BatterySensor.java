@@ -17,9 +17,9 @@ import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.domain.ContextElement;
 
 @Component
-@Provides(specifications=IBatterySensor.class)
+@Provides(specifications = IBatterySensor.class)
 @Instantiate
-public class BatterySensor extends AbstractSensor implements IBatterySensor {
+public class BatterySensor extends ABSensor implements IBatterySensor {
 
 	@Requires
 	private ILoggerService log;
@@ -36,7 +36,7 @@ public class BatterySensor extends AbstractSensor implements IBatterySensor {
 	}
 
 	public void readAndNotify() {
-		log.D("[Medição]");
+		log.I("[Medição] " + this.getClass().getName() + "\n");
 		this.notifyObservers(getCurrentContext());
 	}
 
@@ -74,7 +74,8 @@ public class BatterySensor extends AbstractSensor implements IBatterySensor {
 				Intent.ACTION_BATTERY_CHANGED));
 
 	}
-	public void unregister(){
+
+	public void unregister() {
 		context.unregisterReceiver(this);
 	}
 
@@ -89,6 +90,5 @@ public class BatterySensor extends AbstractSensor implements IBatterySensor {
 		log.D("[STOP] Parado  Battery Sensor");
 
 	}
-
 
 }

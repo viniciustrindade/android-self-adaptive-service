@@ -11,9 +11,20 @@
 	</parent>
 
 	<modules>
-		<module>mapek.bundles.loopmng</module>
-		<module>mapek.bundles.validator</module>
+
+		<!-- LOOP -->
+		<module>mapek.bundles.loop</module>
 		<module>mapek.bundles.sensorbattery</module>
+		<module>mapek.bundles.symptomrepository</module>
+		<module>mapek.bundles.monitor</module>
+		<module>mapek.bundles.analyzer</module>
+		<module>mapek.bundles.planner</module>
+		<module>mapek.bundles.execute</module>
+		<!-- COMMON -->
+		<module>mapek.bundles.validator</module>
+		<module>mapek.bundles.logger</module>
+		<module>mapek.bundles.resource</module>
+		<module>mapek.bundles.contextlog</module>
 	</modules>
 
 	<artifactId>mapek.bundles</artifactId>

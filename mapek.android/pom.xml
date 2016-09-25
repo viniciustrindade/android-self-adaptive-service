@@ -68,7 +68,7 @@
 			<artifactId>org.apache.felix.framework</artifactId>
 			<version>5.4.0</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.google.android</groupId>
 			<artifactId>android-test</artifactId>
 			<version>4.1.1.4</version>
@@ -79,7 +79,7 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 </project>
