@@ -5,30 +5,30 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ContextElement {
-	private Property property;
-	private int reading;
+	private IProperty property;
+	private float reading;
 	private Date collectionTime;
 	
 	private ContextElement() {
 	}
 	
-	public ContextElement(Property property) {
+	public ContextElement(IProperty property) {
 		this.property = property;
 	}
 
-	public Property getProperty() {
+	public IProperty getProperty() {
 		return property;
 	}
 
-	public void setProperty(Property property) {
+	public void setProperty(IProperty property) {
 		this.property = property;
 	}
 
-	public int getReading() {
+	public float getReading() {
 		return reading;
 	}
 
-	public void setReading(int reading) {
+	public void setReading(float reading) {
 		this.reading = reading;
 	}
 

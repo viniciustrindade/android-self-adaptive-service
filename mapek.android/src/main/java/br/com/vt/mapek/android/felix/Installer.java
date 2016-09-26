@@ -15,15 +15,19 @@ public class Installer implements BundleActivator {
 	private Resources res;
 	private BundleContext m_context = null;
 	private final String[] files = {
-			
 			"ipojo",
 			"ipojoapi",
 			"ipojocomposite",
-			"mb_symptomrepository",
 			"mb_logger",
+			"mb_sensor_battery",
+			"mb_sensor_pressure",
+			"mb_sensor_airtemperature",
+			"mb_sensor_humidity",
+			"mb_sensor_illuminance",
+			"mb_sensor_proximity",
 			"mb_resources",
+			"mb_symptomrepository",
 			"mb_contextlog",
-			"mb_sensorbattery",
 			"mb_monitor",
 			"mb_analyzer",
 			"mb_planner",
