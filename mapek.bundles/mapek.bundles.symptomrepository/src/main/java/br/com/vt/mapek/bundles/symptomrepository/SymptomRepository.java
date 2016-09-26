@@ -1,6 +1,7 @@
 package br.com.vt.mapek.bundles.symptomrepository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.felix.ipojo.annotations.Component;
@@ -27,6 +28,28 @@ public class SymptomRepository implements ISymptomRepository {
 		}
 
 		return symptomsFounded;
+
+	}
+	
+	public List<Symptom> search(Collection<List<ContextElement>> states) {
+		List<Symptom> founded = new ArrayList<Symptom>();
+		
+		for (List<ContextElement> list: states){
+			for (ContextElement state: list){
+				for (Symptom symptom : symptoms) {
+					
+					//optimizing: No checking if already have done 
+					
+					if (!founded.contains(symptom)){
+						if (symptom.check(state)) {
+								founded.add(symptom);
+						}
+					}
+				}
+			}
+		}
+		
+		return founded;
 
 	}
 

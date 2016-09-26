@@ -115,7 +115,7 @@ public class Loop implements ILoop {
 		/********* POLICY **********/
 		for (XPolicy policy : policys) {
 			this.symptomRepository.addSymptom(new Symptom(policy.property,
-					policy.condition, new Threshold(policy.setpoint)));
+					policy.condition, new Threshold(policy.bound)));
 		}
 		/********* SENSOR **********/
 		for (XSensor sensor : sensors) {

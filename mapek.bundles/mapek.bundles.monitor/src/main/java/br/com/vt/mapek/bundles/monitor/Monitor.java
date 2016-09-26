@@ -1,6 +1,10 @@
 package br.com.vt.mapek.bundles.monitor;
 
+import java.util.Collection;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.TreeMap;
 
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
@@ -14,6 +18,7 @@ import br.com.vt.mapek.services.IMonitor;
 import br.com.vt.mapek.services.IObserver;
 import br.com.vt.mapek.services.common.Util;
 import br.com.vt.mapek.services.domain.ContextElement;
+import br.com.vt.mapek.services.domain.IProperty;
 
 @Component
 @Provides(strategy = "instance")
@@ -23,20 +28,24 @@ public class Monitor extends ABObserverSubject implements IMonitor {
 	@Requires
 	private ILoggerService log;
 	private ILoop loop;
+	private static final int limit = 10;
 
 	public Monitor() {
 		super();
 	}
- 
+
 	// Receive ContextElement
 	// Send last 10 contexts
 	public synchronized void update(Object object) {
 		if (object instanceof ContextElement) {
 			ContextElement context = (ContextElement) object;
-			log.I(loop + " Monitorando _____________________________________________________________\n");
+			log.I(loop
+					+ " Monitorando ________________________________________________________________________\n");
 
 			loop.getSystemContextLog().saveContext(context);
-			List<ContextElement> list = loop.getSystemContextLog().getLast(10);
+			Collection<List<ContextElement>> list = loop.getSystemContextLog()
+					.getLast(limit);
+
 			print(list);
 			log.I("\n");
 			notifyObservers(list);
@@ -44,15 +53,29 @@ public class Monitor extends ABObserverSubject implements IMonitor {
 
 	}
 
-	public synchronized void print(List<ContextElement> list) {
-		for (ContextElement context : list) {
-			log.I("[" + Util.dtFormat.format(context.getCollectionTime()) + " "
-					+ context.getReading() + "] ");
+	public synchronized void print(Collection<List<ContextElement>> all) {
+
+		for (List<ContextElement> list : all) {
+
+			if (!list.isEmpty()) {
+				ContextElement first = list.get(0);
+				IProperty p = first.getProperty();
+				String toPrint = "[" + p.getName() + "(" + p.getUnit() + ")]\t";
+				for (ContextElement context : list) {
+					String date = Util.dtFormat.format(context
+							.getCollectionTime());
+					String value = String.valueOf(context.getReading());
+					toPrint += "[" + date + " " + value + "] ";
+				}
+				log.I(toPrint);
+			}
+
 		}
 
 	}
 
-	public synchronized void notifyObservers(List<ContextElement> list) {
+	public synchronized void notifyObservers(
+			Collection<List<ContextElement>> list) {
 		for (IObserver observer : observers) {
 			observer.update(list);
 		}

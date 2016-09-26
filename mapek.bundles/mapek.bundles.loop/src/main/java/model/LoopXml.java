@@ -112,8 +112,8 @@ public class LoopXml  {
 			@Attribute(name = "condition", required = true)
 			public Condition condition;
 
-			@Attribute(name = "setpoint", required = true)
-			public int setpoint;
+			@Attribute(name = "bound", required = true)
+			public int bound;
 
 		}
 

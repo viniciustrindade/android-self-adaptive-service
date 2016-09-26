@@ -10,10 +10,10 @@ public enum Property implements IProperty {
 	
 
 	String unit;
-	Threshold threshold;
+	Threshold defaultThreshold;
 
 	Property(float low, float up, String unit) {
-		this.threshold = new Threshold(low, up);
+		this.defaultThreshold = new Threshold(low, up);
 		this.unit = unit;
 	}
 
@@ -21,14 +21,18 @@ public enum Property implements IProperty {
 		return this.name();
 	}
 
-	public Threshold getThreshold() {
-		// TODO Auto-generated method stub
-		return this.threshold;
+	public Threshold getDefaultThreshold() {
+		return this.defaultThreshold;
 	}
 
 	public String getUnit() {
-		// TODO Auto-generated method stub
-		return null;
+		return unit;
+	}
+	
+	@Override
+	public String toString() {
+		
+		return name() + "(" + unit+ ")";
 	}
 
 }

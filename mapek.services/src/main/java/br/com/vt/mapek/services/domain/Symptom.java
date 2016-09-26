@@ -16,4 +16,10 @@ public class Symptom {
 	public Boolean check(ContextElement c){
 		return (this.property == c.getProperty() && this.condition.check(c,this.threshold));
 	}
+	
+	@Override
+	public String toString() {
+		
+		return String.valueOf(property + " " + condition +" " +threshold );
+	}
 }

@@ -57,4 +57,9 @@ public enum Condition {
 			Threshold threshold) {
 		return (contextElement.getReading() >= threshold.getLowerBound() && contextElement.getReading() <= threshold.getUpperBound());
 	}
+
+	
+	public String toString() {
+		return name();
+	}
 }

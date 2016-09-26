@@ -1,33 +1,34 @@
 <loops>
-   <loops class="java.util.LinkedList">
-      <loop rate="1000">
-         <sensors class="java.util.LinkedList">
-            <sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor"/>
-            <sensor className="br.com.vt.mapek.bundles.sensors.proximity.IProximitySensor"/>
-         </sensors>
-         <policys class="java.util.LinkedList">
-            <policy property="PROXIMITY" condition="MAIOR_IGUAL_QUE" setpoint="5"/>
-            <policy property="BATTERY" condition="MENOR_IGUAL_QUE" setpoint="20"/>
-         </policys>
-         <actions class="java.util.LinkedList">
-          	<action id="STOP_COMPONENT" params="rb_spell_checker_gui.bundle"/>
-            <action id="STOP_COMPONENT" params="rb_spellcheckgui_for_android.bundle"/>
-         </actions>
-      </loop>
-      <loop rate="1000">
-         <sensors class="java.util.LinkedList">
-            <sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor"/>
-         </sensors>
-         <policys class="java.util.LinkedList">
-            <policy property="BATTERY" condition="MAIOR_IGUAL_QUE" setpoint="50"/>
-         </policys>
-         <actions class="java.util.LinkedList">
-            <action id="START_COMPONENT" params="rb_spell_services.bundle"/>
-            <action id="START_COMPONENT" params="rb_spell_checker.bundle"/>
-            <action id="START_COMPONENT" params="rb_spell_english.bundle"/>
-     <!--        <action id="START_COMPONENT" params="rb_spell_checker_gui.bundle"/> -->
-            <action id="START_COMPONENT" params="rb_spellcheckgui_for_android.bundle"/>
-         </actions>
-      </loop>
-   </loops>
+	<loops>
+		<loop rate="1000">
+			<sensors>
+				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
+				<sensor
+					className="br.com.vt.mapek.bundles.sensors.illuminance.IIlluminanceSensor" />
+			</sensors>
+			<policys>
+				<policy property="LIGHT" condition="MAIOR_IGUAL_QUE" bound="5" />
+				<policy property="BATTERY" condition="MENOR_IGUAL_QUE" bound="20" />
+			</policys>
+			<actions>
+				<action id="STOP_COMPONENT" params="rb_spell_checker_gui.bundle" />
+				<action id="STOP_COMPONENT" params="rb_spellcheckgui_for_android.bundle" />
+			</actions>
+		</loop>
+		<loop rate="1000">
+			<sensors>
+				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
+			</sensors>
+			<policys>
+				<policy property="BATTERY" condition="MAIOR_IGUAL_QUE" bound="50" />
+			</policys>
+			<actions>
+				<action id="START_COMPONENT" params="rb_spell_services.bundle" />
+				<action id="START_COMPONENT" params="rb_spell_checker.bundle" />
+				<action id="START_COMPONENT" params="rb_spell_english.bundle" />
+				<!-- <action id="START_COMPONENT" params="rb_spell_checker_gui.bundle"/> -->
+				<action id="START_COMPONENT" params="rb_spellcheckgui_for_android.bundle" />
+			</actions>
+		</loop>
+	</loops>
 </loops>

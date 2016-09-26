@@ -37,7 +37,7 @@ public class IlluminanceSensor extends ABSensor implements
 
 	public void onSensorChanged(SensorEvent event) {
 		lastMeasure = event.values[0];
-		log.I("[Medição] " + this.getClass().getName() + "\n");
+		log.I("\n [Medição] " + this.getClass().getName() + "\n");
 		this.notifyObservers(getCurrentContext());
 	}
 

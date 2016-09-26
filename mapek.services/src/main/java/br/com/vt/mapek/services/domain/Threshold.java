@@ -34,7 +34,11 @@ public class Threshold {
 		this.onceBound = onceBound;
 	}
 	
-	
+	@Override
+	public String toString() {
+
+		return " " + String.valueOf(onceBound ? lowerBound : lowerBound + "," + upperBound) + " ";
+	}
 	
 	
 }

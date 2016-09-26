@@ -15,7 +15,7 @@ import br.com.vt.mapek.services.IPlanner;
 import br.com.vt.mapek.services.ISymptomRepository;
 
 @Component
-@Provides(strategy="instance")
+@Provides(strategy = "instance")
 @Instantiate
 public class Planner extends ABObserverSubject implements IPlanner {
 
@@ -31,18 +31,28 @@ public class Planner extends ABObserverSubject implements IPlanner {
 	// Send ChangePlan
 	public synchronized void update(Object object) {
 
-		log.I(loop + " Planejando "+ loop.getChangePlan()+"\n");
+		log.D(loop + " Planejando \n");
 
 		if (object instanceof IAdaptationRequest) {
 			IAdaptationRequest adaptationRequest = (IAdaptationRequest) object;
 			ISymptomRepository repo = loop.getSymptomRepository();
-			if (repo.getSymptoms().containsAll(adaptationRequest.getSymptoms())) {
+
+			log.D("[Symptom knowed] \t "
+					+ repo.getSymptoms().toString() + "\n");
+			
+			log.D("[Symptom founded] \t "
+					+ adaptationRequest.getSymptoms().toString()+ "\n");
+			
+			// Only make adaptation if have all symptoms
+			if (adaptationRequest.getSymptoms().containsAll(repo.getSymptoms())) {
 				IChangePlan changePlan = loop.getChangePlan();
+				log.D("[notifyObservers(changePlan)] > " + changePlan + "\n");
 				notifyObservers(changePlan);
 			}
+
 		}
 
-		log.I("");
+		log.D("");
 
 	}
 
