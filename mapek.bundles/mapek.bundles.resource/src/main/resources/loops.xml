@@ -30,5 +30,33 @@
 				<action id="START_COMPONENT" params="rb_spellcheckgui_for_android.bundle" />
 			</actions>
 		</loop>
+		<loop rate="1000">
+			<sensors>
+				<sensor className="br.com.vt.mapek.bundles.sensors.proximity.IProximitySensor" />
+			</sensors>
+			<policys>
+				<policy property="PROXIMITY" condition="MAIOR_IGUAL_QUE" bound="5" />
+			</policys>
+			<actions>
+				<action id="START_COMPONENT" params="rb_spell_services.bundle" />
+				<action id="START_COMPONENT" params="rb_spell_checker.bundle" />
+				<action id="START_COMPONENT" params="rb_spell_english.bundle" />
+				<!-- <action id="START_COMPONENT" params="rb_spell_checker_gui.bundle"/> -->
+				<action id="START_COMPONENT" params="rb_spellcheckgui_for_android.bundle" />
+			</actions>
+		</loop>
+		<loop rate="1000">
+			<sensors>
+				<sensor className="br.com.vt.mapek.bundles.sensors.proximity.IProximitySensor" />
+			</sensors>
+			<policys>
+				<policy property="PROXIMITY" condition="MENOR_IGUAL_QUE" bound="4" />
+			</policys>
+			<actions>
+				<action id="STOP_COMPONENT" params="rb_spell_checker_gui.bundle" />
+				<action id="STOP_COMPONENT" params="rb_spellcheckgui_for_android.bundle" />
+			</actions>
+		</loop>
+		
 	</loops>
 </loops>
