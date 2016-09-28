@@ -14,6 +14,28 @@ public class Installer implements BundleActivator {
 	private Context androidContext;
 	private Resources res;
 	private BundleContext m_context = null;
+	private final String[] files = {
+			"ipojo",
+			"ipojoapi",
+			"ipojocomposite",
+			"mb_logger",
+			"mb_sensor_battery",
+			"mb_sensor_pressure",
+			"mb_sensor_airtemperature",
+			"mb_sensor_humidity",
+			"mb_sensor_illuminance",
+			"mb_sensor_proximity",
+			"mb_resources",
+			"mb_symptomrepository",
+			"mb_contextlog",
+			"mb_monitor",
+			"mb_analyzer",
+			"mb_planner",
+			"mb_execute",
+			"mb_loop",
+			"mb_validator"
+			};
+
 
 	public Installer(Context androidContext) {
 		this.androidContext = androidContext;
@@ -30,16 +52,12 @@ public class Installer implements BundleActivator {
 
 	@SuppressWarnings("rawtypes")
 	public void start(BundleContext context) throws Exception {
-		Dictionary<String, String> props;
 		m_context = context;
+		for (String file : files) {
+			Bundle bundle = this.installBundle(context, file);
+			bundle.start();
+		}
 
-			Bundle ipojo = this.installBundle(context, "ipojo");
-			Bundle mb_loopmng = this.installBundle(context, "mb_loopmng");
-			Bundle mb_validator = this.installBundle(context, "mb_validator");
-
-			ipojo.start();
-			mb_loopmng.start();
-			mb_validator.start();
 	}
 
 	public void stop(BundleContext arg0) throws Exception {

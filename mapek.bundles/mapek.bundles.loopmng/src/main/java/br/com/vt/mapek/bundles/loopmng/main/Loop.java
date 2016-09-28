@@ -1,7 +1,12 @@
 package br.com.vt.mapek.bundles.loopmng.main;
 
-import java.util.LinkedList;
-import java.util.List;
+import org.apache.felix.ipojo.annotations.Component;
+import org.apache.felix.ipojo.annotations.Instantiate;
+import org.apache.felix.ipojo.annotations.Provides;
+import org.apache.felix.ipojo.annotations.Requires;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 
 import br.com.vt.mapek.bundles.loopmng.analyze.Analyzer;
 import br.com.vt.mapek.bundles.loopmng.analyze.SymptomRepository;
@@ -9,35 +14,43 @@ import br.com.vt.mapek.bundles.loopmng.executor.Executor;
 import br.com.vt.mapek.bundles.loopmng.monitor.Monitor;
 import br.com.vt.mapek.bundles.loopmng.plan.ChangePlan;
 import br.com.vt.mapek.bundles.loopmng.plan.Planner;
+import br.com.vt.mapek.services.IFileService;
+import br.com.vt.mapek.services.ILoggerService;
+import br.com.vt.mapek.services.ISensor;
 import br.com.vt.mapek.services.common.Util;
-import br.com.vt.mapek.services.domain.ISensor;
 
+@Component
+@Instantiate
+@Provides(strategy = "SERVICE")
 public class Loop {
 	private int id;
 	private int rate;
-	private List<ISensor> sensores;
 	private SymptomRepository symptomRepository;
 	private ChangePlan changePlan;
-	
+
+	private Bundle bundle;
+	private BundleContext bundleContext;
+
+	@Requires
+	private ILoggerService log;
+
+	@Requires
+	private IFileService fileManager;
+
 	public Loop(int rate) {
 		this.id = Util.getNewID();
 		this.rate = rate;
-		this.sensores = new LinkedList<ISensor>();
 		this.symptomRepository = new SymptomRepository();
 		this.changePlan = new ChangePlan();
-	}
-	
-	public void addSensor(ISensor sensor){
-		this.sensores.add(sensor);
+		this.bundle = FrameworkUtil.getBundle(this.getClass());
+		this.bundleContext = bundle.getBundleContext();
 	}
 
-	public Loop build(ISensor sensor){
-		this.addSensor(sensor);
-
+	public Loop build(ISensor sensor) {
 		// MONITOR
 		Monitor monitor = new Monitor();
 		sensor.register(monitor);
-		
+
 		// ANALYZE
 		Analyzer analyzer = new Analyzer(this);
 		monitor.register(analyzer);
@@ -52,10 +65,13 @@ public class Loop {
 		return this;
 
 	}
-	
+
 	public synchronized void run() {
-		System.out.println("\n "+this.id+"_____________________________________________________________");
-		
+		System.out
+				.println("\n== LOOP ["
+						+ this.id
+						+ "]_____________________________________________________________");
+
 		try {
 			Thread.sleep(rate);
 		} catch (InterruptedException e) {
@@ -70,14 +86,6 @@ public class Loop {
 
 	public void setRate(int rate) {
 		this.rate = rate;
-	}
-
-	public List<ISensor> getSensores() {
-		return sensores;
-	}
-
-	public void setSensores(List<ISensor> sensores) {
-		this.sensores = sensores;
 	}
 
 	public SymptomRepository getSymptomRepository() {
@@ -96,5 +104,4 @@ public class Loop {
 		this.changePlan = changePlan;
 	}
 
-	
 }

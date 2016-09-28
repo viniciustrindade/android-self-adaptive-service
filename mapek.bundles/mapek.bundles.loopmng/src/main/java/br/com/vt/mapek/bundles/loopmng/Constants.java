@@ -4,7 +4,7 @@ import br.com.vt.mapek.services.domain.SystemProperty;
 
 public class Constants {
 
-	public static String filename = "loops.xml";
+	public static String LOOP_XML_FILE = "loops.xml";
 	public static String[] bundlesToStart = { "rb_spell_services.bundle",
 			"rb_spell_checker.bundle", "rb_spell_checker_gui.bundle", "rb_spell_english.bundle",
 			"rb_spellcheckgui_for_android.bundle" };

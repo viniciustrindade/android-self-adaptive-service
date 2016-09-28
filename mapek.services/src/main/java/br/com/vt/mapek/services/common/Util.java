@@ -8,7 +8,7 @@ import br.com.vt.mapek.services.domain.ContextElement;
 
 public class Util {
 	private static int LASTID = 1;
-	public static final DateFormat dtFormat = new SimpleDateFormat("\t hh:ss");
+	public static final DateFormat dtFormat = new SimpleDateFormat("hh:ss");
 
 	public static int getNewID() {
 		return Util.LASTID++;

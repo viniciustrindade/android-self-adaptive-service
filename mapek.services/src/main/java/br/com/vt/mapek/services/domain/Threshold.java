@@ -1,30 +1,30 @@
 package br.com.vt.mapek.services.domain;
 
 public class Threshold {
-	private int lowerBound;
-	private int upperBound;
+	private float lowerBound;
+	private float upperBound;
 	private Boolean onceBound = false;
 	
-	public Threshold(int bound) {
+	public Threshold(float bound) {
 		super();
 		this.lowerBound = bound;
 		onceBound = true;
 	}
-	public Threshold(int lowerBound, int upperBound) {
+	public Threshold(float lowerBound, float upperBound) {
 		super();
 		this.lowerBound = lowerBound;
 		this.upperBound = upperBound;
 	}
-	public int getLowerBound() {
+	public float getLowerBound() {
 		return lowerBound;
 	}
-	public void setLowerBound(int lowerBound) {
+	public void setLowerBound(float lowerBound) {
 		this.lowerBound = lowerBound;
 	}
-	public int getUpperBound() {
+	public float getUpperBound() {
 		return upperBound;
 	}
-	public void setUpperBound(int upperBound) {
+	public void setUpperBound(float upperBound) {
 		this.upperBound = upperBound;
 	}
 	public Boolean getOnceBound() {
@@ -34,7 +34,11 @@ public class Threshold {
 		this.onceBound = onceBound;
 	}
 	
-	
+	@Override
+	public String toString() {
+
+		return " " + String.valueOf(onceBound ? lowerBound : lowerBound + "," + upperBound) + " ";
+	}
 	
 	
 }

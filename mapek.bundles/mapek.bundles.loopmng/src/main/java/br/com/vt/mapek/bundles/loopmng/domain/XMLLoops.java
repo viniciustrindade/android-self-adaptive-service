@@ -60,8 +60,8 @@ public class XMLLoops  {
 			this.actions = new LinkedList<XAction>();
 		}
 
-		public XSensor instanceSensor(int id, String className) {
-			XSensor sensor = new XSensor(id, className);
+		public XSensor instanceSensor(String className) {
+			XSensor sensor = new XSensor(className);
 			this.sensors.add(sensor);
 			return sensor;
 		}
@@ -82,9 +82,6 @@ public class XMLLoops  {
 		@Default(DefaultType.FIELD)
 		public static class XSensor  {
 
-			@Attribute(name = "id", required = true)
-			public int id;
-
 			@Attribute(name = "property", required = true)
 			public String className;
 
@@ -92,8 +89,7 @@ public class XMLLoops  {
 
 			}
 
-			public XSensor(int id,String className) {
-				this.id = id;
+			public XSensor(String className) {
 				this.className = className;
 			}
 

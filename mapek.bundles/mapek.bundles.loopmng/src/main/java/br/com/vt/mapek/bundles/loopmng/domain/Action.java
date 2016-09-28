@@ -102,6 +102,7 @@ public class Action {
 	public Bundle getBundle(String filename) throws BundleException {
 		Bundle bundle = bundleContext.getBundle("file:///" + filename);
 		if (bundle == null) {
+			System.out.println("filemanager classloader antes: " + fileManager.getClass().getClassLoader().getClass().getName());
 			InputStream input = fileManager.getInputStream(filename);
 			bundle = bundleContext.installBundle("file:///" + filename, input);
 		}

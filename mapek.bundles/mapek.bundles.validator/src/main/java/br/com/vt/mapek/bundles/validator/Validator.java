@@ -99,14 +99,19 @@ public class Validator extends Arch implements IValidator {
 		}
 
 		for (InstanceDeclaration instance : m_instances) {
-			// Only print unbound instances (others already printed above)
-			if (!instance.getStatus().isBound()) {
-				buffer.append(format("Instance %s of type %s is not bound.%n",
-						name(instance.getConfiguration()), instance
-								.getConfiguration().get("component")));
-				buffer.append(format("  Reason: %s", instance.getStatus()
-						.getMessage()));
-				buffer.append("\n");
+			if (instance.getConfiguration().get("component") != null
+					&& !instance.getConfiguration().get("component")
+							.equals(this.getClass())) {
+				// Only print unbound instances (others already printed above)
+				if (!instance.getStatus().isBound()) {
+					buffer.append(format(
+							"Instance %s of type %s is not bound.%n",
+							name(instance.getConfiguration()), instance
+									.getConfiguration().get("component")));
+					buffer.append(format("  Reason: %s", instance.getStatus()
+							.getMessage()));
+					buffer.append("\n");
+				}
 			}
 		}
 
@@ -122,16 +127,19 @@ public class Validator extends Arch implements IValidator {
 
 		for (Architecture m_arch : m_archs) {
 			InstanceDescription id = m_arch.getInstanceDescription();
-			if (id.getName().equalsIgnoreCase(instance)) {
-				sb.append(id.getDescription());
-				sb.append('\n');
+			if (id.getState() != ComponentInstance.VALID) {
+				if (id.getName().equalsIgnoreCase(instance)) {
+					sb.append(id.getDescription());
+					sb.append('\n');
+				}
 			}
 		}
 
 		for (InstanceDeclaration instanceDeclaration : m_instances) {
 			if (!instanceDeclaration.getStatus().isBound()) {
-				if (instance
-						.equals(name(instanceDeclaration.getConfiguration()))) {
+				if (instance != null
+						&& instance.equals(name(instanceDeclaration
+								.getConfiguration()))) {
 					sb.append(format(
 							"InstanceDeclaration %s not bound to its factory%n",
 							instance));

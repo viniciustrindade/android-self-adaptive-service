@@ -17,12 +17,11 @@
 		<bundle.name>mb_loopmng.jar</bundle.name>
 		<bundle.import.packages>
 			!javax.*,
+			!java.*,
 			!org.apache.avalon.*,
 			!org.apache.log4j.*,
-			!org.apache.log.*,
-			*
+			!org.apache.log.*,*
 		</bundle.import.packages>
-		<bundle.export.packages></bundle.export.packages>
 		<bundle._export.contents>
 			br.com.vt.mapek.bundles.loopmng.*;version="${project.version}",
 			br.com.vt.mapek.services.*;version="${project.version}",
@@ -42,9 +41,8 @@
 			<groupId>com.google.android</groupId>
 			<artifactId>android</artifactId>
 			<version>4.1.1.4</version>
+			<scope>compile</scope>
 		</dependency>
-		<!-- <dependency> <groupId>org.apache.felix</groupId> <artifactId>org.apache.felix.configadmin</artifactId> 
-			<version>1.8.10</version> </dependency> -->
 		<!-- XML -->
 		<dependency>
 			<groupId>org.simpleframework</groupId>
@@ -52,21 +50,6 @@
 			<version>2.7.1</version>
 			<scope>provided</scope>
 			<optional>false</optional>
-			<exclusions>
-				<exclusion>
-					<artifactId>stax-api</artifactId>
-					<groupId>stax</groupId>
-				</exclusion>
-				<exclusion>
-					<!-- Provided by Android -->
-					<artifactId>xpp3</artifactId>
-					<groupId>xpp3</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>stax</artifactId>
-					<groupId>stax</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 </project>
