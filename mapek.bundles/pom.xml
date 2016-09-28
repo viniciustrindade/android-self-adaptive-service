@@ -23,13 +23,13 @@
 		<module>mapek.bundles.sensors.battery</module>
 		<module>mapek.bundles.sensors.illuminance</module>
 		<module>mapek.bundles.sensors.humidity</module>
+		<module>mapek.bundles.sensors.proximity</module>
 		<!-- LOOP -->
 		<module>mapek.bundles.loop</module>
 		<module>mapek.bundles.monitor</module>
 		<module>mapek.bundles.analyzer</module>
 		<module>mapek.bundles.planner</module>
 		<module>mapek.bundles.execute</module>
-		<module>mapek.bundles.sensors.proximity</module>
 	</modules>
 
 	<artifactId>mapek.bundles</artifactId>
