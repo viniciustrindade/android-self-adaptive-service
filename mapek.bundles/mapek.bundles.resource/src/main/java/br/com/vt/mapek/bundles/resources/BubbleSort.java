@@ -16,7 +16,8 @@ import br.com.vt.mapek.services.IFileService;
 public class BubbleSort {
 
 	public static void main(String[] args) throws IOException {
-		File tmpFile = File.createTempFile("bubblesort", ".counter");
+		File tmpFile = new File(System.getProperty("java.io.tmpdir") + "/bubblesort.counter");
+	
 		Resource res = new Resource(new FileService(new LoggerService()));
 		int intArray[] = res.getArray();
 		int counter = 0;

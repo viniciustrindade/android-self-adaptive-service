@@ -17,8 +17,9 @@ public class RandomGenerator {
 	public static final int FILESIZE_6788_KB = 1000000; // 6,7 MB
 	public static final int FILESIZE_584_KB = 100000; // 584 KB
 	public static final int FILESIZE_56_KB = 10000; // 56 KB
+	public static final int FILESIZE_3_KB = 1000; // 3,8 KB
 	
-	public static int SIZE = FILESIZE_56_KB;
+	public static int SIZE = FILESIZE_3_KB;
 	
 	
 	public static void main(String[] args) throws IOException {

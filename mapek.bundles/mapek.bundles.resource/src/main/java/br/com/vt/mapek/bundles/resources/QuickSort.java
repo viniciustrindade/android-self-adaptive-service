@@ -10,7 +10,9 @@ public class QuickSort {
 
 	public static void main(String[] args) throws IOException {
 
-		File tmpFile = File.createTempFile("quicksort", ".counter");
+	    
+		
+		File tmpFile = new File(System.getProperty("java.io.tmpdir") + "/quicksort.counter");
 		Resource res = new Resource(new FileService(new LoggerService()));
 		int intArray[] = res.getArray();
 		int counter = 0;
@@ -27,7 +29,7 @@ public class QuickSort {
 //			System.out.println("");
 
 			// prints the sorted array
-			//printArray(a);
+			printArray();
 
 			spentTime += ((new Date()).getTime() - before.getTime());
 			res.saveExecution(tmpFile, counter++, spentTime);
