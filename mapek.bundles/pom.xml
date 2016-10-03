@@ -30,6 +30,8 @@
 		<module>mapek.bundles.analyzer</module>
 		<module>mapek.bundles.planner</module>
 		<module>mapek.bundles.execute</module>
+		<module>mapek.bundles.bubblesort</module>
+		<module>mapek.bundles.quicksort</module>
 	</modules>
 
 	<artifactId>mapek.bundles</artifactId>

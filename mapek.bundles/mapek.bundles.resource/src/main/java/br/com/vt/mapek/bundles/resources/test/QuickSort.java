@@ -1,18 +1,14 @@
-package br.com.vt.mapek.bundles.resources;
+package br.com.vt.mapek.bundles.resources.test;
+/*package br.com.vt.mapek.bundles.resources;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
 public class QuickSort {
-	
+
 	static int a[];
 
 	public static void main(String[] args) throws IOException {
-
-	    
-		
-		File tmpFile = new File(System.getProperty("java.io.tmpdir") + "/quicksort.counter");
 		Resource res = new Resource(new FileService(new LoggerService()));
 		int intArray[] = res.getArray();
 		int counter = 0;
@@ -23,16 +19,17 @@ public class QuickSort {
 			a = intArray.clone();
 			Date before = new Date();
 			// prints the given array
-		//	printArray(a);
+			// printArray(a);
 			sort();
 
-//			System.out.println("");
+			// System.out.println("");
 
 			// prints the sorted array
 			printArray();
 
 			spentTime += ((new Date()).getTime() - before.getTime());
-			res.saveExecution(tmpFile, counter++, spentTime);
+			res.saveExecution(System.getProperty("java.io.tmpdir")
+					+ "/quicksort.counter", counter++, spentTime);
 		}
 
 	}
@@ -56,11 +53,11 @@ public class QuickSort {
 		// For the simplicity, we took the right most item of the array as a
 		// pivot
 		int pivot = a[right];
-		int partition = partition( left, right, pivot);
+		int partition = partition(left, right, pivot);
 
 		// Recursively, calls the quicksort with the different left and right
 		// parameters of the sub-array
-		quickSort( 0, partition - 1);
+		quickSort(0, partition - 1);
 		quickSort(partition + 1, right);
 	}
 
@@ -98,3 +95,4 @@ public class QuickSort {
 	}
 
 }
+*/

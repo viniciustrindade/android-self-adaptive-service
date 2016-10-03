@@ -78,10 +78,11 @@ public class Resource implements IResource {
 		return intArray;
 	}
 
-	public void saveExecution(File tmpFile, int counter, long spentTime) {
+	public void saveExecution(String tmpFileName, int counter, long spentTime) {
 
 		PrintWriter out;
 		try {
+			File tmpFile = new File(System.getProperty("java.io.tmpdir") + tmpFileName);
 			out = new PrintWriter(tmpFile);
 			out.write(counter + "," + spentTime);
 			out.close();

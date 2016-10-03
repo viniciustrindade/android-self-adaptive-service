@@ -1,5 +1,6 @@
 package br.com.vt.mapek.services;
 
+import java.io.File;
 import java.io.InputStream;
 
 public interface IResource {
@@ -17,5 +18,10 @@ public interface IResource {
 	 * @return
 	 */
 	public  InputStream getXML();
+	
+	public void saveExecution(String tmpFileName, int counter, long spentTime);
+	
+
+	public int[] getArray();
 
 }

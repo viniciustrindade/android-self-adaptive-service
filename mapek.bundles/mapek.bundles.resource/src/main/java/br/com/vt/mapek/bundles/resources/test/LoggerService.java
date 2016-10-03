@@ -1,11 +1,11 @@
-package br.com.vt.mapek.bundles.resources;
+package br.com.vt.mapek.bundles.resources.test;
 
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.log.LogService;
 
 import br.com.vt.mapek.services.ILoggerService;
 
-class LoggerService implements ILoggerService, LogService {
+public class LoggerService implements ILoggerService, LogService {
 
 
 	public void log(int level, String message) {

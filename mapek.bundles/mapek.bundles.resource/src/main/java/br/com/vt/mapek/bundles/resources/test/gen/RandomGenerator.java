@@ -1,15 +1,14 @@
-package br.com.vt.mapek.bundles.resources;
+package br.com.vt.mapek.bundles.resources.test.gen;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+
+import br.com.vt.mapek.bundles.resources.FileService;
+import br.com.vt.mapek.bundles.resources.test.LoggerService;
 
 public class RandomGenerator {
 	public static final String FILENAME = "src/main/resources/" + "input.csv";
