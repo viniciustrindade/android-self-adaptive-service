@@ -12,32 +12,18 @@ import android.app.Activity;
 import android.view.View;
 import br.com.vt.mapek.felix.view.ViewFactory;
 
-public class FelixTracker<S, T> extends ServiceTracker<S, T> implements
+public abstract class FelixTracker<S, T> extends ServiceTracker<S, T> implements
 		ServiceTrackerCustomizer<S, T> {
-	private Activity activity;
+
 
 	public FelixTracker(BundleContext context, Filter filter,
-			ServiceTrackerCustomizer<S, T> customizer, Activity activity) {
+			ServiceTrackerCustomizer<S, T> customizer) {
 		super(context, filter, null);
-		this.activity = activity;
-
 	}
 
-	public T addingService(ServiceReference<S> reference) {
-		final T fac = (T) context.getService(reference);
 
-		if (fac instanceof ViewFactory) {
-			if (fac != null) {
-				final ViewFactory viewFac = (ViewFactory) fac;
-				activity.runOnUiThread(new Runnable() {
-					public void run() {
-						activity.setContentView(viewFac.create(activity));
-					}
-				});
-			}
-		}
-		return fac;
-	}
+
+	public abstract T addingService(ServiceReference<S> reference);
 
 	public void modifiedService(ServiceReference<S> reference, T service) {
 
@@ -46,17 +32,7 @@ public class FelixTracker<S, T> extends ServiceTracker<S, T> implements
 
 	}
 
-	public void removedService(ServiceReference<S> reference, T service) {
-		context.ungetService(reference);
-		if (service instanceof ViewFactory) {
-			activity.runOnUiThread(new Runnable() {
-				public void run() {
-					activity.setContentView(new View(activity));
-				}
-			});
-		}
-
-	}
+	public abstract void removedService(ServiceReference<S> reference, T service);
 
 	public static Filter getFilterByClass(BundleContext context, Class clazz)
 			throws InvalidSyntaxException {

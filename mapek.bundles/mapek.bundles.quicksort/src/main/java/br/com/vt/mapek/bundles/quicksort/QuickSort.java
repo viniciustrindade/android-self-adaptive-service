@@ -2,6 +2,8 @@ package br.com.vt.mapek.bundles.quicksort;
 
 import java.util.Date;
 
+import org.apache.felix.ipojo.annotations.Component;
+import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Invalidate;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.apache.felix.ipojo.annotations.Validate;
@@ -9,6 +11,8 @@ import org.apache.felix.ipojo.annotations.Validate;
 import br.com.vt.mapek.services.IResource;
 import br.com.vt.mapek.services.ISort;
 
+@Component
+@Instantiate
 public class QuickSort implements ISort {
 	@Requires
 	private IResource res;

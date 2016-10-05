@@ -14,6 +14,7 @@ import org.osgi.framework.BundleException;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -24,12 +25,14 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.com.vt.mapek.android.felix.FelixConfig;
 import br.com.vt.mapek.android.felix.FelixTracker;
 import br.com.vt.mapek.android.felix.Installer;
 import br.com.vt.mapek.felix.view.ViewFactory;
+import br.com.vt.mapek.services.ISort;
 
 public class MapekOSGIService extends Service {
 
@@ -62,7 +65,7 @@ public class MapekOSGIService extends Service {
 
 	@Override
 	public void onCreate() {
-		
+
 		felixConfig = new FelixConfig();
 		felixConfig.configureBundlesDir();
 		felixConfig.configureCache();
@@ -79,36 +82,31 @@ public class MapekOSGIService extends Service {
 			felix.start();
 
 			// Android Context
-			 installer.registerBundleService(felix.getBundleContext(),
-			 Context.class, this.getApplicationContext(), new
-			 Hashtable<String, String>());
-			 /*
-
-			ServiceRegistration<DeclarationBuilderService> declarationBuilderServiceRegistration = installer
-					.registerBundleService(
-							felix.getBundleContext(),
-							DeclarationBuilderService.class,
-							new DefaultDeclarationBuilderService(felix
-									.getBundleContext()), null);
-			DeclarationBuilderService service = felix.getBundleContext()
-					.getService(
-							declarationBuilderServiceRegistration
-									.getReference());
-
-			// Context Services
-			// registerBundleService(IBatteryContextService.class, // new
-			// BatteryContextService(), null);
-
-			DeclarationHandle handle = service
-					.newInstance(IBatteryContextService.class.getName())
-					.name(BatteryContextService.class.getName())
-					.context(felix.getBundleContext())
-					.configure()
-					.property("service.pid",
-							IBatteryContextService.class.getName())
-					.build();
-			handle.publish();
-*/
+			installer.registerBundleService(felix.getBundleContext(),
+					Context.class, this.getApplicationContext(),
+					new Hashtable<String, String>());
+			/*
+			 * 
+			 * ServiceRegistration<DeclarationBuilderService>
+			 * declarationBuilderServiceRegistration = installer
+			 * .registerBundleService( felix.getBundleContext(),
+			 * DeclarationBuilderService.class, new
+			 * DefaultDeclarationBuilderService(felix .getBundleContext()),
+			 * null); DeclarationBuilderService service =
+			 * felix.getBundleContext() .getService(
+			 * declarationBuilderServiceRegistration .getReference());
+			 * 
+			 * // Context Services //
+			 * registerBundleService(IBatteryContextService.class, // new //
+			 * BatteryContextService(), null);
+			 * 
+			 * DeclarationHandle handle = service
+			 * .newInstance(IBatteryContextService.class.getName())
+			 * .name(BatteryContextService.class.getName())
+			 * .context(felix.getBundleContext()) .configure()
+			 * .property("service.pid", IBatteryContextService.class.getName())
+			 * .build(); handle.publish();
+			 */
 		} catch (BundleException ex) {
 			throw new IllegalStateException(ex);
 		}
@@ -132,7 +130,7 @@ public class MapekOSGIService extends Service {
 
 			String stateStr = "";
 			StringBuffer servicesInUse = new StringBuffer();
-			//servicesInUse.append("\n[USING] \n");
+			// servicesInUse.append("\n[USING] \n");
 			int state = b.getState();
 
 			switch (state) {
@@ -164,46 +162,35 @@ public class MapekOSGIService extends Service {
 
 			teststr = teststr + "\n[" + stateStr + "] " + b.getSymbolicName()
 					+ " (" + b.getVersion() + ")";
-/*
-			if (b.getServicesInUse() != null) {
-				for (ServiceReference ref : b.getServicesInUse()) {
-
-					for (String id : (String[]) ref.getProperty("objectClass")) {
-						servicesInUse
-								.append("[")
-								.append(ref.getProperty("service.id"))
-								.append("]  ")
-								.append("[")
-								.append(ref.getBundle() != null ? ref
-										.getBundle().getSymbolicName() : "")
-								.append("] ")
-								.append(id)
-								.append(" (")
-								.append(b.getBundleContext().getService(ref)
-										.getClass().getName()).append(") \n");
-
-					}
-				}
-			}*/
+			/*
+			 * if (b.getServicesInUse() != null) { for (ServiceReference ref :
+			 * b.getServicesInUse()) {
+			 * 
+			 * for (String id : (String[]) ref.getProperty("objectClass")) {
+			 * servicesInUse .append("[") .append(ref.getProperty("service.id"))
+			 * .append("]  ") .append("[") .append(ref.getBundle() != null ? ref
+			 * .getBundle().getSymbolicName() : "") .append("] ") .append(id)
+			 * .append(" (") .append(b.getBundleContext().getService(ref)
+			 * .getClass().getName()).append(") \n");
+			 * 
+			 * } } }
+			 */
 			teststr += servicesInUse;
 
 		}
 
-/*		if (felix.getRegisteredServices() != null) {
-			for (ServiceReference ref : felix.getRegisteredServices()) {
-
-				for (String id : (String[]) ref.getProperty("objectClass")) {
-					services.append("[")
-							.append(ref.getProperty("service.id"))
-							.append("]  ")
-							.append(id)
-							.append(" (")
-							.append(felix.getBundleContext().getService(ref)
-									.getClass().getName()).append(") \n");
-
-				}
-			}
-		}*/
+		/*
+		 * if (felix.getRegisteredServices() != null) { for (ServiceReference
+		 * ref : felix.getRegisteredServices()) {
+		 * 
+		 * for (String id : (String[]) ref.getProperty("objectClass")) {
+		 * services.append("[") .append(ref.getProperty("service.id"))
+		 * .append("]  ") .append(id) .append(" (")
+		 * .append(felix.getBundleContext().getService(ref)
+		 * .getClass().getName()).append(") \n");
+		 * 
+		 * } } }
+		 */
 
 		TextView tv = new TextView(this);
 
@@ -222,9 +209,40 @@ public class MapekOSGIService extends Service {
 			BundleContext context = felix.getBundleContext();
 			org.osgi.framework.Filter filter = FelixTracker.getFilterByClass(
 					context, ViewFactory.class);
+
 			tracker = new FelixTracker<ViewFactory, ViewFactory>(context,
-					filter, null, responseActivity);
+					filter, null) {
+				public ViewFactory addingService(
+						ServiceReference<ViewFactory> reference) {
+					final ViewFactory view = (ViewFactory) context
+							.getService(reference);
+					if (view != null) {
+						final ViewFactory viewFac = (ViewFactory) view;
+						responseActivity.runOnUiThread(new Runnable() {
+							public void run() {
+								responseActivity.setContentView(viewFac
+										.create(responseActivity));
+							}
+						});
+					}
+					return view;
+
+				}
+
+				public void removedService(
+						ServiceReference<ViewFactory> reference,
+						ViewFactory service) {
+					context.ungetService(reference);
+					responseActivity.runOnUiThread(new Runnable() {
+						public void run() {
+							responseActivity.setContentView(new View(
+									responseActivity));
+						}
+					});
+				}
+			};
 			tracker.open();
+
 		} catch (InvalidSyntaxException e) {
 
 			e.printStackTrace();

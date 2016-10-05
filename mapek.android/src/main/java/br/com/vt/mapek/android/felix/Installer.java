@@ -20,11 +20,11 @@ public class Installer implements BundleActivator {
 			"ipojocomposite",
 			"mb_logger",
 			"mb_sensor_battery",
-			"mb_sensor_pressure",
-			"mb_sensor_airtemperature",
-			"mb_sensor_humidity",
 			"mb_sensor_illuminance",
-			"mb_sensor_proximity",
+		//	"mb_sensor_pressure",
+		//	"mb_sensor_airtemperature",
+		//	"mb_sensor_humidity",
+		//	"mb_sensor_proximity",
 			"mb_resources",
 			"mb_symptomrepository",
 			"mb_contextlog",
@@ -33,6 +33,7 @@ public class Installer implements BundleActivator {
 			"mb_planner",
 			"mb_execute",
 			"mb_loop",
+			//"mb_quicksort",
 			"mb_validator"
 			};
 
