@@ -15,23 +15,12 @@
 		<module>mapek.bundles.validator</module>
 		<module>mapek.bundles.logger</module>
 		<module>mapek.bundles.resource</module>
-		<module>mapek.bundles.contextlog</module>
-		<module>mapek.bundles.symptomrepository</module>
-		<!-- SENSORS -->
-		<module>mapek.bundles.sensors.airpressure</module>
-		<module>mapek.bundles.sensors.airtemperature</module>
-		<module>mapek.bundles.sensors.battery</module>
-		<module>mapek.bundles.sensors.illuminance</module>
-		<module>mapek.bundles.sensors.humidity</module>
-		<module>mapek.bundles.sensors.proximity</module>
 		<!-- LOOP -->
 		<module>mapek.bundles.loop</module>
-		<module>mapek.bundles.monitor</module>
-		<module>mapek.bundles.analyzer</module>
-		<module>mapek.bundles.planner</module>
-		<module>mapek.bundles.execute</module>
-		<module>mapek.bundles.bubblesort</module>
-		<module>mapek.bundles.quicksort</module>
+		<module>mapek.bundles.sensors</module>
+		<!--  SORT -->
+		<module>mapek.bundles.sort.bubblesort</module>
+		<module>mapek.bundles.sort.quicksort</module>
 	</modules>
 
 	<artifactId>mapek.bundles</artifactId>

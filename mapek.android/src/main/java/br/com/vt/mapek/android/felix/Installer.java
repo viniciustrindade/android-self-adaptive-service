@@ -19,22 +19,9 @@ public class Installer implements BundleActivator {
 			"ipojoapi",
 			"ipojocomposite",
 			"mb_logger",
-			"mb_sensor_battery",
-			"mb_sensor_illuminance",
-		//	"mb_sensor_pressure",
-		//	"mb_sensor_airtemperature",
-		//	"mb_sensor_humidity",
-		//	"mb_sensor_proximity",
+			"mb_sensors",
 			"mb_resources",
-			"mb_symptomrepository",
-			"mb_contextlog",
-			"mb_monitor",
-			"mb_analyzer",
-			"mb_planner",
-			"mb_execute",
-			"mb_loop",
-			//"mb_quicksort",
-			"mb_validator"
+			"mb_loop"
 			};
 
 

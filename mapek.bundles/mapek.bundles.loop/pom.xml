@@ -23,7 +23,13 @@
 			!org.apache.log.*,*
 		</bundle.import.packages>
 		<bundle._export.contents>
+			br.com.vt.mapek.bundles.symptomrepository.*;version="${project.version}",
+			br.com.vt.mapek.bundles.contextlog.*;version="${project.version}",
 			br.com.vt.mapek.bundles.loop.*;version="${project.version}",
+			br.com.vt.mapek.bundles.monitor.*;version="${project.version}",
+			br.com.vt.mapek.bundles.analyzer.*;version="${project.version}",
+			br.com.vt.mapek.bundles.planner.*;version="${project.version}",
+			br.com.vt.mapek.bundles.executor.*;version="${project.version}",
 			br.com.vt.mapek.services.*;version="${project.version}",
 			org.simpleframework.xml.*,
 			org.xmlpull.v1,
