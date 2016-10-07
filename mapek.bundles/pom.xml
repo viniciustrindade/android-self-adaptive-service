@@ -29,7 +29,6 @@
 	<!-- ============================================================================================== -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<android.dex.coreLibrary>true</android.dex.coreLibrary>
 		<skip.maven.plugin>true</skip.maven.plugin>
 	</properties>
 	<!-- ============================================================================================== -->
@@ -172,8 +171,8 @@
 					<skip>${skip.maven.plugin}</skip>
 					<includeScope>provided</includeScope>
 					<archive>
-						<!-- <manifest> <addClasspath>true</addClasspath> <classpathPrefix>lib/</classpathPrefix> 
-							</manifest> -->
+						<manifest> <addClasspath>true</addClasspath> <classpathPrefix>lib/</classpathPrefix> 
+							</manifest>
 						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
 					</archive>
 				</configuration>

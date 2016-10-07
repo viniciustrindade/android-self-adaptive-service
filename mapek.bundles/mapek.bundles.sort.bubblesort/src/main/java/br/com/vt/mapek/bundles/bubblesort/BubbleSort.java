@@ -9,22 +9,27 @@ import org.apache.felix.ipojo.annotations.Requires;
 import org.apache.felix.ipojo.annotations.Unbind;
 import org.apache.felix.ipojo.annotations.Validate;
 
+import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.IResource;
 import br.com.vt.mapek.services.ISort;
 
-@Component
+@Component(immediate=true)
 @Instantiate
-public class BubbleSort implements ISort {
+public class BubbleSort implements ISort, Runnable {
 	@Requires
 	private IResource res;
 
-	int counter = 0;
-	long spentTime = 0;
+	@Requires
+	private ILoggerService log;
+
+	private int counter = 0;
+	private long spentTime = 0;
 	private final static String tmpFileName = "/bubblesort.counter";
 	private boolean end = false;
 
-	@Validate
-	public void start() {
+	public void run() {
+		log.D("BubbleSort started");
+
 		int[] intArray = res.getArray();
 
 		while (!end) {
@@ -33,6 +38,15 @@ public class BubbleSort implements ISort {
 			spentTime += ((new Date()).getTime() - before.getTime());
 			res.saveExecution(tmpFileName, counter++, spentTime);
 		}
+		log.D("BubbleSort stopped");
+
+	}
+
+	@Validate
+	public void start() {
+		Thread thread = new Thread(this);
+		end = false;
+		thread.start();
 
 	}
 

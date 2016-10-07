@@ -1,6 +1,5 @@
 package br.com.vt.mapek.services;
 
-import java.io.File;
 import java.io.InputStream;
 
 public interface IResource {

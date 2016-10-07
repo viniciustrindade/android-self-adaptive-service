@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.vt</groupId>
@@ -21,7 +20,7 @@
 		<url>http://github.com/viniciustrindade/entregastcc</url>
 		<developerConnection>viniciustindade</developerConnection>
 	</scm>
-	<repositories>
+	 <repositories>
 		<repository>
 			<id>android-repo</id>
 			<url>file://${env.ANDROID_HOME}extras/android/m2repository</url>
@@ -34,12 +33,17 @@
 			<id>android-libs</id>
 			<url>file://${project.basedir}/private_libs</url>
 		</repository>
-	</repositories>
+	</repositories> 
 	<!-- ============================================================================================== -->
 
 	<properties>
 		<!-- use UTF-8 for everything -->
 		<ANDROID_HOME>/home/vinicius/android-sdk</ANDROID_HOME>
+		<android.sdk.groupId>android</android.sdk.groupId>
+		<android.sdk.artifactId>android</android.sdk.artifactId>
+		<android.sdk.platform>19</android.sdk.platform>
+		<android.sdk.version>4.4.2_r4</android.sdk.version>
+		<android.dex.coreLibrary>true</android.dex.coreLibrary>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -49,7 +53,7 @@
 		<module>mapek.android</module>
 		<module>mapek.services</module>
 		<module>mapek.bundles</module>
-	</modules>
+  </modules>
 	<!-- ============================================================================================== -->
 
 	<!-- ============================================================================================== -->
@@ -133,7 +137,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>

@@ -14,6 +14,7 @@ import org.apache.felix.ipojo.annotations.Provides;
 import org.apache.felix.ipojo.annotations.Requires;
 
 import br.com.vt.mapek.services.IFileService;
+import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.IResource;
 
 @Component
@@ -25,6 +26,9 @@ public class Resource implements IResource {
 
 	@Requires
 	private IFileService fileManager;
+	
+	@Requires
+	private ILoggerService log;
 
 	public Resource() {
 	}
@@ -84,6 +88,7 @@ public class Resource implements IResource {
 		try {
 			File tmpFile = new File(System.getProperty("java.io.tmpdir") + tmpFileName);
 			out = new PrintWriter(tmpFile);
+			log.D("[" +tmpFile.getPath() + "] " + counter + "," + spentTime);
 			out.write(counter + "," + spentTime);
 			out.close();
 
