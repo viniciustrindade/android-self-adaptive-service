@@ -23,8 +23,6 @@
 			!org.apache.log.*,*
 		</bundle.import.packages>
 		<bundle._export.contents>
-			!javax.*,
-			!java.*,
 			br.com.vt.mapek.bundles.symptomrepository.*;version="${project.version}",
 			br.com.vt.mapek.bundles.contextlog.*;version="${project.version}",
 			br.com.vt.mapek.bundles.loop.*;version="${project.version}",

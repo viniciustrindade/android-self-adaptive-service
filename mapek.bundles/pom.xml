@@ -18,7 +18,7 @@
 		<!-- LOOP -->
 		<module>mapek.bundles.loop</module>
 		<module>mapek.bundles.sensors</module>
-		<!--  SORT -->
+		<!-- SORT -->
 		<module>mapek.bundles.sort.bubblesort</module>
 		<module>mapek.bundles.sort.quicksort</module>
 	</modules>
@@ -154,6 +154,30 @@
 									<version>${project.version}</version>
 									<destFileName>${bundle.name}</destFileName>
 								</artifactItem>
+								<artifactItem>
+									<groupId>org.apache.felix</groupId>
+									<artifactId>org.apache.felix.ipojo</artifactId>
+									<version>1.12.1</version>
+									<destFileName>ipojo.jar</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.apache.felix</groupId>
+									<artifactId>org.apache.felix.ipojo.api</artifactId>
+									<version>1.12.1</version>
+									<destFileName>ipojoapi.jar</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.apache.felix</groupId>
+									<artifactId>org.apache.felix.ipojo.composite</artifactId>
+									<version>1.12.1</version>
+									<destFileName>ipojocomposite.jar</destFileName>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.osgi</groupId>
+									<artifactId>org.osgi.compendium</artifactId>
+									<version>4.2.0</version>
+									<destFileName>org_osgi_compendium.jar</destFileName>
+								</artifactItem>
 							</artifactItems>
 						</configuration>
 					</execution>
@@ -171,8 +195,10 @@
 					<skip>${skip.maven.plugin}</skip>
 					<includeScope>provided</includeScope>
 					<archive>
-						<manifest> <addClasspath>true</addClasspath> <classpathPrefix>lib/</classpathPrefix> 
-							</manifest>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
 						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
 					</archive>
 				</configuration>
@@ -283,14 +309,9 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- TEST 
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>-->
+		<!-- TEST <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> 
+			<version>4.12</version> <scope>compile</scope> <optional>true</optional> 
+			</dependency> -->
 
 	</dependencies>
 </project>

@@ -41,8 +41,10 @@
 		<ANDROID_HOME>/home/vinicius/android-sdk</ANDROID_HOME>
 		<android.sdk.groupId>android</android.sdk.groupId>
 		<android.sdk.artifactId>android</android.sdk.artifactId>
-		<android.sdk.platform>19</android.sdk.platform>
-		<android.sdk.version>4.4.2_r4</android.sdk.version>
+		<!-- <android.sdk.platform>19</android.sdk.platform>
+		<android.sdk.version>4.4.2_r4</android.sdk.version> -->
+		<android.sdk.platform>22</android.sdk.platform>
+		<android.sdk.version>5.1.1_r2</android.sdk.version>
 		<android.dex.coreLibrary>true</android.dex.coreLibrary>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
