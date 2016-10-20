@@ -3,16 +3,16 @@
 		<loop rate="1000">
 			<sensors>
 				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
-				<sensor
-					className="br.com.vt.mapek.bundles.sensors.illuminance.IIlluminanceSensor" />
 			</sensors>
 			<policys>
-				<policy property="LIGHT" condition="MAIOR_IGUAL_QUE" bound="30000" />
-				<policy property="BATTERY" condition="MENOR_IGUAL_QUE" bound="20" />
+				<policy property="BATTERY" condition="MENOR_IGUAL_QUE" bound="94" />
 			</policys>
 			<actions>
-				<action id="STOP_COMPONENT" params="rb_spell_checker_gui.bundle" />
-				<action id="STOP_COMPONENT" params="rb_spellcheckgui_for_android.bundle" />
+				<!-- <action id="STOP_COMPONENT" params="rb_spell_checker_gui.bundle" 
+					/> <action id="STOP_COMPONENT" params="rb_spellcheckgui_for_android.bundle" 
+					/> -->
+				<action id="STOP_COMPONENT" params="rb_quicksort.bundle" />
+				<action id="START_COMPONENT" params="rb_bubblesort.bundle" />
 			</actions>
 		</loop>
 		<loop rate="1000">
@@ -20,46 +20,28 @@
 				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
 			</sensors>
 			<policys>
-				<policy property="BATTERY" condition="MAIOR_IGUAL_QUE" bound="50" />
+				<policy property="BATTERY" condition="MAIOR_IGUAL_QUE" bound="95" />
 			</policys>
 			<actions>
-				<action id="START_COMPONENT" params="rb_spell_services.bundle" />
-				<action id="START_COMPONENT" params="rb_spell_checker.bundle" />
-				<action id="START_COMPONENT" params="rb_spell_english.bundle" />
-				<action id="START_COMPONENT" params="rb_spellcheckgui_for_android.bundle" />
-			</actions>
-		</loop></loops>
-</loops>
-
-<!-- <loops>
-	<loops>
-		<loop rate="1000">
-			<sensors>
-				<sensor
-					className="br.com.vt.mapek.bundles.sensors.illuminance.IIlluminanceSensor" />
-			</sensors>
-			<policys>
-				<policy property="LIGHT" condition="MAIOR_IGUAL_QUE" bound="30000" />
-			</policys>
-			<actions>
-				<action id="STOP_COMPONENT" params="rb_spell_checker_gui.bundle" />
-				<action id="STOP_COMPONENT" params="rb_spellcheckgui_for_android.bundle" />
-			</actions>
-		</loop>
-		<loop rate="1000">
-			<sensors>
-			    <sensor
-					className="br.com.vt.mapek.bundles.sensors.illuminance.IIlluminanceSensor" />
-			</sensors>
-			<policys>
-				<policy property="LIGHT" condition="MENOR_QUE" bound="30000" />
-			</policys>
-			<actions>
-				<action id="START_COMPONENT" params="rb_spell_services.bundle" />
-				<action id="START_COMPONENT" params="rb_spell_checker.bundle" />
-				<action id="START_COMPONENT" params="rb_spell_english.bundle" />
-				<action id="START_COMPONENT" params="rb_spellcheckgui_for_android.bundle" />
+				<!-- <action id="START_COMPONENT" params="rb_spell_services.bundle" /> 
+					<action id="START_COMPONENT" params="rb_spell_checker.bundle" /> <action 
+					id="START_COMPONENT" params="rb_spell_english.bundle" /> <action id="START_COMPONENT" 
+					params="rb_spellcheckgui_for_android.bundle" /> -->
+				<action id="START_COMPONENT" params="rb_quicksort.bundle" />
+				<action id="STOP_COMPONENT" params="rb_bubblesort.bundle" />
 			</actions>
 		</loop>
 	</loops>
-</loops> -->
+</loops>
+
+<!-- <loops> <loops> <loop rate="1000"> <sensors> <sensor className="br.com.vt.mapek.bundles.sensors.illuminance.IIlluminanceSensor" 
+	/> </sensors> <policys> <policy property="LIGHT" condition="MAIOR_IGUAL_QUE" 
+	bound="30000" /> </policys> <actions> <action id="STOP_COMPONENT" params="rb_spell_checker_gui.bundle" 
+	/> <action id="STOP_COMPONENT" params="rb_spellcheckgui_for_android.bundle" 
+	/> </actions> </loop> <loop rate="1000"> <sensors> <sensor className="br.com.vt.mapek.bundles.sensors.illuminance.IIlluminanceSensor" 
+	/> </sensors> <policys> <policy property="LIGHT" condition="MENOR_QUE" bound="30000" 
+	/> </policys> <actions> <action id="START_COMPONENT" params="rb_spell_services.bundle" 
+	/> <action id="START_COMPONENT" params="rb_spell_checker.bundle" /> <action 
+	id="START_COMPONENT" params="rb_spell_english.bundle" /> <action id="START_COMPONENT" 
+	params="rb_spellcheckgui_for_android.bundle" /> </actions> </loop> </loops> 
+	</loops> -->

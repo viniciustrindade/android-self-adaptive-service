@@ -17,5 +17,10 @@ public interface IResource {
 	 * @return
 	 */
 	public  InputStream getXML();
+	
+	public void saveExecution(String tmpFileName, int counter, long spentTime);
+	
+
+	public int[] getArray();
 
 }
