@@ -3,23 +3,21 @@ package br.com.vt.mapek.bundles.loop.main;
 import java.util.Dictionary;
 import java.util.List;
 
-import model.LoopXml.XLoop.XAction;
-import model.LoopXml.XLoop.XPolicy;
-import model.LoopXml.XLoop.XSensor;
-
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Property;
 import org.apache.felix.ipojo.annotations.Provides;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.apache.felix.ipojo.annotations.Validate;
 import org.apache.felix.ipojo.extender.DeclarationBuilderService;
-import org.apache.felix.ipojo.util.Log;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 
 import br.com.vt.mapek.bundles.loop.Action;
+import br.com.vt.mapek.bundles.loop.model.XAction;
+import br.com.vt.mapek.bundles.loop.model.XPolicy;
+import br.com.vt.mapek.bundles.loop.model.XSensor;
 import br.com.vt.mapek.services.IAnalyzer;
 import br.com.vt.mapek.services.IChangePlan;
 import br.com.vt.mapek.services.IExecutor;

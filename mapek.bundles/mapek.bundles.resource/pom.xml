@@ -11,6 +11,7 @@
 	<properties>
 		<bundle.name>mb_resources.jar</bundle.name>
 		<bundle.import.packages>*</bundle.import.packages>
+		<bundle.private.packages>br.com.vt.mapek.bundles.resources.test.*;version="${project.version}"</bundle.private.packages>
 		<bundle.export.packages>br.com.vt.mapek.bundles.resources.*;version="${project.version}"</bundle.export.packages>
 		<bundle._export.contents>br.com.vt.mapek.services.*;version="${project.version}"</bundle._export.contents>
 		<skip.maven.plugin>false</skip.maven.plugin>

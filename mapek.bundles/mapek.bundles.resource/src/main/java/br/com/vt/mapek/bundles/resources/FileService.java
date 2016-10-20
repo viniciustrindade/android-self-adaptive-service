@@ -1,6 +1,7 @@
 package br.com.vt.mapek.bundles.resources;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -25,6 +26,11 @@ public class FileService implements IFileService {
 	@Requires
 	private ILoggerService log;
 
+	public FileService(ILoggerService log) {
+		this.log = log;
+		log.D("File Service iniciado");
+	}
+	
 	public FileService() {
 		log.D("File Service iniciado");
 	}
@@ -58,16 +64,11 @@ public class FileService implements IFileService {
 	public OutputStream getOutputStream(String filename) {
 
 		FileOutputStream out = null;
-		ClassLoader classLoader = Main.class.getClassLoader();
-
-		String file = classLoader.getResource(filename).getFile();
-
-		log.D("[OUTPUT] filename : " + file);
+		File f = new File(filename);
 
 		try {
-			out = new FileOutputStream(file);
+			out = new FileOutputStream(f);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return out;
@@ -84,5 +85,7 @@ public class FileService implements IFileService {
 		log.D("[STOP] Parado File Service");
 
 	}
+	
+
 
 }
