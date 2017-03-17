@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.felix.framework.Felix;
 import org.apache.felix.framework.util.FelixConstants;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
@@ -115,31 +116,40 @@ public class MapekOSGIService extends Service {
 		// access to the set of installed bundles.
 		return installer.getBundles();
 	}
-	
-	public void addBundleListener(BundleListener listener){
+
+	public void addBundleListener(BundleListener listener) {
 		felix.getBundleContext().addBundleListener(listener);
 	}
-	
-	public void removeBundleListener(BundleListener listener){
+
+	public void removeBundleListener(BundleListener listener) {
 		felix.getBundleContext().removeBundleListener(listener);
 	}
-	public void startBundle(long id){
+
+	public void startBundle(long id) {
 		try {
-			felix.getBundleContext().getBundle(id).start();
+			Bundle b = felix.getBundleContext().getBundle(id);
+			b.start();
+			Toast.makeText(getApplicationContext(),
+					"Bundle " + b.getSymbolicName() + " started ",
+					Toast.LENGTH_SHORT).show();
 		} catch (BundleException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public void stopBundle(long id){
+
+	public void stopBundle(long id) {
 		try {
-			felix.getBundleContext().getBundle(id).stop();
+			Bundle b = felix.getBundleContext().getBundle(id);
+			b.stop();
+			Toast.makeText(getApplicationContext(),
+					"Bundle " + b.getSymbolicName() + " stopped ",
+					Toast.LENGTH_SHORT).show();
 		} catch (BundleException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
 
 	public void initServiceTracker() {
 

@@ -36,7 +36,7 @@ public class BatterySensor extends ABSensor implements IBatterySensor {
 	}
 
 	public void readAndNotify() {
-		log.I("\n [Medição] " + this.getClass().getName() + "\n");
+		log.I("\n [Medição] [" + this.getClass().getName() + "] " + getCurrentContext() + "\n");
 		this.notifyObservers(getCurrentContext());
 	}
 

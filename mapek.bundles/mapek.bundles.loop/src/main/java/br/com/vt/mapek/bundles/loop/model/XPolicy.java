@@ -19,5 +19,11 @@ public class XPolicy {
 
 	@Attribute(name = "bound", required = true)
 	public int bound;
+	
+	@Attribute(name = "upperbound", required = false)
+	public int upperbound;
+	
+	@Attribute(name = "lowerbound", required = false)
+	public int lowerbound;
 
 }

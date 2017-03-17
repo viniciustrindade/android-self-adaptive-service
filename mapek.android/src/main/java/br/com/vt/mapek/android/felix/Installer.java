@@ -20,8 +20,7 @@ public class Installer implements BundleActivator {
 			"ipojocomposite",
 			"mb_logger",
 			"mb_sensors",
-			"mb_resources",
-			"mb_loop"
+			"mb_resources"
 			};
 
 
@@ -45,6 +44,9 @@ public class Installer implements BundleActivator {
 			Bundle bundle = this.installBundle(context, file);
 			bundle.start();
 		}
+
+		Bundle bundle = this.installBundle(context, "mb_loop");
+		bundle.start();
 
 	}
 
