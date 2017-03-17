@@ -23,6 +23,8 @@ public enum Condition {
 			return MAIOR_IGUAL_QUE(contextElement, threshold);
 		case MAIOR_QUE:
 			return MAIOR_QUE(contextElement, threshold);
+		case ENTRE:
+			return ENTRE(contextElement, threshold);
 		default:
 			return null;
 		}
