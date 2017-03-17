@@ -181,9 +181,30 @@
 							</artifactItems>
 						</configuration>
 					</execution>
+					<!-- ============================================================================================== -->
+					<!-- RUNTIME BUNDLES -->
+					<execution>
+						<id>copy-bundles-to-runtime-folder</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<skip>${isnot_runtime_bundle}</skip>
+							<outputDirectory>../mapek.bundles.resource/src/main/resources/bundles</outputDirectory>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<destFileName>${bundle.runtime.name}</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+							
 				</executions>
 			</plugin>
-
 			<!-- ============================================================================================== -->
 			<!-- MANIFEST -->
 			<plugin>

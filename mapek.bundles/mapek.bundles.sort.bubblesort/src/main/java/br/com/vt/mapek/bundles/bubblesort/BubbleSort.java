@@ -6,37 +6,45 @@ import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Invalidate;
 import org.apache.felix.ipojo.annotations.Requires;
-import org.apache.felix.ipojo.annotations.Unbind;
 import org.apache.felix.ipojo.annotations.Validate;
 
+import br.com.vt.mapek.services.IBatterySensor;
 import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.IResource;
 import br.com.vt.mapek.services.ISort;
+import br.com.vt.mapek.services.common.Util;
 
-@Component(immediate=true)
+@Component(immediate = true)
 @Instantiate
 public class BubbleSort implements ISort, Runnable {
 	@Requires
-	private IResource res;
-
+	private IResource resource;
+/*	@Requires
+	private IBatterySensor batterySensor;*/
 	@Requires
 	private ILoggerService log;
+	private int[] intArray;
 
-	private int counter = 0;
-	private long spentTime = 0;
-	private final static String tmpFileName = "/bubblesort.counter";
+	private Integer counter = 0;
+	Long spentTimeTotal = 0l;
+	private String tmpFileName = "/"
+			+ Util.fileDtFormat.format(new Date()) + "_bubblesort.counter";
 	private boolean end = false;
 
 	public void run() {
 		log.D("BubbleSort started");
-
-		int[] intArray = res.getArray();
+		if (intArray == null) {
+			intArray = resource.getArray();
+		}
 
 		while (!end) {
+			Long spentTime = 0l;
+			Float level = 0f;
 			Date before = new Date();
 			sort(intArray.clone());
-			spentTime += ((new Date()).getTime() - before.getTime());
-			res.saveExecution(tmpFileName, counter++, spentTime);
+			spentTime = ((new Date()).getTime() - before.getTime());
+			spentTimeTotal += spentTime;
+			resource.saveExecution(tmpFileName, counter++, level , spentTime, spentTimeTotal);
 		}
 		log.D("BubbleSort stopped");
 

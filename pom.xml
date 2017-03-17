@@ -48,6 +48,7 @@
 		<android.dex.coreLibrary>true</android.dex.coreLibrary>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<isnot_runtime_bundle>true</isnot_runtime_bundle>
 	</properties>
 	<!-- ============================================================================================== -->
 	<modules>

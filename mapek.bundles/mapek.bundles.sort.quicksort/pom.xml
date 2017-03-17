@@ -10,6 +10,8 @@
 	<!-- ============================================================================================== -->
 	<properties>
 		<bundle.name>mb_quicksort.jar</bundle.name>
+		<bundle.runtime.name>rb_quicksort.bundle</bundle.runtime.name>
+		<isnot_runtime_bundle>false</isnot_runtime_bundle>
 		<bundle.import.packages>
 			*
 		</bundle.import.packages>

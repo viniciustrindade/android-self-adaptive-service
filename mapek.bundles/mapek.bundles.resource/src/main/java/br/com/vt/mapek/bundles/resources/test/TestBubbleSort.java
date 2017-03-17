@@ -1,30 +1,48 @@
 package br.com.vt.mapek.bundles.resources.test;
-/*package br.com.vt.mapek.bundles.resources;
 
 import java.io.IOException;
 import java.util.Date;
 
+import br.com.vt.mapek.bundles.resources.FileService;
+import br.com.vt.mapek.bundles.resources.Resource;
+import br.com.vt.mapek.services.IResource;
+import br.com.vt.mapek.services.common.Util;
 
+/*
  Java Bubble Sort Example
  This Java bubble sort example shows how to sort an array of int using bubble
  sort algorithm. Bubble sort is the simplest sorting algorithm.
- 
+ */
 
-public class BubbleSort {
+public class TestBubbleSort {
 
 	public static void main(String[] args) throws IOException {
-		Resource res = new Resource(new FileService(new LoggerService()));
-		int intArray[] = res.getArray();
-		int counter = 0;
-		long spentTime = 0;
+		IResource resource = new Resource(new FileService(new TestLoggerService()),new TestLoggerService());
+		int intArray[] = resource.getArray();
+		Integer counter = 0;
+		Long spentTimeTotal = 0l;
+		Long spentTime = 0l;
+		Float level = 0f;
+		String tmpFileName = System.getProperty("java.io.tmpdir")
+				+  Util.fileDtFormat.format(new Date()) + "_bubblesort.counter";
 
 		while (true) {
-			int intArrayS[] = intArray.clone();
+			int a[] = intArray.clone();
 			Date before = new Date();
-			sort(intArrayS);
-			spentTime += ((new Date()).getTime() - before.getTime());
-			res.saveExecution(System.getProperty("java.io.tmpdir")
-					+ "/bubblesort.counter", counter++, spentTime);
+			
+			// prints the given array
+			//System.out.println("DESORDENADO:");
+			//printArray(a);
+			
+			sort(a);
+			
+			//System.out.println("\nORDENADO:");
+			//printArray(a);
+
+			spentTime = ((new Date()).getTime() - before.getTime());
+			spentTimeTotal += spentTime;
+			resource.saveExecution(tmpFileName, counter++, level, spentTime, spentTimeTotal);
+			System.out.println("\n");
 
 		}
 
@@ -33,7 +51,7 @@ public class BubbleSort {
 	private static void sort(int[] intArray) {
 
 		
-		 * In bubble sort, we basically traverse the array from first to
+		 /* In bubble sort, we basically traverse the array from first to
 		 * array_length - 1 position and compare the element with the next one.
 		 * Element is swapped with the next element if the next element is
 		 * greater.
@@ -46,7 +64,8 @@ public class BubbleSort {
 		 * 
 		 * After this step we will have largest element at the last index.
 		 * 
-		 * Repeat the same steps for array[1] to array[n-1]
+		 * Repeat the same steps for array[1] to array[n-1] 
+		 */
 		 
 
 		int n = intArray.length;
@@ -66,5 +85,10 @@ public class BubbleSort {
 		}
 
 	}
+	public static void printArray(int[] a) {
+		for (int i : a) {
+			System.out.print(i + " ");
+		}
+	}
+
 }
-*/

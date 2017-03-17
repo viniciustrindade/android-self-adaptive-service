@@ -168,7 +168,7 @@ public class StatusActivity extends AbstractActivity implements BundleListener {
 								"Bundle " + tb.getText() + " is "
 										+ bundleInfo.getStatus(), Toast.LENGTH_LONG)
 								.show();*/
-						bundleInfo.setOnoff(tb.isChecked());
+						//bundleInfo.setOnoff(tb.isChecked());
 					}
 				});
 			} else {

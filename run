@@ -1,9 +1,11 @@
 #!/bin/zsh
 source ~/.zshrc
-
+# echo Gerando numeros randomicos && \
+# shuf -i 1-100000000 | tr '\n' ',' > mapek.bundles/mapek.bundles.resource/src/main/resources/input.csv && \
 echo Construindo o Projeto && \
 mvn clean install && \
 
-echo "Compilando mp* bundles para o dalvikVM" && \
-echo $(cd mapek.android/res/raw && rm -rf dx && mkdir dx && mv mb_* dx && cd dx && dxall && mv mb_* .. && cd .. && rm -rf dx) >/dev/null && \
-
+echo "Compilando mb_* bundles para o dalvikVM" && \
+cd mapek.android/res/raw && rm -rf dx && mkdir dx && mv mb_* dx && cd dx && dxall && mv mb_* .. && cd .. && rm -rf dx && \
+#echo "Compilando mb_* runtime bundles para o dalvikVM" && \
+#echo $(cd mapek.bundles/mapek.bundles.resource/src/main/resources && rm -rf dx && mkdir dx && mv mb_* dx && cd dx && dxall && mv mb_* .. && cd .. && rm -rf dx) >/dev/null && \

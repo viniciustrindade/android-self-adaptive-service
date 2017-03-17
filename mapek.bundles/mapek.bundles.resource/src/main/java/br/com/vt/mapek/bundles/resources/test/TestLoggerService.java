@@ -5,7 +5,7 @@ import org.osgi.service.log.LogService;
 
 import br.com.vt.mapek.services.ILoggerService;
 
-public class LoggerService implements ILoggerService, LogService {
+public class TestLoggerService implements ILoggerService, LogService {
 
 
 	public void log(int level, String message) {

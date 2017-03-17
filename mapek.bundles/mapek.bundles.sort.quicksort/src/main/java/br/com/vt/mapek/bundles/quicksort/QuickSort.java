@@ -1,6 +1,7 @@
 package br.com.vt.mapek.bundles.quicksort;
 
 import java.util.Date;
+import java.util.Stack;
 
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
@@ -8,34 +9,45 @@ import org.apache.felix.ipojo.annotations.Invalidate;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.apache.felix.ipojo.annotations.Validate;
 
+import br.com.vt.mapek.services.IBatterySensor;
 import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.IResource;
 import br.com.vt.mapek.services.ISort;
+import br.com.vt.mapek.services.common.Util;
 
 @Component(immediate = true)
 @Instantiate
 public class QuickSort implements ISort, Runnable {
 	@Requires
-	private IResource res;
+	private IResource resource;
+	/*
+	 * @Requires private IBatterySensor batterySensor;
+	 */
 	@Requires
 	private ILoggerService log;
-
-	int a[];
-	int counter = 0;
-	long spentTime = 0;
-	private final static String tmpFileName = "/quicksort.counter";
+	private int[] intArray;
+	Integer counter = 0;
+	Long spentTimeTotal = 0l;
+	private String tmpFileName = "/" + Util.fileDtFormat.format(new Date())
+			+ "_quicksort.counter";
 	private boolean end = false;
 
 	public void run() {
 		log.D("QuickSort started");
 
-		int[] intArray = res.getArray();
+		if (intArray == null) {
+			intArray = resource.getArray();
+		}
 
 		while (!end) {
+			Long spentTime = 0l;
+			Float level = 0f;
 			Date before = new Date();
 			sort(intArray.clone());
-			spentTime += ((new Date()).getTime() - before.getTime());
-			res.saveExecution(tmpFileName, counter++, spentTime);
+			spentTime = ((new Date()).getTime() - before.getTime());
+			spentTimeTotal += spentTime;
+			resource.saveExecution(tmpFileName, counter++, level, spentTime,
+					spentTimeTotal);
 		}
 		log.D("QuickSort stopped");
 
@@ -53,70 +65,71 @@ public class QuickSort implements ISort, Runnable {
 		end = true;
 	}
 
-	public void sort(int[] intArray) {
-		this.a = intArray;
-		sort();
+	/*
+	 * iterative implementation of quicksort sorting algorithm.
+	 */
+	public void sort(int[] numbers) {
+		Stack<Integer> stack = new Stack<Integer>();
+		stack.push(0);
+		stack.push(numbers.length);
 
-	}
+		while (!stack.isEmpty()) {
+			int end = stack.pop();
+			int start = stack.pop();
+			if (end - start < 2) {
+				continue;
+			}
+			int p = start + ((end - start) / 2);
+			p = partition(numbers, p, start, end);
 
-	// This method sorts an array and internally calls quickSort
-	public void sort() {
-		int left = 0;
-		int right = a.length - 1;
+			stack.push(p + 1);
+			stack.push(end);
 
-		quickSort(left, right);
-	}
+			stack.push(start);
+			stack.push(p);
 
-	// This method is used to swap the values between the two given index
-	public void swap(int left, int right) {
-		int temp = a[left];
-		a[left] = a[right];
-		a[right] = temp;
-	}
-
-	public void printArray() {
-		for (int i : a) {
-			System.out.print(i + " ");
 		}
 	}
 
-	// This method is used to partition the given array and returns the integer
-	// which points to the sorted pivot index
-	private int partition(int left, int right, int pivot) {
-		int leftCursor = left - 1;
-		int rightCursor = right;
-		while (leftCursor < rightCursor) {
-			while (a[++leftCursor] < pivot)
-				;
-			while (rightCursor > 0 && a[--rightCursor] > pivot)
-				;
-			if (leftCursor >= rightCursor) {
-				break;
+	/*
+	 * Utility method to partition the array into smaller array, and comparing
+	 * numbers to rearrange them as per quicksort algorithm.
+	 */
+	private static int partition(int[] input, int position, int start, int end) {
+		int l = start;
+		int h = end - 2;
+		int piv = input[position];
+		swap(input, position, end - 1);
+
+		while (l < h) {
+			if (input[l] < piv) {
+				l++;
+			} else if (input[h] >= piv) {
+				h--;
 			} else {
-				swap(leftCursor, rightCursor);
+				swap(input, l, h);
 			}
 		}
-		swap(leftCursor, right);
-		return leftCursor;
+		int idx = h;
+		if (input[h] < piv) {
+			idx++;
+		}
+		swap(input, end - 1, idx);
+		return idx;
 	}
 
-	// This method is used to sort the array using quicksort algorithm.
-	// It takes the left and the right end of the array as the two cursors.
-	private void quickSort(int left, int right) {
-
-		// If both cursor scanned the complete array quicksort exits
-		if (left >= right)
-			return;
-
-		// For the simplicity, we took the right most item of the array as a
-		// pivot
-		int pivot = a[right];
-		int partition = partition(left, right, pivot);
-
-		// Recursively, calls the quicksort with the different left and right
-		// parameters of the sub-array
-		quickSort(0, partition - 1);
-		quickSort(partition + 1, right);
+	/**
+	 * Utility method to swap two numbers in given array
+	 *
+	 * @param arr
+	 *            - array on which swap will happen
+	 * @param i
+	 * @param j
+	 */
+	private static void swap(int[] arr, int i, int j) {
+		int temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
 	}
 
 }
