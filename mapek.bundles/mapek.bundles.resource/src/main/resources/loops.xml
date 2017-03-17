@@ -5,7 +5,8 @@
 				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
 			</sensors>
 			<policys>
-				<policy property="BATTERY" condition="ENTRE" lowerbound="5" upperbound="10" />
+				<policy property="BATTERY" condition="MAIOR_IGUAL_QUE" bound="5"  />
+				<policy property="BATTERY" condition="MENOR_IGUAL_QUE" bound="10"  />
 			</policys>
 			<actions>
 				<action id="STOP_COMPONENT" params="rb_quicksort.bundle" />
@@ -17,7 +18,8 @@
 				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
 			</sensors>
 			<policys>
-				<policy property="BATTERY" condition="ENTRE"  lowerbound="11" upperbound="15"  />
+				<policy property="BATTERY" condition="MAIOR_QUE" bound="10"  />
+				<policy property="BATTERY" condition="MENOR_IGUAL_QUE" bound="15"  />
 			</policys>
 			<actions>
 			

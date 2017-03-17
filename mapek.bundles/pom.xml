@@ -12,7 +12,7 @@
 
 	<modules>
 		<!-- COMMON -->
-		<module>mapek.bundles.validator</module>
+		<!-- <module>mapek.bundles.validator</module> -->
 		<module>mapek.bundles.logger</module>
 		<module>mapek.bundles.resource</module>
 		<!-- LOOP -->
