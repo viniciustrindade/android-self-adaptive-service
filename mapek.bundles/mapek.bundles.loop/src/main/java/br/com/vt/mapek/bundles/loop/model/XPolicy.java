@@ -17,7 +17,7 @@ public class XPolicy {
 	@Attribute(name = "condition", required = true)
 	public Condition condition;
 
-	@Attribute(name = "bound", required = true)
+	@Attribute(name = "bound", required = false)
 	public int bound;
 	
 	@Attribute(name = "upperbound", required = false)

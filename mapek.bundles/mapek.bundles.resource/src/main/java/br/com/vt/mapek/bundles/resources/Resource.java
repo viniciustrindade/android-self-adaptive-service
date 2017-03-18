@@ -3,10 +3,10 @@ package br.com.vt.mapek.bundles.resources;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
@@ -87,19 +87,23 @@ public class Resource implements IResource {
 	public void saveExecution(String tmpFileName, Integer counter,
 			Float batteryLevel, Long spentTime, Long spentTimeTotal) {
 
-		PrintWriter out;
+		FileWriter out;
 		try {
 			File tmpFile = new File(System.getProperty("java.io.tmpdir")
 					+ tmpFileName);
-			out = new PrintWriter(tmpFile);
+			out = new FileWriter(tmpFile, true);
 			String csv = counter + "," + batteryLevel + "," + spentTime + ","
 					+ spentTimeTotal;
 
 			log.D("[" + tmpFile.getPath() + "] " + csv);
-			out.println(csv);
+			out.write(csv);
+			out.flush();
 			out.close();
 
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

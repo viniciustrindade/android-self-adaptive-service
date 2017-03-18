@@ -52,7 +52,7 @@
 	</properties>
 	<!-- ============================================================================================== -->
 	<modules>
-		<module>mapek.desktop</module>
+		<!-- <module>mapek.desktop</module>-->
 		<module>mapek.android</module>
 		<module>mapek.services</module>
 		<module>mapek.bundles</module>

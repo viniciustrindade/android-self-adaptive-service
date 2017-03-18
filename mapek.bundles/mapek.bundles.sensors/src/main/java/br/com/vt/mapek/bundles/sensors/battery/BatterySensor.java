@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import br.com.vt.mapek.services.ILoggerService;
+import br.com.vt.mapek.services.common.Util;
 import br.com.vt.mapek.services.domain.ContextElement;
 
 @Component
@@ -47,7 +48,7 @@ public class BatterySensor extends ABSensor implements IBatterySensor {
 		context.setCollectionTime(collectionTime);
 		context.setReading(reading);
 
-		// log.I(Util.dtFormat.format(collectionTime) + " | " + reading + "\n");
+		log.I(Util.timeFormat.format(collectionTime) + " | " + reading + "\n");
 		return context;
 	}
 

@@ -116,7 +116,7 @@
 						</configuration>
 					</execution>
 					<!-- ============================================================================================== -->
-					<!-- DESKTOP BUNDLES -->
+					<!-- DESKTOP BUNDLES 
 					<execution>
 						<id>copy-bundles-to-desktop-folder</id>
 						<phase>install</phase>
@@ -135,7 +135,7 @@
 								</artifactItem>
 							</artifactItems>
 						</configuration>
-					</execution>
+					</execution>-->
 					<!-- ============================================================================================== -->
 					<!-- MOBILE BUNDLES -->
 					<execution>

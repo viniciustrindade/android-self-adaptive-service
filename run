@@ -1,6 +1,6 @@
 #!/bin/zsh
-
-
+adb shell am force-stop br.com.vt.mapek/br.com.vt.mapek.android.StatusActivity
+adb shell rm -rf /data/data/br.com.vt.mapek/cache
 
 export ANDROID_HOME="$HOME/android-sdk/"
 export PATH=$PATH:$ANDROID_HOME/build-tools/19.1.0
@@ -70,6 +70,7 @@ echo Construindo o Projeto && \
 mvn clean install && \
 
 echo "Compilando mb_* bundles para o dalvikVM" && \
-cd mapek.android/res/raw && rm -rf dx && mkdir dx && mv mb_* dx && cd dx && dxall && mv mb_* .. && cd .. && rm -rf dx && \
-#echo "Compilando mb_* runtime bundles para o dalvikVM" && \
-#echo $(cd mapek.bundles/mapek.bundles.resource/src/main/resources && rm -rf dx && mkdir dx && mv mb_* dx && cd dx && dxall && mv mb_* .. && cd .. && rm -rf dx) >/dev/null && \
+echo $(cd mapek.android/res/raw && rm -rf dx && mkdir dx && mv mb_* dx && cd dx && dxall && mv mb_* .. && cd .. && rm -rf dx) > /dev/null && \
+adb install -r mapek.android/target/mapek.android-1.0-SNAPSHOT.apk && \
+adb shell am start -n br.com.vt.mapek/br.com.vt.mapek.android.StatusActivity && \
+

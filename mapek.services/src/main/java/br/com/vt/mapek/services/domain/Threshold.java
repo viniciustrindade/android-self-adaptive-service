@@ -5,9 +5,9 @@ public class Threshold {
 	private float upperBound;
 	private Boolean onceBound = false;
 	
-	public Threshold(Integer bound, Integer lowerBound, Integer upperBound) {
+	public Threshold(float bound, float lowerBound, float upperBound) {
 		super();
-		if (lowerBound != null && upperBound!= null){
+		if (upperBound != 0){
 			this.lowerBound = lowerBound;
 			this.upperBound = upperBound;
 		}else{

@@ -52,7 +52,7 @@ public enum Condition {
 
 	public static Boolean MAIOR_QUE(ContextElement contextElement,
 			Threshold threshold) {
-		return (contextElement.getReading() < threshold.getLowerBound());
+		return (contextElement.getReading() > threshold.getLowerBound());
 	}
 	
 	public static Boolean ENTRE(ContextElement contextElement,

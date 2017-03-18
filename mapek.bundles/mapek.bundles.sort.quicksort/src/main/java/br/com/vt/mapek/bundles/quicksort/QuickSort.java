@@ -8,10 +8,15 @@ import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Invalidate;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.apache.felix.ipojo.annotations.Validate;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceReference;
 
 import br.com.vt.mapek.services.IBatterySensor;
 import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.IResource;
+import br.com.vt.mapek.services.ISensor;
 import br.com.vt.mapek.services.ISort;
 import br.com.vt.mapek.services.common.Util;
 
@@ -20,28 +25,40 @@ import br.com.vt.mapek.services.common.Util;
 public class QuickSort implements ISort, Runnable {
 	@Requires
 	private IResource resource;
-	/*
-	 * @Requires private IBatterySensor batterySensor;
-	 */
 	@Requires
 	private ILoggerService log;
 	private int[] intArray;
 	Integer counter = 0;
 	Long spentTimeTotal = 0l;
+	Float level = 0f;
 	private String tmpFileName = "/" + Util.fileDtFormat.format(new Date())
 			+ "_quicksort.counter";
 	private boolean end = false;
+	private Bundle bundle;
+	private BundleContext context;
+	private ISensor batterySensor;
+
+	public QuickSort() {
+		this.bundle = FrameworkUtil.getBundle(this.getClass());
+		this.context = bundle.getBundleContext();
+	}
 
 	public void run() {
+		//batterySensor.register(this);
+		
 		log.D("QuickSort started");
 
 		if (intArray == null) {
 			intArray = resource.getArray();
 		}
+		batterySensor = getSensorByClassName("br.com.vt.mapek.bundles.sensors.battery.IBatterySensor");
+
 
 		while (!end) {
+			if (batterySensor != null){
+				level = batterySensor.getCurrentContext().getReading();
+			}
 			Long spentTime = 0l;
-			Float level = 0f;
 			Date before = new Date();
 			sort(intArray.clone());
 			spentTime = ((new Date()).getTime() - before.getTime());
@@ -130,6 +147,22 @@ public class QuickSort implements ISort, Runnable {
 		int temp = arr[i];
 		arr[i] = arr[j];
 		arr[j] = temp;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public ISensor getSensorByClassName(String className) {
+		ISensor isensor = null;
+		try {
+			ServiceReference ref = context.getServiceReference(className);
+			isensor = (ISensor) context.getService(ref);
+			return isensor;
+
+		} catch (Exception e) {
+			log.E("Couldnt load sensor class " + className + ", "
+					+ e.getMessage() + "\n");
+		}
+		return isensor;
+
 	}
 
 }

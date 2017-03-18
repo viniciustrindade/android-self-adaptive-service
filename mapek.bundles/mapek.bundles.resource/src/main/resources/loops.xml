@@ -1,12 +1,37 @@
 <loops>
 	<loops>
+	    <loop rate="1000">
+			<sensors>
+				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
+			</sensors>
+			<policys>
+				<policy property="BATTERY" condition="MAIOR_QUE" bound="33"  />
+			</policys>
+			<actions>
+			
+				<action id="STOP_COMPONENT" params="rb_quicksort.bundle" />
+				<action id="STOP_COMPONENT" params="rb_bubblesort.bundle" />
+			</actions>
+		</loop>
+	    <loop rate="1000">
+			<sensors>
+				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
+			</sensors>
+			<policys>
+				<policy property="BATTERY" condition="ENTRE" lowerbound="30" upperbound="33"  />
+			</policys>
+			<actions>
+			
+				<action id="START_COMPONENT" params="rb_quicksort.bundle" />
+				<action id="STOP_COMPONENT" params="rb_bubblesort.bundle" />
+			</actions>
+		</loop>
 		<loop rate="1000">
 			<sensors>
 				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
 			</sensors>
 			<policys>
-				<policy property="BATTERY" condition="MAIOR_IGUAL_QUE" bound="5"  />
-				<policy property="BATTERY" condition="MENOR_IGUAL_QUE" bound="10"  />
+				<policy property="BATTERY" condition="ENTRE" lowerbound="27" upperbound="29" />
 			</policys>
 			<actions>
 				<action id="STOP_COMPONENT" params="rb_quicksort.bundle" />
@@ -18,26 +43,13 @@
 				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
 			</sensors>
 			<policys>
-				<policy property="BATTERY" condition="MAIOR_QUE" bound="10"  />
-				<policy property="BATTERY" condition="MENOR_IGUAL_QUE" bound="15"  />
+				<policy property="BATTERY" condition="MENOR_QUE" bound="27" />
 			</policys>
 			<actions>
-			
-				<action id="START_COMPONENT" params="rb_quicksort.bundle" />
+				<action id="STOP_COMPONENT" params="rb_quicksort.bundle" />
 				<action id="STOP_COMPONENT" params="rb_bubblesort.bundle" />
 			</actions>
-		</loop>
+		</loop> 
+		
 	</loops>
 </loops>
-
-<!-- <loops> <loops> <loop rate="1000"> <sensors> <sensor className="br.com.vt.mapek.bundles.sensors.illuminance.IIlluminanceSensor"
-	/> </sensors> <policys> <policy property="LIGHT" condition="MAIOR_IGUAL_QUE"
-	bound="30000" /> </policys> <actions> <action id="STOP_COMPONENT" params="rb_spell_checker_gui.bundle"
-	/> <action id="STOP_COMPONENT" params="rb_spellcheckgui_for_android.bundle"
-	/> </actions> </loop> <loop rate="1000"> <sensors> <sensor className="br.com.vt.mapek.bundles.sensors.illuminance.IIlluminanceSensor"
-	/> </sensors> <policys> <policy property="LIGHT" condition="MENOR_QUE" bound="30000"
-	/> </policys> <actions> <action id="START_COMPONENT" params="rb_spell_services.bundle"
-	/> <action id="START_COMPONENT" params="rb_spell_checker.bundle" /> <action
-	id="START_COMPONENT" params="rb_spell_english.bundle" /> <action id="START_COMPONENT"
-	params="rb_spellcheckgui_for_android.bundle" /> </actions> </loop> </loops>
-	</loops> -->
