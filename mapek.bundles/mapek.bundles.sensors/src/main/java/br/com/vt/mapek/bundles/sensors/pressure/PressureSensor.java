@@ -49,7 +49,7 @@ public class PressureSensor extends ABSensor implements
 		Date collectionTime = new Date();
 		ContextElement context = new ContextElement(property);
 		context.setCollectionTime(collectionTime);
-		context.setReading(lastMeasure);
+		context.setValue(lastMeasure);
 		// log.I(Util.dtFormat.format(collectionTime) + " | " + reading + "\n");
 		return context;
 	}

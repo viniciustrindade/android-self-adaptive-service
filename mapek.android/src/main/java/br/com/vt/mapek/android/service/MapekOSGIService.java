@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.AndroidRuntimeException;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -40,7 +41,7 @@ public class MapekOSGIService extends Service {
 	private Installer installer = null;
 	private Felix felix;
 	private BundleContext felixBundleContext;
-	
+
 	private ServiceTracker tracker;
 	private FelixConfig felixConfig;
 	private Activity responseActivity;
@@ -66,6 +67,7 @@ public class MapekOSGIService extends Service {
 
 		return mBinder;
 	}
+
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
@@ -90,12 +92,12 @@ public class MapekOSGIService extends Service {
 					activators);
 			felix = new Felix(felixConfig);
 			felix.start();
-			
+
 			felixBundleContext = felix.getBundleContext();
 			// Android Context
-			installer.registerBundleService(felixBundleContext,
-					Context.class, this.getApplicationContext(),
-					new Hashtable<String, String>());
+			installer.registerBundleService(felixBundleContext, Context.class,
+					ct, new Hashtable<String, String>());
+			installer.startAllBundles();
 			/*
 			 * 
 			 * ServiceRegistration<DeclarationBuilderService>
@@ -119,7 +121,9 @@ public class MapekOSGIService extends Service {
 			 * .build(); handle.publish();
 			 */
 		} catch (BundleException ex) {
-			throw new IllegalStateException(ex);
+			ex.printStackTrace();
+		} catch (AndroidRuntimeException ex) {
+			ex.printStackTrace();
 		}
 		super.onCreate();
 	}
@@ -167,12 +171,12 @@ public class MapekOSGIService extends Service {
 	public void initServiceTracker() {
 
 		try {
-		
+
 			org.osgi.framework.Filter filter = FelixTracker.getFilterByClass(
 					felixBundleContext, ViewFactory.class);
 
-			tracker = new FelixTracker<ViewFactory, ViewFactory>(felixBundleContext,
-					filter, null) {
+			tracker = new FelixTracker<ViewFactory, ViewFactory>(
+					felixBundleContext, filter, null) {
 				public ViewFactory addingService(
 						ServiceReference<ViewFactory> reference) {
 					final ViewFactory view = (ViewFactory) context

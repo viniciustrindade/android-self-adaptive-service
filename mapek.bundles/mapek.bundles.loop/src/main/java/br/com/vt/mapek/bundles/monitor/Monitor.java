@@ -64,7 +64,7 @@ public class Monitor extends ABObserverSubject implements IMonitor {
 				for (ContextElement context : list) {
 					String date = Util.timeFormat.format(context
 							.getCollectionTime());
-					String value = String.valueOf(context.getReading());
+					String value = String.valueOf(context.getValue());
 					toPrint += "[" + date + " " + value + "] ";
 				}
 				log.I(toPrint);

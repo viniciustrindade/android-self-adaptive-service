@@ -13,12 +13,10 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 
-import br.com.vt.mapek.services.IBatterySensor;
 import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.IResource;
 import br.com.vt.mapek.services.ISensor;
 import br.com.vt.mapek.services.ISort;
-import br.com.vt.mapek.services.common.Util;
 
 @Component(immediate = true)
 @Instantiate
@@ -29,10 +27,8 @@ public class QuickSort implements ISort, Runnable {
 	private ILoggerService log;
 	private int[] intArray;
 	Integer counter = 0;
-	Long spentTimeTotal = 0l;
-	Float level = 0f;
-	private String tmpFileName = "/" + Util.fileDtFormat.format(new Date())
-			+ "_quicksort.counter";
+	Long timeTotal = 0l;
+	Float levelBefore = 0f;
 	private boolean end = false;
 	private Bundle bundle;
 	private BundleContext context;
@@ -44,27 +40,30 @@ public class QuickSort implements ISort, Runnable {
 	}
 
 	public void run() {
-		//batterySensor.register(this);
-		
+
 		log.D("QuickSort started");
 
 		if (intArray == null) {
 			intArray = resource.getArray();
 		}
 		batterySensor = getSensorByClassName("br.com.vt.mapek.bundles.sensors.battery.IBatterySensor");
-
+		if (batterySensor != null) {
+			levelBefore = batterySensor.getCurrentContext().getValue();
+		}
 
 		while (!end) {
-			if (batterySensor != null){
-				level = batterySensor.getCurrentContext().getReading();
-			}
-			Long spentTime = 0l;
+			Long time = 0l;
 			Date before = new Date();
+			Float level = 0f;
+			if (batterySensor != null)
+				level = levelBefore
+						- batterySensor.getCurrentContext().getValue();
+
 			sort(intArray.clone());
-			spentTime = ((new Date()).getTime() - before.getTime());
-			spentTimeTotal += spentTime;
-			resource.saveExecution(tmpFileName, counter++, level, spentTime,
-					spentTimeTotal);
+			time = ((new Date()).getTime() - before.getTime());
+			timeTotal += time;
+			log.logBatteryConsumeExecution(filename, "quicksort",
+					counter++, level, time, timeTotal);
 		}
 		log.D("QuickSort stopped");
 

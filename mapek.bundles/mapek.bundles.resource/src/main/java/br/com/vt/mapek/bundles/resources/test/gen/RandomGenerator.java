@@ -1,4 +1,4 @@
-package br.com.vt.mapek.bundles.resources.test.gen;
+/*package br.com.vt.mapek.bundles.resources.test.gen;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -50,3 +50,4 @@ public class RandomGenerator {
 	
 	
 }
+*/

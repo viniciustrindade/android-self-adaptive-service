@@ -4,19 +4,36 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:scrollbars="vertical" >
-	<TextView
+
+    <TextView
         android:id="@+id/header"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/bundles_status"
+        android:textAlignment="center"
         android:textSize="15sp" />
-	
+
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        >
+        android:layout_height="203dp"
+        android:layout_weight="0.92" >
     </ListView>
+
+    <TextView
+        android:id="@+id/loading"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/loading"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="15sp" />
+    <Button
+        android:id="@+id/resultButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Download CSV File" />
 
 </LinearLayout>

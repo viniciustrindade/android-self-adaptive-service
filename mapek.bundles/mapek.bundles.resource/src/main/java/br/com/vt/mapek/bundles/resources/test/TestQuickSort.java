@@ -1,4 +1,4 @@
-package br.com.vt.mapek.bundles.resources.test;
+/*package br.com.vt.mapek.bundles.resources.test;
 
 import java.io.IOException;
 import java.util.Date;
@@ -41,16 +41,16 @@ public class TestQuickSort {
 			spentTime = ((new Date()).getTime() - before.getTime());
 			spentTimeTotal += spentTime;
 			System.out.println("\n");
-			resource.saveExecution(tmpFileName, counter++, level, spentTime, spentTimeTotal);
-			
+			resource.saveBatteryConsumeExecution(tmpFileName,"quicksort", counter++, level, spentTime, spentTimeTotal);
+				
 		}
 
 	}
 
 
-    /*
+    
      * iterative implementation of quicksort sorting algorithm.
-     */
+     
     public static void sort(int[] numbers) {
         Stack<Integer> stack = new Stack<Integer>();
         stack.push(0);
@@ -74,10 +74,10 @@ public class TestQuickSort {
         }
     }
 
-    /*
+    
      * Utility method to partition the array into smaller array, and
      * comparing numbers to rearrange them as per quicksort algorithm.
-     */
+     
     private static int partition(int[] input, int position, int start, int end) {
         int l = start;
         int h = end - 2;
@@ -101,13 +101,13 @@ public class TestQuickSort {
         return idx;
     }
 
-    /**
+    *//**
      * Utility method to swap two numbers in given array
      *
      * @param arr - array on which swap will happen
      * @param i
      * @param j
-     */
+     *//*
     private static void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
@@ -121,3 +121,4 @@ public class TestQuickSort {
 	}
 
 }
+*/

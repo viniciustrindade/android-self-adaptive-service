@@ -13,7 +13,6 @@ import br.com.vt.mapek.services.ILoggerService;
 @Provides
 public class LoggerService implements ILoggerService, LogService {
 
-
 	public void log(int level, String message) {
 		console(level, message);
 
@@ -34,7 +33,7 @@ public class LoggerService implements ILoggerService, LogService {
 		console(level, message);
 
 	}
-	
+
 	public void I(String message) {
 		log(LOG_INFO, message);
 	}
@@ -51,6 +50,7 @@ public class LoggerService implements ILoggerService, LogService {
 		log(LOG_DEBUG, message);
 
 	}
+
 	public void console(int level, String message) {
 		switch (level) {
 		case LOG_ERROR:
@@ -61,5 +61,44 @@ public class LoggerService implements ILoggerService, LogService {
 			break;
 		}
 
+	}
+
+	public void logBatteryConsumeExecution(String filename, String title,
+			Integer counter, Float level, Long time, Long timeTotal) {
+ 
+		/*
+		 * FileWriter out; try { File tmpFile = new
+		 * File(System.getProperty("java.io.tmpdir") + "/" + filename); out =
+		 * new FileWriter(tmpFile, true); String csv = counter + "," + level +
+		 * "," + time + "," + timeTotal;
+		 * 
+		 * this.D("[" + tmpFile.getPath() + "] " + csv); out.write(csv);
+		 * out.flush(); out.close();
+		 * 
+		 * } catch (FileNotFoundException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); } catch (IOException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
+/*
+		try {
+
+			int seconds = (int) (timeTotal / 1000);
+			int ocsindex = (int) (counter / ((seconds) * (level != 0 ? level
+					: 1))); // ordering/consume/seconds
+			String csv = title + "," + counter + "," + level + "," + time + ","
+					+ seconds + "," + ocsindex + "\n";
+			File tmp = new File(Environment.getExternalStorageDirectory()
+					+ File.separator + filename);
+			FileWriter out = new FileWriter(tmp, true);
+			out.write(csv);
+			out.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}
 }

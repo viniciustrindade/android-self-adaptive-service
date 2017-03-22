@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class ContextElement {
 	private IProperty property;
-	private float reading;
+	private float value;
 	private Date collectionTime;
 	
 	private ContextElement() {
@@ -24,12 +24,12 @@ public class ContextElement {
 		this.property = property;
 	}
 
-	public float getReading() {
-		return reading;
+	public float getValue() {
+		return value;
 	}
 
-	public void setReading(float reading) {
-		this.reading = reading;
+	public void setValue(float value) {
+		this.value = value;
 	}
 
 	public Date getCollectionTime() {
@@ -44,7 +44,7 @@ public class ContextElement {
 	public String toString() {
 		DateFormat format = SimpleDateFormat.getDateInstance();
 		
-		return "ContextElement [property=" + property.getName() + ", reading=" + reading
+		return "ContextElement [property=" + property.getName() + ", reading=" + value
 				+ ", collectionTime=" + format.format(collectionTime) + "]";
 	}
 	

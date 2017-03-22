@@ -33,7 +33,7 @@
 			<id>android-libs</id>
 			<url>file://${project.basedir}/private_libs</url>
 		</repository>
-	</repositories> 
+	</repositories>
 	<!-- ============================================================================================== -->
 
 	<properties>
@@ -45,6 +45,11 @@
 		<android.sdk.version>4.4.2_r4</android.sdk.version> -->
 		<android.sdk.platform>22</android.sdk.platform>
 		<android.sdk.version>5.1.1_r2</android.sdk.version>
+
+		<support.sdk.groupId>com.android.support</support.sdk.groupId>
+		<support.sdk.artifactId>support-v4</support.sdk.artifactId>
+		<support.sdk.version>18.0.0</support.sdk.version>
+
 		<android.dex.coreLibrary>true</android.dex.coreLibrary>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -77,8 +82,8 @@
 					</filesets>
 				</configuration>
 			</plugin>
-			<!-- <plugin> <artifactId>maven-dependency-plugin</artifactId> <version>2.10</version> 
-				<inherited>true</inherited> <executions> <execution> <phase>generate-resources</phase> 
+			<!-- <plugin> <artifactId>maven-dependency-plugin</artifactId> <version>2.10</version>
+				<inherited>true</inherited> <executions> <execution> <phase>generate-resources</phase>
 				<goals> <goal>sources</goal> </goals> </execution> </executions> </plugin> -->
 			<!-- COMPILER -->
 			<plugin>
@@ -117,7 +122,7 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
