@@ -43,7 +43,7 @@
 				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
 			</sensors>
 			<policys>
-				<policy property="BATTERY" condition="MENOR_QUE" bound="5" />
+				<policy property="BATTERY" condition="MENOR_QUE" bound="6" />
 			</policys>
 			<actions>
 				<action id="STOP_COMPONENT" params="rb_quicksort.bundle" />
