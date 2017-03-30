@@ -7,7 +7,8 @@ import java.util.Random;
 
 public class Util {
 	private static int LASTID = 1;
-	public static final DateFormat dtFormat = new SimpleDateFormat("hh:ss");
+	public static final DateFormat timeFormat = new SimpleDateFormat("HH:ss");
+	public static final DateFormat fileDtFormat = new SimpleDateFormat("yyMMddHHmm");
 
 	public static int getNewID() {
 		return Util.LASTID++;

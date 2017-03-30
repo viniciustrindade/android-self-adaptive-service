@@ -62,12 +62,18 @@
 			<version>${android.sdk.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<!--<dependency>
+			<groupId>${support.sdk.groupId}</groupId>
+			<artifactId>${support.sdk.artifactId}</artifactId>
+			<version>${support.sdk.version}</version>
+			<scope>compile</scope>
+		</dependency> -->
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.framework</artifactId>
 			<version>5.4.0</version>
 		</dependency>
-		
+
 	</dependencies>
 
 </project>

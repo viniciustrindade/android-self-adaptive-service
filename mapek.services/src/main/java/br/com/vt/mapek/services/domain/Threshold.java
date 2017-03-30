@@ -5,10 +5,15 @@ public class Threshold {
 	private float upperBound;
 	private Boolean onceBound = false;
 	
-	public Threshold(float bound) {
+	public Threshold(float bound, float lowerBound, float upperBound) {
 		super();
-		this.lowerBound = bound;
-		onceBound = true;
+		if (upperBound != 0){
+			this.lowerBound = lowerBound;
+			this.upperBound = upperBound;
+		}else{
+			this.lowerBound = bound;
+			onceBound = true;
+		}
 	}
 	public Threshold(float lowerBound, float upperBound) {
 		super();

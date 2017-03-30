@@ -54,9 +54,9 @@ public class LoopBuilder {
 	public void build() {
 
 		log.D("[TRANSFORMS XML TO LOOPXML]");
-		InputStream input = resources.getXML();
 		LoopXml xml;
 		try {
+		InputStream input = resources.getXML();
 			xml = serializer.unmarshal(input, LoopXml.class);
 		} catch (Exception e) {
 			log.E("Error on unmarshal: ");

@@ -1,10 +1,13 @@
 package br.com.vt.mapek.android.felix;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.List;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 import org.osgi.framework.ServiceRegistration;
 
 import android.content.Context;
@@ -14,6 +17,7 @@ public class Installer implements BundleActivator {
 	private Context androidContext;
 	private Resources res;
 	private BundleContext m_context = null;
+	private List<Bundle> bundles = new ArrayList<Bundle>();
 	private final String[] files = {
 			"ipojo",
 			"ipojoapi",
@@ -43,9 +47,13 @@ public class Installer implements BundleActivator {
 		m_context = context;
 		for (String file : files) {
 			Bundle bundle = this.installBundle(context, file);
-			bundle.start();
+			bundles.add(bundle);
 		}
-
+	}
+	public void startAllBundles() throws BundleException{
+		for (Bundle b: bundles){
+			b.start();
+		}
 	}
 
 	public void stop(BundleContext arg0) throws Exception {

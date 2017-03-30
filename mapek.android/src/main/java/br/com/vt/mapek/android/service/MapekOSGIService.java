@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.felix.framework.Felix;
 import org.apache.felix.framework.util.FelixConstants;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
@@ -22,7 +23,9 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Environment;
 import android.os.IBinder;
+import android.util.AndroidRuntimeException;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -30,6 +33,8 @@ import br.com.vt.mapek.android.felix.FelixConfig;
 import br.com.vt.mapek.android.felix.FelixTracker;
 import br.com.vt.mapek.android.felix.Installer;
 import br.com.vt.mapek.felix.view.ViewFactory;
+import br.com.vt.mapek.services.IParameters;
+import br.com.vt.mapek.services.Parameters;
 
 public class MapekOSGIService extends Service {
 
@@ -38,6 +43,8 @@ public class MapekOSGIService extends Service {
 	private static final int ONGOING_NOTIFICATION_ID = 1;
 	private Installer installer = null;
 	private Felix felix;
+	private BundleContext felixBundleContext;
+
 	private ServiceTracker tracker;
 	private FelixConfig felixConfig;
 	private Activity responseActivity;
@@ -52,12 +59,22 @@ public class MapekOSGIService extends Service {
 
 	}
 
+	public BundleContext getFelixBundleContext() {
+		return felixBundleContext;
+	}
+
 	public IBinder onBind(Intent intent) {
 		Log.d(TAG, "onStartCommand");
 		Toast.makeText(this, "Serviço Mapek Iniciado", Toast.LENGTH_SHORT)
 				.show();
 
 		return mBinder;
+	}
+
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		// TODO Auto-generated method stub
+		return super.onStartCommand(intent, flags, startId);
 	}
 
 	@Override
@@ -68,6 +85,7 @@ public class MapekOSGIService extends Service {
 		felixConfig.configureCache();
 		Context ct = this.getApplicationContext();
 		delete(felixConfig.getCacheDir());
+		delete(felixConfig.getBundleDir());
 		try {
 			List<BundleActivator> activators = new ArrayList<BundleActivator>();
 			installer = new Installer(ct);
@@ -78,10 +96,19 @@ public class MapekOSGIService extends Service {
 			felix = new Felix(felixConfig);
 			felix.start();
 
+			felixBundleContext = felix.getBundleContext();
 			// Android Context
-			installer.registerBundleService(felix.getBundleContext(),
-					Context.class, this.getApplicationContext(),
-					new Hashtable<String, String>());
+			installer.registerBundleService(felixBundleContext, Context.class,
+					ct, new Hashtable<String, String>());
+			
+			// ExternalDir 
+			File external = Environment.getExternalStorageDirectory();
+			IParameters para = new Parameters();
+			para.setExternalDir(external);
+			
+			installer.registerBundleService(felixBundleContext, IParameters.class,
+					para, new Hashtable<String, String>());
+			installer.startAllBundles();
 			/*
 			 * 
 			 * ServiceRegistration<DeclarationBuilderService>
@@ -105,7 +132,9 @@ public class MapekOSGIService extends Service {
 			 * .build(); handle.publish();
 			 */
 		} catch (BundleException ex) {
-			throw new IllegalStateException(ex);
+			ex.printStackTrace();
+		} catch (AndroidRuntimeException ex) {
+			ex.printStackTrace();
 		}
 		super.onCreate();
 	}
@@ -115,41 +144,50 @@ public class MapekOSGIService extends Service {
 		// access to the set of installed bundles.
 		return installer.getBundles();
 	}
-	
-	public void addBundleListener(BundleListener listener){
-		felix.getBundleContext().addBundleListener(listener);
+
+	public void addBundleListener(BundleListener listener) {
+		felixBundleContext.addBundleListener(listener);
 	}
-	
-	public void removeBundleListener(BundleListener listener){
-		felix.getBundleContext().removeBundleListener(listener);
+
+	public void removeBundleListener(BundleListener listener) {
+		felixBundleContext.removeBundleListener(listener);
 	}
-	public void startBundle(long id){
+
+	public void startBundle(long id) {
 		try {
-			felix.getBundleContext().getBundle(id).start();
+			Bundle b = felixBundleContext.getBundle(id);
+			b.start();
+			Toast.makeText(getApplicationContext(),
+					"Bundle " + b.getSymbolicName() + " started ",
+					Toast.LENGTH_SHORT).show();
 		} catch (BundleException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public void stopBundle(long id){
+
+	public void stopBundle(long id) {
 		try {
-			felix.getBundleContext().getBundle(id).stop();
+			Bundle b = felixBundleContext.getBundle(id);
+			b.stop();
+			Toast.makeText(getApplicationContext(),
+					"Bundle " + b.getSymbolicName() + " stopped ",
+					Toast.LENGTH_SHORT).show();
 		} catch (BundleException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
 
 	public void initServiceTracker() {
 
 		try {
-			BundleContext context = felix.getBundleContext();
-			org.osgi.framework.Filter filter = FelixTracker.getFilterByClass(
-					context, ViewFactory.class);
 
-			tracker = new FelixTracker<ViewFactory, ViewFactory>(context,
-					filter, null) {
+			org.osgi.framework.Filter filter = FelixTracker.getFilterByClass(
+					felixBundleContext, ViewFactory.class);
+
+			tracker = new FelixTracker<ViewFactory, ViewFactory>(
+					felixBundleContext, filter, null) {
 				public ViewFactory addingService(
 						ServiceReference<ViewFactory> reference) {
 					final ViewFactory view = (ViewFactory) context
@@ -219,7 +257,7 @@ public class MapekOSGIService extends Service {
 				new Intent(this, responseActivity.getClass()), 0);
 
 		Notification notification = new Notification.Builder(this)
-				.setContentTitle("Mapek").setContentText("Rodando..")
+				.setContentTitle("Mapek").setContentText("Executando..")
 				.setSmallIcon(android.R.drawable.alert_light_frame)
 				.setContentIntent(pendingIntent).build();
 		startForeground(ONGOING_NOTIFICATION_ID, notification);

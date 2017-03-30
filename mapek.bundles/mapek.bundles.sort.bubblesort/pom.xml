@@ -9,10 +9,11 @@
 	<artifactId>mapek.bundles.sort.bubblesort</artifactId>
 	<!-- ============================================================================================== -->
 	<properties>
+
 		<bundle.name>mb_bubblesort.jar</bundle.name>
-		<bundle.import.packages>
-			*
-		</bundle.import.packages>
+		<bundle.runtime.name>rb_bubblesort.bundle</bundle.runtime.name>
+		<isnot_runtime_bundle>false</isnot_runtime_bundle>
+		<bundle.import.packages>*</bundle.import.packages>
 		<bundle.export.packages>br.com.vt.mapek.bundles.bubblesort.*;version="${project.version}"</bundle.export.packages>
 		<bundle._export.contents>br.com.vt.mapek.services.*;version="${project.version}"</bundle._export.contents>
 		<skip.maven.plugin>false</skip.maven.plugin>

@@ -1,4 +1,4 @@
-package br.com.vt.mapek.bundles.resources.test.gen;
+/*package br.com.vt.mapek.bundles.resources.test.gen;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import br.com.vt.mapek.bundles.resources.FileService;
-import br.com.vt.mapek.bundles.resources.test.LoggerService;
+import br.com.vt.mapek.bundles.resources.test.TestLoggerService;
 
 public class RandomGenerator {
 	public static final String FILENAME = "src/main/resources/" + "input.csv";
@@ -22,7 +22,7 @@ public class RandomGenerator {
 	
 	
 	public static void main(String[] args) throws IOException {
-		FileService fileService = new FileService(new LoggerService());
+		FileService fileService = new FileService(new TestLoggerService());
 		
         ArrayList<Integer> list = new ArrayList<Integer>();
         for (int i=1; i<SIZE;i++) {
@@ -50,3 +50,4 @@ public class RandomGenerator {
 	
 	
 }
+*/

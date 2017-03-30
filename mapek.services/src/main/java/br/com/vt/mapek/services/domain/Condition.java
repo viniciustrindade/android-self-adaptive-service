@@ -23,6 +23,8 @@ public enum Condition {
 			return MAIOR_IGUAL_QUE(contextElement, threshold);
 		case MAIOR_QUE:
 			return MAIOR_QUE(contextElement, threshold);
+		case ENTRE:
+			return ENTRE(contextElement, threshold);
 		default:
 			return null;
 		}
@@ -30,32 +32,32 @@ public enum Condition {
 
 	public static Boolean IGUAL(ContextElement contextElement,
 			Threshold threshold) {
-		return (contextElement.getReading() == threshold.getLowerBound());
+		return (contextElement.getValue() == threshold.getLowerBound());
 	}
 
 	public static Boolean MENOR_IGUAL_QUE(ContextElement contextElement,
 			Threshold threshold) {
-		return (contextElement.getReading() <= threshold.getLowerBound());
+		return (contextElement.getValue() <= threshold.getLowerBound());
 	}
 
 	public static Boolean MENOR_QUE(ContextElement contextElement,
 			Threshold threshold) {
-		return (contextElement.getReading() < threshold.getLowerBound());
+		return (contextElement.getValue() < threshold.getLowerBound());
 	}
 
 	public static Boolean MAIOR_IGUAL_QUE(ContextElement contextElement,
 			Threshold threshold) {
-		return (contextElement.getReading() >= threshold.getLowerBound());
+		return (contextElement.getValue() >= threshold.getLowerBound());
 	}
 
 	public static Boolean MAIOR_QUE(ContextElement contextElement,
 			Threshold threshold) {
-		return (contextElement.getReading() < threshold.getLowerBound());
+		return (contextElement.getValue() > threshold.getLowerBound());
 	}
 	
 	public static Boolean ENTRE(ContextElement contextElement,
 			Threshold threshold) {
-		return (contextElement.getReading() >= threshold.getLowerBound() && contextElement.getReading() <= threshold.getUpperBound());
+		return (contextElement.getValue() >= threshold.getLowerBound() && contextElement.getValue() <= threshold.getUpperBound());
 	}
 
 	

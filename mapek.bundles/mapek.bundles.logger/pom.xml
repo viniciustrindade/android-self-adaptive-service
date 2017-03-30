@@ -15,5 +15,14 @@
 		<skip.maven.plugin>false</skip.maven.plugin>
 	</properties>
 	<!-- ============================================================================================== -->
+  <!--   <dependencies>
+    <dependency>
+      <groupId>${android.sdk.groupId}</groupId>
+      <artifactId>${android.sdk.artifactId}</artifactId>
+      <version>${android.sdk.version}</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>  -->
+  <!-- ============================================================================================== -->
   
 </project>

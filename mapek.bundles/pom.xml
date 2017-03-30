@@ -12,15 +12,16 @@
 
 	<modules>
 		<!-- COMMON -->
-		<module>mapek.bundles.validator</module>
+		<!-- <module>mapek.bundles.validator</module> -->
 		<module>mapek.bundles.logger</module>
-		<module>mapek.bundles.resource</module>
 		<!-- LOOP -->
 		<module>mapek.bundles.loop</module>
 		<module>mapek.bundles.sensors</module>
 		<!-- SORT -->
 		<module>mapek.bundles.sort.bubblesort</module>
 		<module>mapek.bundles.sort.quicksort</module>
+		<!-- resource should be after all bundles -->
+		<module>mapek.bundles.resource</module>
 	</modules>
 
 	<artifactId>mapek.bundles</artifactId>
@@ -116,26 +117,12 @@
 						</configuration>
 					</execution>
 					<!-- ============================================================================================== -->
-					<!-- DESKTOP BUNDLES -->
-					<execution>
-						<id>copy-bundles-to-desktop-folder</id>
-						<phase>install</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-
-							<outputDirectory>../../mapek.desktop/bundle</outputDirectory>
-							<artifactItems>
-								<artifactItem>
-									<groupId>${project.groupId}</groupId>
-									<artifactId>${project.artifactId}</artifactId>
-									<version>${project.version}</version>
-									<destFileName>${bundle.name}</destFileName>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
+					<!-- DESKTOP BUNDLES <execution> <id>copy-bundles-to-desktop-folder</id> 
+						<phase>install</phase> <goals> <goal>copy</goal> </goals> <configuration> 
+						<outputDirectory>../../mapek.desktop/bundle</outputDirectory> <artifactItems> 
+						<artifactItem> <groupId>${project.groupId}</groupId> <artifactId>${project.artifactId}</artifactId> 
+						<version>${project.version}</version> <destFileName>${bundle.name}</destFileName> 
+						</artifactItem> </artifactItems> </configuration> </execution> -->
 					<!-- ============================================================================================== -->
 					<!-- MOBILE BUNDLES -->
 					<execution>
@@ -181,9 +168,30 @@
 							</artifactItems>
 						</configuration>
 					</execution>
+					<!-- ============================================================================================== -->
+					<!-- RUNTIME BUNDLES -->
+					<execution>
+						<id>copy-bundles-to-runtime-folder</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<skip>${isnot_runtime_bundle}</skip>
+							<outputDirectory>../mapek.bundles.resource/src/main/resources/bundles</outputDirectory>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<destFileName>${bundle.runtime.name}</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+
 				</executions>
 			</plugin>
-
 			<!-- ============================================================================================== -->
 			<!-- MANIFEST -->
 			<plugin>
@@ -227,9 +235,7 @@
 									packages from the embedded jars. it is for you declare the packages from 
 									the own bundle. You must use <_exportcontents> http://stackoverflow.com/questions/21218296/maven-bundle-plugin-export-has-private-references -->
 								<Export-Package>${bundle.export.packages}</Export-Package>
-								<_exportcontents>
-									${bundle._export.contents}
-								</_exportcontents>
+								<_exportcontents> ${bundle._export.contents} </_exportcontents>
 								<Bundle-Name>${project.artifactId}</Bundle-Name>
 								<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 								<Bundle-Version>${project.version}</Bundle-Version>
