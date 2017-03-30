@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>br.com.vt</groupId>
 	<artifactId>mapek</artifactId>
 	<packaging>pom</packaging>
@@ -20,7 +20,7 @@
 		<url>http://github.com/viniciustrindade/entregastcc</url>
 		<developerConnection>viniciustindade</developerConnection>
 	</scm>
-	 <repositories>
+	<repositories>
 		<repository>
 			<id>android-repo</id>
 			<url>file://${env.ANDROID_HOME}extras/android/m2repository</url>
@@ -33,18 +33,19 @@
 			<id>android-libs</id>
 			<url>file://${project.basedir}/private_libs</url>
 		</repository>
-	</repositories> 
+	</repositories>
 	<!-- ============================================================================================== -->
-
 	<properties>
 		<!-- use UTF-8 for everything -->
 		<ANDROID_HOME>/home/vinicius/android-sdk</ANDROID_HOME>
 		<android.sdk.groupId>android</android.sdk.groupId>
 		<android.sdk.artifactId>android</android.sdk.artifactId>
-		<!-- <android.sdk.platform>19</android.sdk.platform>
-		<android.sdk.version>4.4.2_r4</android.sdk.version> -->
+		<!-- <android.sdk.platform>19</android.sdk.platform> <android.sdk.version>4.4.2_r4</android.sdk.version> -->
 		<android.sdk.platform>22</android.sdk.platform>
 		<android.sdk.version>5.1.1_r2</android.sdk.version>
+		<support.sdk.groupId>com.android.support</support.sdk.groupId>
+		<support.sdk.artifactId>support-v4</support.sdk.artifactId>
+		<support.sdk.version>18.0.0</support.sdk.version>
 		<android.dex.coreLibrary>true</android.dex.coreLibrary>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -52,13 +53,12 @@
 	</properties>
 	<!-- ============================================================================================== -->
 	<modules>
-		<!-- <module>mapek.desktop</module>-->
+		<!-- <module>mapek.desktop</module> -->
 		<module>mapek.android</module>
 		<module>mapek.services</module>
 		<module>mapek.bundles</module>
-  </modules>
+	</modules>
 	<!-- ============================================================================================== -->
-
 	<!-- ============================================================================================== -->
 	<build>
 		<plugins>
@@ -71,9 +71,7 @@
 						<fileset>
 							<directory>mapek.desktop/bundle</directory>
 						</fileset>
-				<!-- 		<fileset>
-							<directory>mapek.desktop/felix-cache</directory>
-						</fileset> -->
+						<!-- <fileset> <directory>mapek.desktop/felix-cache</directory> </fileset> -->
 					</filesets>
 				</configuration>
 			</plugin>
@@ -128,19 +126,15 @@
 							<pluginExecutions>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-dependency-plugin
-										</artifactId>
+										<groupId> org.apache.maven.plugins										</groupId>
+										<artifactId> maven-dependency-plugin										</artifactId>
 										<versionRange>[2.8,)</versionRange>
 										<goals>
 											<goal>sources</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>

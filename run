@@ -1,5 +1,5 @@
 #!/bin/zsh
-adb shell am force-stop br.com.vt.mapek/br.com.vt.mapek.android.StatusActivity
+# adb shell am force-stop br.com.vt.mapek/br.com.vt.mapek.android.StatusActivity
 adb shell rm -rf /data/data/br.com.vt.mapek/cache
 
 export ANDROID_HOME="$HOME/android-sdk/"
@@ -74,3 +74,5 @@ echo $(cd mapek.android/res/raw && rm -rf dx && mkdir dx && mv mb_* dx && cd dx 
 adb install -r mapek.android/target/mapek.android-1.0-SNAPSHOT.apk && \
 adb shell am start -n br.com.vt.mapek/br.com.vt.mapek.android.StatusActivity && \
 
+#Result
+watch -n 1 adb pull /storage/sdcard0/result.csv

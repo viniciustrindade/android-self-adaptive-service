@@ -9,5 +9,8 @@ public interface ILoggerService {
 	public void E(String message);
 
 	public void W(String message);
+	
+	public void logBatteryConsumeExecution(String filename, String title,
+			Integer counter, Float level, Long time, Long timeTotal);
 
 }

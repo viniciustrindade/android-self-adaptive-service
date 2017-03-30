@@ -56,4 +56,11 @@ public class TestLoggerService implements ILoggerService, LogService {
 		}
 
 	}
+
+	@Override
+	public void logBatteryConsumeExecution(String filename, String title,
+			Integer counter, Float level, Long time, Long timeTotal) {
+		// TODO Auto-generated method stub
+		
+	}
 }

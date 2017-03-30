@@ -41,7 +41,7 @@ public class TestQuickSort {
 			spentTime = ((new Date()).getTime() - before.getTime());
 			spentTimeTotal += spentTime;
 			System.out.println("\n");
-			resource.saveExecution(tmpFileName, counter++, level, spentTime, spentTimeTotal);
+			//resource.saveExecution(tmpFileName, counter++, level, spentTime, spentTimeTotal);
 			
 		}
 

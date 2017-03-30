@@ -17,9 +17,7 @@ public interface IResource {
 	 * @return
 	 */
 	public  InputStream getXML();
-	
-	public void saveExecution(String tmpFileName, Integer counter, Float batteryLevel, Long spentTime,  Long spentTimeTotal);
-	
+
 
 	public int[] getArray();
 

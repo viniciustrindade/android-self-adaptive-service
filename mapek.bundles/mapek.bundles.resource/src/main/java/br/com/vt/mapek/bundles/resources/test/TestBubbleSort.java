@@ -41,7 +41,7 @@ public class TestBubbleSort {
 
 			spentTime = ((new Date()).getTime() - before.getTime());
 			spentTimeTotal += spentTime;
-			resource.saveExecution(tmpFileName, counter++, level, spentTime, spentTimeTotal);
+			//resource.saveExecution(tmpFileName, counter++, level, spentTime, spentTimeTotal);
 			System.out.println("\n");
 
 		}
