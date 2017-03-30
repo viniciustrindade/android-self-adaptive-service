@@ -62,6 +62,7 @@ public class QuickSort implements ISort, Runnable {
 			sort(intArray.clone());
 			time = ((new Date()).getTime() - before.getTime());
 			timeTotal += time;
+			log.D("[quicksort] " + counter);
 			log.logBatteryConsumeExecution(filename, "quicksort",
 					counter++, level, time, timeTotal);
 		}

@@ -79,8 +79,8 @@ public class LoggerService implements ILoggerService, LogService {
 		 * block e.printStackTrace(); } catch (IOException e) { // TODO
 		 * Auto-generated catch block e.printStackTrace(); }
 		 */
-
-		/*try {
+		/*
+		try {*/
 
 			int seconds = (int) (timeTotal / 1000);
 			int ocsindex = (int) (counter / ((seconds) * (level != 0 ? level
@@ -88,12 +88,14 @@ public class LoggerService implements ILoggerService, LogService {
 			// ordering/consume/seconds
 			String csv = title + "," + counter + "," + level + "," + time + ","
 					+ seconds + "," + ocsindex + "\n";
-			File tmp = new File(Environment.getExternalStorageDirectory()
+			//log.D("[" + tmpFile.getPath() + "] " + csv);
+			this.D("[xxx] " + csv);
+			/*	File tmp = new File(Environment.getExternalStorageDirectory()
 					+ File.separator + filename);
 			FileWriter out = new FileWriter(tmp, true);
 			out.write(csv);
-			out.close();
-
+			out.close(); */
+			/*
 		} catch (FileNotFoundException e) { // TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {

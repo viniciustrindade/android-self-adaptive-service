@@ -21,4 +21,7 @@ public interface IResource {
 
 	public int[] getArray();
 
+	
+	public void saveExecution(String tmpFileName, Integer counter,
+			Float batteryLevel, Long spentTime, Long spentTimeTotal);
 }
