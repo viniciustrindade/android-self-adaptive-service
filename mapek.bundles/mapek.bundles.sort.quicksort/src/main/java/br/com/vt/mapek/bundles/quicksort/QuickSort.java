@@ -26,9 +26,9 @@ public class QuickSort implements ISort, Runnable {
 	@Requires
 	private ILoggerService log;
 	private int[] intArray;
-	Integer counter = 0;
-	Long timeTotal = 0l;
-	Float levelBefore = 0f;
+	private Integer counter = 0;
+	private Long timeTotal = 0l;
+	private Float level = 0f;
 	private boolean end = false;
 	private Bundle bundle;
 	private BundleContext context;
@@ -47,23 +47,22 @@ public class QuickSort implements ISort, Runnable {
 			intArray = resource.getArray();
 		}
 		batterySensor = getSensorByClassName("br.com.vt.mapek.bundles.sensors.battery.IBatterySensor");
-		if (batterySensor != null) {
+		Float levelBefore = 0f;
+		if (batterySensor != null)
 			levelBefore = batterySensor.getCurrentContext().getValue();
-		}
-
 		while (!end) {
+			if (batterySensor != null) {
+				level = batterySensor.getCurrentContext().getValue();
+				level = levelBefore >= level ? levelBefore - level : level
+						- levelBefore;
+			}
 			Long time = 0l;
 			Date before = new Date();
-			Float level = 0f;
-			if (batterySensor != null)
-				level = levelBefore
-						- batterySensor.getCurrentContext().getValue();
-
 			sort(intArray.clone());
 			time = ((new Date()).getTime() - before.getTime());
 			timeTotal += time;
-			log.logBatteryConsumeExecution(filename, "quicksort",
-					counter++, level, time, timeTotal);
+			log.logBatteryConsumeExecution(filename, "quicksort", counter++,
+					level, time, timeTotal);
 		}
 		log.D("QuickSort stopped");
 

@@ -23,6 +23,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Environment;
 import android.os.IBinder;
 import android.util.AndroidRuntimeException;
 import android.util.Log;
@@ -32,6 +33,8 @@ import br.com.vt.mapek.android.felix.FelixConfig;
 import br.com.vt.mapek.android.felix.FelixTracker;
 import br.com.vt.mapek.android.felix.Installer;
 import br.com.vt.mapek.felix.view.ViewFactory;
+import br.com.vt.mapek.services.IParameters;
+import br.com.vt.mapek.services.Parameters;
 
 public class MapekOSGIService extends Service {
 
@@ -97,6 +100,14 @@ public class MapekOSGIService extends Service {
 			// Android Context
 			installer.registerBundleService(felixBundleContext, Context.class,
 					ct, new Hashtable<String, String>());
+			
+			// ExternalDir 
+			File external = Environment.getExternalStorageDirectory();
+			IParameters para = new Parameters();
+			para.setExternalDir(external);
+			
+			installer.registerBundleService(felixBundleContext, IParameters.class,
+					para, new Hashtable<String, String>());
 			installer.startAllBundles();
 			/*
 			 * 

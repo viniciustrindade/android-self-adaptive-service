@@ -7,9 +7,14 @@ import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Invalidate;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.apache.felix.ipojo.annotations.Validate;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceReference;
 
 import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.IResource;
+import br.com.vt.mapek.services.ISensor;
 import br.com.vt.mapek.services.ISort;
 
 @Component(immediate = true)
@@ -22,26 +27,42 @@ public class BubbleSort implements ISort, Runnable {
 	private int[] intArray;
 	private Integer counter = 0;
 	private Long timeTotal = 0l;
+	private Float level = 0f;
 	private boolean end = false;
-	
+	private Bundle bundle;
+	private BundleContext context;
+	private ISensor batterySensor;
+
+	public BubbleSort() {
+		this.bundle = FrameworkUtil.getBundle(this.getClass());
+		this.context = bundle.getBundleContext();
+	}
 
 	public void run() {
-		log.I("BubbleSort started");
+		log.D("BubbleSort started");
 		if (intArray == null) {
 			intArray = resource.getArray();
 		}
-	
+		batterySensor = getSensorByClassName("br.com.vt.mapek.bundles.sensors.battery.IBatterySensor");
+		Float levelBefore = 0f;
+		if (batterySensor != null)
+			levelBefore = batterySensor.getCurrentContext().getValue();
 		while (!end) {
-			log.I("BubbleSort Loop started");
+			if (batterySensor != null) {
+				level = batterySensor.getCurrentContext().getValue();
+				level = levelBefore >= level ? levelBefore - level : level
+						- levelBefore;
+			}
+			Long time = 0l;
 			Date before = new Date();
-			Float level = 0f;
 			sort(intArray.clone());
-			Long time = ((new Date()).getTime() - before.getTime());
+			time = ((new Date()).getTime() - before.getTime());
 			timeTotal += time;
-			log.logBatteryConsumeExecution(filename,"bubblesort",counter++, level, time, timeTotal);
+			log.logBatteryConsumeExecution(filename, "bubblesort", counter++,
+					level, time, timeTotal);
 
 		}
-		log.I("BubbleSort stopped");
+		log.D("BubbleSort stopped");
 
 	}
 
@@ -56,6 +77,22 @@ public class BubbleSort implements ISort, Runnable {
 	@Invalidate
 	public void stop() {
 		end = true;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public ISensor getSensorByClassName(String className) {
+		ISensor isensor = null;
+		try {
+			ServiceReference ref = context.getServiceReference(className);
+			isensor = (ISensor) context.getService(ref);
+			return isensor;
+
+		} catch (Exception e) {
+			log.E("Couldnt load sensor class " + className + ", "
+					+ e.getMessage() + "\n");
+		}
+		return isensor;
+
 	}
 
 	public void sort(int[] intArray) {
