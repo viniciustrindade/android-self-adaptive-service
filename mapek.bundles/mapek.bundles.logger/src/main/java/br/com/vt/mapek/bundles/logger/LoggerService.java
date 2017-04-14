@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
@@ -14,8 +15,9 @@ import org.osgi.service.log.LogService;
 
 import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.IParameters;
+import br.com.vt.mapek.services.common.Util;
 
-@Component
+@Component(immediate =true)
 @Instantiate
 @Provides
 public class LoggerService implements ILoggerService, LogService {
@@ -73,8 +75,7 @@ public class LoggerService implements ILoggerService, LogService {
 
 	}
 
-	public void logBatteryConsumeExecution(String filename, String title,
-			Integer counter, Float level, Long time, Long timeTotal) {
+	public void logBatteryConsumeExecution(String filename,String csv) {
 
 		/*
 		 * FileWriter out; try { File tmpFile = new
@@ -90,14 +91,9 @@ public class LoggerService implements ILoggerService, LogService {
 		 */
 
 		try {
+		
+			
 			File tmp = new File("/storage/sdcard/result1.csv");
-			int seconds = (int) (timeTotal / 1000);
-			int ocsindex = (int) (counter / ((seconds) * (level != 0 ? level
-					: 1))); //
-			// ordering/consume/seconds
-			String csv = title + "," + counter + "," + level + "," + time + ","
-					+ seconds + "," + ocsindex + "\n";
-
 			if (para != null && para.getExternalDir() != null) {
 				tmp = new File(para.getExternalDir().getPath() + "/" + filename);
 			}

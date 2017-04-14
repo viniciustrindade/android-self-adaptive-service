@@ -1,8 +1,8 @@
 package br.com.vt.mapek.bundles.quicksort;
 
-import java.util.Date;
 import java.util.Stack;
 
+import org.apache.felix.ipojo.annotations.Bind;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Invalidate;
@@ -16,70 +16,28 @@ import org.osgi.framework.ServiceReference;
 import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.IResource;
 import br.com.vt.mapek.services.ISensor;
-import br.com.vt.mapek.services.ISort;
+import br.com.vt.mapek.services.domain.ABSort;
 
 @Component(immediate = true)
 @Instantiate
-public class QuickSort implements ISort, Runnable {
-	@Requires
-	private IResource resource;
-	@Requires
-	private ILoggerService log;
-	private int[] intArray;
-	private Integer counter = 0;
-	private Long timeTotal = 0l;
-	private Float level = 0f;
-	private boolean end = false;
-	private Bundle bundle;
-	private BundleContext context;
-	private ISensor batterySensor;
+public class QuickSort extends ABSort{
 
+	@Requires
+	protected IResource resource;
+	protected Bundle bundle;
+	protected BundleContext context;
+	
 	public QuickSort() {
+		super();
 		this.bundle = FrameworkUtil.getBundle(this.getClass());
 		this.context = bundle.getBundleContext();
 	}
 
-	public void run() {
-
-		log.D("QuickSort started");
-
-		if (intArray == null) {
-			intArray = resource.getArray();
-		}
-		batterySensor = getSensorByClassName("br.com.vt.mapek.bundles.sensors.battery.IBatterySensor");
-		Float levelBefore = 0f;
-		if (batterySensor != null)
-			levelBefore = batterySensor.getCurrentContext().getValue();
-		while (!end) {
-			if (batterySensor != null) {
-				level = batterySensor.getCurrentContext().getValue();
-				level = levelBefore >= level ? levelBefore - level : level
-						- levelBefore;
-			}
-			Long time = 0l;
-			Date before = new Date();
-			sort(intArray.clone());
-			time = ((new Date()).getTime() - before.getTime());
-			timeTotal += time;
-			log.logBatteryConsumeExecution(filename, "quicksort", counter++,
-					level, time, timeTotal);
-		}
-		log.D("QuickSort stopped");
-
+	@Bind(id="log")
+	public void bindLoggerService(ILoggerService log){
+		this.log = log;
 	}
-
-	@Validate
-	public void start() {
-		Thread thread = new Thread(this);
-		end = false;
-		thread.start();
-	}
-
-	@Invalidate
-	public void stop() {
-		end = true;
-	}
-
+	
 	/*
 	 * iterative implementation of quicksort sorting algorithm.
 	 */
@@ -146,7 +104,7 @@ public class QuickSort implements ISort, Runnable {
 		arr[i] = arr[j];
 		arr[j] = temp;
 	}
-
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ISensor getSensorByClassName(String className) {
 		ISensor isensor = null;
@@ -154,13 +112,36 @@ public class QuickSort implements ISort, Runnable {
 			ServiceReference ref = context.getServiceReference(className);
 			isensor = (ISensor) context.getService(ref);
 			return isensor;
-
+	
 		} catch (Exception e) {
 			log.E("Couldnt load sensor class " + className + ", "
 					+ e.getMessage() + "\n");
 		}
 		return isensor;
+	
+	}
+	
+	@Validate
+	public void start() {
+		Thread thread = new Thread(this);
+		end = false;
+		thread.start();
+	}
 
+	@Invalidate
+	public void stop() {
+		end = true;
+	}
+	public ILoggerService getLog(){
+		return this.log;
+	};
+	
+	public IResource getResource(){
+		return this.resource;
+	};
+	
+	public String getAlgoritmName(){
+		return "quicksort";
 	}
 
 }

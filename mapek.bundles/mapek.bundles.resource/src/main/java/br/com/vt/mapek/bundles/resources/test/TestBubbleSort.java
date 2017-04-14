@@ -1,73 +1,126 @@
-/*package br.com.vt.mapek.bundles.resources.test;
+package br.com.vt.mapek.bundles.resources.test;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 import br.com.vt.mapek.bundles.resources.FileService;
 import br.com.vt.mapek.bundles.resources.Resource;
+import br.com.vt.mapek.services.IBatterySensor;
+import br.com.vt.mapek.services.ILoggerService;
+import br.com.vt.mapek.services.IObserver;
 import br.com.vt.mapek.services.IResource;
-import br.com.vt.mapek.services.common.Util;
+import br.com.vt.mapek.services.ISensor;
+import br.com.vt.mapek.services.domain.ABSort;
+import br.com.vt.mapek.services.domain.ContextElement;
+import br.com.vt.mapek.services.domain.Property;
 
+public class TestBubbleSort extends ABSort {
 
- Java Bubble Sort Example
- This Java bubble sort example shows how to sort an array of int using bubble
- sort algorithm. Bubble sort is the simplest sorting algorithm.
- 
-
-public class TestBubbleSort {
-
-	public static void main(String[] args) throws IOException {
-		IResource resource = new Resource(new FileService(new TestLoggerService()),new TestLoggerService());
-		int intArray[] = resource.getArray();
-		Integer counter = 0;
-		Long spentTimeTotal = 0l;
-		Long spentTime = 0l;
-		Float level = 0f;
-		String tmpFileName = System.getProperty("java.io.tmpdir")
-				+  Util.fileDtFormat.format(new Date()) + "_bubblesort.counter";
-
-		while (true) {
-			int a[] = intArray.clone();
-			Date before = new Date();
+	static int a[];
+	IResource resource;
+	ILoggerService log;
+	
+	public TestBubbleSort() {
+		super();
+		log = new TestLoggerService();
+		resource = new Resource(new FileService(new TestLoggerService()),
+				new TestLoggerService());
+		batterySensor = new IBatterySensor() {
 			
-			// prints the given array
-			//System.out.println("DESORDENADO:");
-			//printArray(a);
+			@Override
+			public void unregister() {
+				// TODO Auto-generated method stub
+				
+			}
 			
-			sort(a);
+			@Override
+			public IObserver unregister(IObserver observer) {
+				// TODO Auto-generated method stub
+				return null;
+			}
 			
-			//System.out.println("\nORDENADO:");
-			//printArray(a);
-
-			spentTime = ((new Date()).getTime() - before.getTime());
-			spentTimeTotal += spentTime;
-			resource.saveBatteryConsumeExecution(tmpFileName,"bubblesort", counter++, level, spentTime, spentTimeTotal);
-			System.out.println("\n");
-
-		}
-
+			@Override
+			public void stop() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void start() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void setSensorID(int sensorID) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void setObservers(List<IObserver> observers) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void register() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public IObserver register(IObserver observer) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void notifyObservers(ContextElement contextElement) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void notifyObservers() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public int getSensorID() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public List<IObserver> getObservers() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			public ContextElement getCurrentContext() {
+				ContextElement ce = new ContextElement(Property.BATTERY);
+				ce.setCollectionTime(new Date());
+				ce.setValue(getBatteryLevel());
+				return ce;
+			}
+			
+			@Override
+			public float getBatteryLevel() {
+				Random r = new Random();
+				int index = (r.nextInt() % 5);
+				index = index > 0 ? index :  index * -1;
+				int [] values = {15,15,15,15,14,15};
+				float value = values[index];
+				return value;
+			}
+		};
 	}
-
-	private static void sort(int[] intArray) {
-
-		
-		  In bubble sort, we basically traverse the array from first to
-		 * array_length - 1 position and compare the element with the next one.
-		 * Element is swapped with the next element if the next element is
-		 * greater.
-		 * 
-		 * Bubble sort steps are as follows.
-		 * 
-		 * 1. Compare array[0] & array[1] 2. If array[0] > array [1] swap it. 3.
-		 * Compare array[1] & array[2] 4. If array[1] > array[2] swap it. ... 5.
-		 * Compare array[n-1] & array[n] 6. if [n-1] > array[n] then swap it.
-		 * 
-		 * After this step we will have largest element at the last index.
-		 * 
-		 * Repeat the same steps for array[1] to array[n-1] 
-		 
-		 
-
+	
+	public void sort(int[] intArray) {
 		int n = intArray.length;
 		int temp = 0;
 
@@ -85,10 +138,44 @@ public class TestBubbleSort {
 		}
 
 	}
-	public static void printArray(int[] a) {
+	public static void printArray() {
 		for (int i : a) {
 			System.out.print(i + " ");
 		}
 	}
 
-}*/
+	public void start() {
+		Thread thread = new Thread(this);
+		end = false;
+		thread.start();
+	}
+
+	public void stop() {
+		end = true;
+	}
+
+	public ILoggerService getLog() {
+		return this.log;
+	};
+
+	public IResource getResource() {
+		return this.resource;
+	}
+
+	@Override
+	public ISensor getSensorByClassName(String className) {
+		return batterySensor;
+	};
+
+	
+	public static void main(String[] args) throws IOException {
+		TestBubbleSort test = new TestBubbleSort();
+		test.start();
+
+	}
+	
+	public String getAlgoritmName(){
+		return "bubblesort";
+	}
+	
+}

@@ -10,7 +10,6 @@ public interface ILoggerService {
 
 	public void W(String message);
 	
-	public void logBatteryConsumeExecution(String filename, String title,
-			Integer counter, Float level, Long time, Long timeTotal);
+	public void logBatteryConsumeExecution(String filename, String csv);
 
 }

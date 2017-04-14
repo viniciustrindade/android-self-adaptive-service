@@ -202,7 +202,7 @@ public class StatusActivity extends AbstractActivity implements BundleListener {
 			list.add(bundleMap.get(key));
 		}
 
-		System.out.println(info);
+		// System.out.println(info);
 		this.runOnUiThread(new Runnable() {
 
 			public void run() {

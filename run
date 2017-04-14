@@ -75,4 +75,5 @@ adb install -r mapek.android/target/mapek.android-1.0-SNAPSHOT.apk && \
 adb shell am start -n br.com.vt.mapek/br.com.vt.mapek.android.StatusActivity && \
 
 #Result
-watch -n 1 adb pull /storage/sdcard0/result.csv
+# watch -n 1 adb pull /storage/sdcard/result.csv
+adb shell rm /storage/sdcard/result.csv && watch adb shell 'cat /storage/sdcard/result.csv'

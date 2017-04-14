@@ -48,7 +48,7 @@ public class BatterySensor extends ABSensor implements IBatterySensor {
 		context.setCollectionTime(collectionTime);
 		context.setValue(reading);
 
-		log.I(Util.timeFormat.format(collectionTime) + " | " + reading + "\n");
+	//	log.I(Util.timeFormat.format(collectionTime) + " | " + reading + "\n");
 		return context;
 	}
 
