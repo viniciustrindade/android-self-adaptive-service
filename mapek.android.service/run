@@ -1,0 +1,2 @@
+$(cd $pwd && mvn clean install android:deploy android:run)
+adb logcat

@@ -70,8 +70,10 @@ echo Construindo o Projeto && \
 mvn clean install && \
 
 echo "Compilando mb_* bundles para o dalvikVM" && \
-echo $(cd mapek.android/res/raw && rm -rf dx && mkdir dx && mv mb_* dx && cd dx && dxall && mv mb_* .. && cd .. && rm -rf dx) > /dev/null && \
-adb install -r mapek.android/target/mapek.android-1.0-SNAPSHOT.apk && \
+echo $(cd mapek.android.service/res/raw && rm -rf dx && mkdir dx && mv mb_* dx && cd dx && dxall && mv mb_* .. && cd .. && rm -rf dx) > /dev/null && \
+echo $(cd mapek.android.app/res/raw && rm -rf dx && mkdir dx && mv mb_* dx && cd dx && dxall && mv mb_* .. && cd .. && rm -rf dx) > /dev/null && \
+adb install -r mapek.android.service/target/mapek.android.service-1.0-SNAPSHOT.apk && \
+adb install -r mapek.android.app/target/mapek.android.app-1.0-SNAPSHOT.apk && \
 adb shell am start -n br.com.vt.mapek/br.com.vt.mapek.android.StatusActivity && \
 
 #Result

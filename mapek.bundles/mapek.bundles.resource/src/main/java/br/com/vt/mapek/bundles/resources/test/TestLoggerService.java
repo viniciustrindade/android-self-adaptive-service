@@ -62,7 +62,7 @@ public class TestLoggerService implements ILoggerService, LogService {
 
 	}
 
-	@Override
+
 	public void logBatteryConsumeExecution(String filename, String csv) {
 		try {
 

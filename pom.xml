@@ -54,11 +54,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<isnot_runtime_bundle>true</isnot_runtime_bundle>
+		<isnot_mobile_service_bundle>true</isnot_mobile_service_bundle>
+		<isnot_mobile_app_bundle>true</isnot_mobile_app_bundle>
 	</properties>
 	<!-- ============================================================================================== -->
 	<modules>
 		<!-- <module>mapek.desktop</module>-->
-		<module>mapek.android</module>
+		<module>mapek.android.service</module>
+		<module>mapek.android.app</module>
 		<module>mapek.services</module>
 		<module>mapek.bundles</module>
   </modules>

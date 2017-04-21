@@ -124,16 +124,16 @@
 						<version>${project.version}</version> <destFileName>${bundle.name}</destFileName> 
 						</artifactItem> </artifactItems> </configuration> </execution> -->
 					<!-- ============================================================================================== -->
-					<!-- MOBILE BUNDLES -->
+					<!-- MOBILE SERVICE BUNDLES  -->
 					<execution>
-						<id>copy-bundles-to-mobile-folder</id>
+						<id>copy-bundles-to-mobile-service-folder</id>
 						<phase>install</phase>
 						<goals>
 							<goal>copy</goal>
 						</goals>
 						<configuration>
-
-							<outputDirectory>../../mapek.android/res/raw</outputDirectory>
+							<skip>${isnot_mobile_service_bundle}</skip>
+							<outputDirectory>../../mapek.android.service/res/raw</outputDirectory>
 							<artifactItems>
 								<artifactItem>
 									<groupId>${project.groupId}</groupId>
@@ -164,6 +164,27 @@
 									<artifactId>org.osgi.compendium</artifactId>
 									<version>4.2.0</version>
 									<destFileName>org_osgi_compendium.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+					<!-- ============================================================================================== -->
+					<!-- MOBILE APP BUNDLES  -->
+					<execution>
+						<id>copy-bundles-to-mobile-app-folder</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<skip>${isnot_mobile_app_bundle}</skip>
+							<outputDirectory>../../mapek.android.app/res/raw</outputDirectory>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<destFileName>${bundle.name}</destFileName>
 								</artifactItem>
 							</artifactItems>
 						</configuration>

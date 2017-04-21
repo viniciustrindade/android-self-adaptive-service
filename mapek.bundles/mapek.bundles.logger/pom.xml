@@ -9,6 +9,7 @@
 	  	<!-- ============================================================================================== -->
 	<properties>
 		<bundle.name>mb_logger.jar</bundle.name>
+    <isnot_mobile_service_bundle>false</isnot_mobile_service_bundle>
 		<bundle.import.packages>*</bundle.import.packages>
 		<bundle.export.packages>br.com.vt.mapek.bundles.logger.*;version="${project.version}"</bundle.export.packages>
 		<bundle._export.contents>br.com.vt.mapek.services.*;version="${project.version}"</bundle._export.contents>

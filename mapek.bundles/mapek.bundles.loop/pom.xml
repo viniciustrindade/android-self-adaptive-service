@@ -15,6 +15,7 @@
 	<!-- ============================================================================================== -->
 	<properties>
 		<bundle.name>mb_loop.jar</bundle.name>
+		<isnot_mobile_service_bundle>false</isnot_mobile_service_bundle>
 		<bundle.import.packages>
 			!javax.*,
 			!java.*,

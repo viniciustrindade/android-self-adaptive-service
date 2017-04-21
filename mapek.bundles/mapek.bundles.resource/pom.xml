@@ -10,6 +10,7 @@
 	<!-- ============================================================================================== -->
 	<properties>
 		<bundle.name>mb_resources.jar</bundle.name>
+		<isnot_mobile_app_bundle>false</isnot_mobile_app_bundle>
 		<bundle.import.packages>*</bundle.import.packages>
 		<bundle.private.packages>br.com.vt.mapek.bundles.resources.test.*;version="${project.version}"</bundle.private.packages>
 		<bundle.export.packages>br.com.vt.mapek.bundles.resources.*;version="${project.version}"</bundle.export.packages>
