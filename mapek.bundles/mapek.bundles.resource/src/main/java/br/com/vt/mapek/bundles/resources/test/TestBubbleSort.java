@@ -29,73 +29,72 @@ public class TestBubbleSort extends ABSort {
 				new TestLoggerService());
 		batterySensor = new IBatterySensor() {
 			
-			@Override
 			public void unregister() {
 				// TODO Auto-generated method stub
 				
 			}
 			
-			@Override
+			
 			public IObserver unregister(IObserver observer) {
 				// TODO Auto-generated method stub
 				return null;
 			}
 			
-			@Override
+			
 			public void stop() {
 				// TODO Auto-generated method stub
 				
 			}
 			
-			@Override
+			
 			public void start() {
 				// TODO Auto-generated method stub
 				
 			}
 			
-			@Override
+			
 			public void setSensorID(int sensorID) {
 				// TODO Auto-generated method stub
 				
 			}
 			
-			@Override
+			
 			public void setObservers(List<IObserver> observers) {
 				// TODO Auto-generated method stub
 				
 			}
 			
-			@Override
+			
 			public void register() {
 				// TODO Auto-generated method stub
 				
 			}
 			
-			@Override
+			
 			public IObserver register(IObserver observer) {
 				// TODO Auto-generated method stub
 				return null;
 			}
 			
-			@Override
+			
 			public void notifyObservers(ContextElement contextElement) {
 				// TODO Auto-generated method stub
 				
 			}
 			
-			@Override
+			
 			public void notifyObservers() {
 				// TODO Auto-generated method stub
 				
 			}
 			
-			@Override
+			
 			public int getSensorID() {
 				// TODO Auto-generated method stub
 				return 0;
 			}
 			
-			@Override
+			
 			public List<IObserver> getObservers() {
 				// TODO Auto-generated method stub
 				return null;
@@ -108,7 +107,7 @@ public class TestBubbleSort extends ABSort {
 				return ce;
 			}
 			
-			@Override
+			
 			public float getBatteryLevel() {
 				Random r = new Random();
 				int index = (r.nextInt() % 5);
@@ -162,7 +161,7 @@ public class TestBubbleSort extends ABSort {
 		return this.resource;
 	}
 
-	@Override
+	
 	public ISensor getSensorByClassName(String className) {
 		return batterySensor;
 	};
