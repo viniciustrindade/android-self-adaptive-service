@@ -1,10 +1,7 @@
 package br.com.vt.mapek.bundles.monitor;
 
 import java.util.Collection;
-import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;

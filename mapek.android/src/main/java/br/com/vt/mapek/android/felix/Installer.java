@@ -42,7 +42,6 @@ public class Installer implements BundleActivator {
 				res.openRawResource(idRes));
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void start(BundleContext context) throws Exception {
 		m_context = context;
 		for (String file : files) {

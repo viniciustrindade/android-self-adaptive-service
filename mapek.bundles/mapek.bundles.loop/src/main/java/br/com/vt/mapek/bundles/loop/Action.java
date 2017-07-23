@@ -2,13 +2,9 @@ package br.com.vt.mapek.bundles.loop;
 
 import java.io.InputStream;
 
-import org.apache.felix.ipojo.annotations.Component;
-import org.apache.felix.ipojo.annotations.Property;
-import org.apache.felix.ipojo.annotations.Requires;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
-import org.osgi.framework.FrameworkUtil;
 
 import br.com.vt.mapek.services.IAction;
 import br.com.vt.mapek.services.ILoggerService;
@@ -43,7 +39,7 @@ public class Action implements IAction {
 			try {
 				stopBundle(this.params);
 			} catch (BundleException e) {
-				String error = "\nComponente " + params + " não foi parado\n";
+//				String error = "\nComponente " + params + " não foi parado\n";
 			//	log.D(error + ": \n\t" + e.getMessage() + "\n\n");
 				return;
 			}
@@ -53,8 +49,8 @@ public class Action implements IAction {
 			try {
 				startBundle(this.params);
 			} catch (BundleException e) {
-				String error = "\nComponente " + params
-						+ " não foi instalado\n";
+//				String error = "\nComponente " + params
+//						+ " não foi instalado\n";
 				//log.D(error + ": \n\t" + e.getMessage()+ "\n\n");
 
 				return;
@@ -67,8 +63,8 @@ public class Action implements IAction {
 			try {
 				removeBundle(this.params);
 			} catch (BundleException e) {
-				String error = "\nComponente " + params
-						+ " não foi removido\n";
+//				String error = "\nComponente " + params
+//						+ " não foi removido\n";
 			//	log.D(error + ": \n\t" + e.getMessage()+ "\n");
 				return;
 			}

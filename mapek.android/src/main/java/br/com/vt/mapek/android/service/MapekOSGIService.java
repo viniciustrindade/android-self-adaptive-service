@@ -45,6 +45,7 @@ public class MapekOSGIService extends Service {
 	private Felix felix;
 	private BundleContext felixBundleContext;
 
+	@SuppressWarnings("rawtypes")
 	private ServiceTracker tracker;
 	private FelixConfig felixConfig;
 	private Activity responseActivity;

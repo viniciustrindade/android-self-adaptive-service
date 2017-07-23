@@ -8,10 +8,6 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
-import android.app.Activity;
-import android.view.View;
-import br.com.vt.mapek.felix.view.ViewFactory;
-
 public abstract class FelixTracker<S, T> extends ServiceTracker<S, T> implements
 		ServiceTrackerCustomizer<S, T> {
 
@@ -34,7 +30,7 @@ public abstract class FelixTracker<S, T> extends ServiceTracker<S, T> implements
 
 	public abstract void removedService(ServiceReference<S> reference, T service);
 
-	public static Filter getFilterByClass(BundleContext context, Class clazz)
+	public static Filter getFilterByClass(BundleContext context, @SuppressWarnings("rawtypes") Class clazz)
 			throws InvalidSyntaxException {
 		String filter = "(" + Constants.OBJECTCLASS + "=" + clazz.getName()
 				+ ")";

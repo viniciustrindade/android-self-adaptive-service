@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
 
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
@@ -15,7 +14,6 @@ import org.osgi.service.log.LogService;
 
 import br.com.vt.mapek.services.ILoggerService;
 import br.com.vt.mapek.services.IParameters;
-import br.com.vt.mapek.services.common.Util;
 
 @Component(immediate =true)
 @Instantiate
@@ -35,12 +33,12 @@ public class LoggerService implements ILoggerService, LogService {
 
 	}
 
-	public void log(ServiceReference sr, int level, String message) {
+	public void log(@SuppressWarnings("rawtypes") ServiceReference sr, int level, String message) {
 		console(level, message);
 
 	}
 
-	public void log(ServiceReference sr, int level, String message,
+	public void log(@SuppressWarnings("rawtypes") ServiceReference sr, int level, String message,
 			Throwable exception) {
 		console(level, message);
 

@@ -8,7 +8,6 @@ import org.apache.felix.ipojo.annotations.Provides;
 
 import br.com.vt.mapek.services.IAction;
 import br.com.vt.mapek.services.IChangePlan;
-import br.com.vt.mapek.services.domain.Commands;
 
 
 @Component

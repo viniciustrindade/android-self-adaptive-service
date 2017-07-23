@@ -84,7 +84,6 @@ public abstract class ABSort implements ISort, Runnable {
 
 	public abstract IResource getResource();
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public abstract ISensor getSensorByClassName(String className);
 
 }

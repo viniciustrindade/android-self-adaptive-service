@@ -1,6 +1,5 @@
 package br.com.vt.mapek.services;
 
-import br.com.vt.mapek.services.ISensor;
 import br.com.vt.mapek.services.domain.IProperty;
 import br.com.vt.mapek.services.domain.Property;
 

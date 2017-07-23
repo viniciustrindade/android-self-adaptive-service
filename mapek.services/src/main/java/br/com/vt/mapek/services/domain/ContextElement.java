@@ -9,6 +9,7 @@ public class ContextElement {
 	private float value;
 	private Date collectionTime;
 	
+	@SuppressWarnings("unused")
 	private ContextElement() {
 	}
 	

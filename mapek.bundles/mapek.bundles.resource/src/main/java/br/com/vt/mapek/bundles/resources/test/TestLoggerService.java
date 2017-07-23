@@ -22,12 +22,12 @@ public class TestLoggerService implements ILoggerService, LogService {
 
 	}
 
-	public void log(ServiceReference sr, int level, String message) {
+	public void log(@SuppressWarnings("rawtypes") ServiceReference sr, int level, String message) {
 		console(level, message);
 
 	}
 
-	public void log(ServiceReference sr, int level, String message,
+	public void log(@SuppressWarnings("rawtypes") ServiceReference sr, int level, String message,
 			Throwable exception) {
 		console(level, message);
 
