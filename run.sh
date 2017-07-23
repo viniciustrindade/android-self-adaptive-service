@@ -7,7 +7,7 @@ export MVN_JAVA_VERSION=1.5
 export JAVA_HOME="/usr/lib/jvm/jdk1.8"
 export JAVA_JAR="/usr/lib/jvm/jdk$MVN_JAVA_VERSION/bin/jar"
 export ANDROID_HOME="$HOME/android-sdk/"
-export PATH=$PATH:$ANDROID_HOME/build-tools/$MVN_ANDROID_BUILD_TOOL_VERSION:$JAVA_HOME/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools/:$ANDROID_HOME/build-tools/$MVN_ANDROID_BUILD_TOOL_VERSION:$JAVA_HOME/bin
 
 command -v adb >/dev/null 2>&1 || { echo >&2 "I require adb but it's not installed.  Aborting."; exit 1; }
 command -v $JAVA_JAR >/dev/null 2>&1 || { echo >&2 "I require jar but it's not installed.  Aborting."; exit 1; }
@@ -86,8 +86,8 @@ mvn clean install && \
 
 echo "Compilando mb_* bundles para o dalvikVM" && \
 echo $(cd mapek.android/res/raw && rm -rf dx && mkdir dx && mv mb_* dx && cd dx && dxall && mv mb_* .. && cd .. && rm -rf dx) > /dev/null && \
-adb install -r mapek.android/target/mapek.android-1.0-SNAPSHOT.apk && \
-adb shell am start -n br.com.vt.mapek/br.com.vt.mapek.android.StatusActivity && \
+adb install -r mapek.android/target/mapek.android.apk && \
+adb shell am start -n br.com.vt.mapek/br.com.vt.mapek.android.StatusActivity
 
 #Result
-watch -n 1 adb pull /storage/sdcard0/result.csv
+# watch -n 1 adb pull /storage/sdcard0/result.csv

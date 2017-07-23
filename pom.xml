@@ -39,6 +39,7 @@
 	<properties>
 		<!-- use UTF-8 for everything -->
 		<ANDROID_HOME>/home/vinicius/android-sdk</ANDROID_HOME>
+		<env.ANDROID_HOME>/home/vinicius/android-sdk</env.ANDROID_HOME>
 		<android.sdk.groupId>android</android.sdk.groupId>
 		<android.sdk.artifactId>android</android.sdk.artifactId>
 		<!-- <android.sdk.platform>19</android.sdk.platform>
@@ -66,6 +67,7 @@
 
 	<!-- ============================================================================================== -->
 	<build>
+        <finalName>mapek.android</finalName>
 		<plugins>
 			<!-- CLEAN -->
 			<plugin>
