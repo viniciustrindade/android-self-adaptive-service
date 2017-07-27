@@ -108,7 +108,7 @@ public class FelixConfig extends StringMap {
 		put("ipojo.log.level", "debug");
 		put(FelixConstants.FRAMEWORK_STORAGE_CLEAN,
 				FelixConstants.FRAMEWORK_STORAGE_CLEAN_ONFIRSTINIT);
-		put(FelixConstants.LOG_LEVEL_PROP, String.valueOf(Logger.LOG_DEBUG));
+		put(FelixConstants.LOG_LEVEL_PROP, String.valueOf(Logger.LOG_ERROR));
 		// put(DirectoryWatcher.LOG_LEVEL, Logger.LOG_DEBUG);
 
 		put(Constants.FRAMEWORK_SYSTEMCAPABILITIES, FRAMEWORK_CAPABILITIES);

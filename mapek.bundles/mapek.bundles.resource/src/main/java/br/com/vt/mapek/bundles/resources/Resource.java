@@ -22,7 +22,7 @@ import br.com.vt.mapek.services.IResource;
 @Provides
 public class Resource implements IResource {
 
-	public static final String LOOP_XML_FILE = "loops.xml";
+	public static final String LOOP_XML_FILE = "loop_selfadaptive.xml";
 	public static final String BUNDLE_DIR = "bundles";
 
 	@Requires

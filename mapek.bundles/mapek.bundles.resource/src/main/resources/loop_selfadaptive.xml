@@ -1,19 +1,18 @@
 <loops>
 	<loops>
-	    <loop rate="1000">
+		<loop rate="1000">
 			<sensors>
 				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
 			</sensors>
 			<policys>
-				<policy property="BATTERY" condition="MAIOR_QUE" bound="15"  />
+				<policy property="BATTERY" condition="MAIOR_QUE" bound="15" />
 			</policys>
 			<actions>
-			
 				<action id="STOP_COMPONENT" params="rb_quicksort.bundle" />
 				<action id="STOP_COMPONENT" params="rb_bubblesort.bundle" />
 			</actions>
 		</loop>
-	    <loop rate="1000">
+		<loop rate="1000">
 			<sensors>
 				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
 			</sensors>
@@ -21,7 +20,6 @@
 				<policy property="BATTERY" condition="ENTRE" lowerbound="11" upperbound="15"  />
 			</policys>
 			<actions>
-			
 				<action id="START_COMPONENT" params="rb_quicksort.bundle" />
 				<action id="STOP_COMPONENT" params="rb_bubblesort.bundle" />
 			</actions>
@@ -34,10 +32,10 @@
 				<policy property="BATTERY" condition="ENTRE" lowerbound="6" upperbound="10" />
 			</policys>
 			<actions>
-				<action id="STOP_COMPONENT" params="rb_quicksort.bundle" />
 				<action id="START_COMPONENT" params="rb_bubblesort.bundle" />
+				<action id="STOP_COMPONENT" params="rb_quicksort.bundle" />
 			</actions>
-		</loop> 
+		</loop>
 		<loop rate="1000">
 			<sensors>
 				<sensor className="br.com.vt.mapek.bundles.sensors.battery.IBatterySensor" />
@@ -49,7 +47,7 @@
 				<action id="STOP_COMPONENT" params="rb_quicksort.bundle" />
 				<action id="STOP_COMPONENT" params="rb_bubblesort.bundle" />
 			</actions>
-		</loop> 
-		
+		</loop>
+
 	</loops>
 </loops>
